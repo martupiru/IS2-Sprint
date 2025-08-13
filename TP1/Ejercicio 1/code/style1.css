@@ -1,0 +1,54 @@
+#PrimerElemento {
+    color:blue;
+    font-size: 4rem;
+}
+.SegundoElemento{
+    color:rgb(230, 230, 9);
+}
+
+/*
+1px
+1rem = 16px
+vh = alto de pagina
+wh = ancho de pagina
+
+*/
+.Parrafo{
+    color:blue;
+    font-size: 2rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/*
+top = arriba
+left
+right
+bottom = abajo 
+*/
+.box{
+    background-color: rgb(16, 240, 87);
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+    box-shadow: 5px 4px 10px 0px blue;
+    border-radius: 0.5rem;
+}
+.boxpadre{
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    background-color: black;
+}
+.box2{
+    background-color: yellow;
+    position: absolute;
+    bottom: 0 ;
+}
+.box3{
+    background-color: rgb(255, 10, 165);
+    position: absolute;
+    bottom: 0 ;
+    left: 50%;
+}
