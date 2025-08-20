@@ -3,12 +3,16 @@ package entity;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -18,17 +22,21 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private Domicilio domicilio;
     private String nombre;
     private boolean eliminado;
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<Factura> facturas = new ArrayList<>();
 
-    public Cliente(String apellido, int dni, Domicilio domicilio, String nombre, boolean eliminado) {
+    public Cliente(String apellido, int dni, Domicilio domicilio, String nombre, boolean eliminado, List<Factura> facturas) {
         this.apellido = apellido;
         this.dni = dni;
         this.domicilio = domicilio;
         this.nombre = nombre;
         this.eliminado = eliminado;
+        this.facturas = facturas;
     }
 }
 

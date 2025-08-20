@@ -18,7 +18,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String denominacion;
-    @ManyToMany
+    @ManyToMany(mappedBy = "categorias", cascade = CascadeType.ALL)
     private Collection<Articulo> articulos;
 
     public Categoria(String denominacion, Collection<Articulo> articulos) {

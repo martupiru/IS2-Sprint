@@ -19,10 +19,11 @@ public class Factura {
     private long id;
     private String fecha;
     @ManyToOne
+    @JoinColumn
     private Cliente cliente;
     private int numero;
     private int total;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) // lo del rombo
     private Collection<DetalleFactura> detalleFacturas;
 
 

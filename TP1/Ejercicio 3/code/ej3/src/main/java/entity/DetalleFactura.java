@@ -19,9 +19,13 @@ public class DetalleFactura {
     @ManyToOne
     private Articulo articulo;
 
-    public DetalleFactura(int cantidad, int subtotal, Articulo articulo) {
-        this.cantidad = cantidad;
-        this.subtotal = subtotal;
+    @ManyToOne
+    private Factura factura;
+
+    public DetalleFactura(Factura factura, Articulo articulo, int subtotal, int cantidad) {
+        this.factura = factura;
         this.articulo = articulo;
+        this.subtotal = subtotal;
+        this.cantidad = cantidad;
     }
 }

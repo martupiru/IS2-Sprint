@@ -1,16 +1,13 @@
 package entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Domicilio {
@@ -20,10 +17,14 @@ public class Domicilio {
     private String nombreCalle;
     private int numero;
     private boolean eliminado;
+    @OneToOne
+    @JoinColumn
+    private Cliente cliente;
 
-    public Domicilio(boolean eliminado, int numero, String nombreCalle) {
-        this.eliminado = eliminado;
-        this.numero = numero;
+    public Domicilio(String nombreCalle, int numero, boolean eliminado, Cliente cliente) {
         this.nombreCalle = nombreCalle;
+        this.numero = numero;
+        this.eliminado = eliminado;
+        this.cliente = cliente;
     }
 }
