@@ -1,0 +1,120 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLActor</id><coordinates><x>0</x><y>20</y><w>100</w><h>110</h></coordinates><panel_attributes>Administrador</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>130</x><y>80</y><w>100</w><h>30</h></coordinates><panel_attributes>Interfaz UI</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>40</x><y>110</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>100</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>260</x><y>80</y><w>100</w><h>30</h></coordinates><panel_attributes>ProductoController</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>300</x><y>100</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>490</x><y>80</y><w>100</w><h>30</h></coordinates><panel_attributes>ProductoService</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>100</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>610</x><y>370</y><w>140</w><h>30</h></coordinates><panel_attributes>Producto: Producto</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>690</x><y>390</y><w>30</w><h>370</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;350</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>760</x><y>80</y><w>100</w><h>30</h></coordinates><panel_attributes>DAOProducto</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>100</y><w>30</w><h>140</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>40</x><y>140</y><w>160</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+modificar()</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>170</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+Event()</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>300</x><y>180</y><w>260</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+void: modificarPais(id_producto, nombre)</panel_attributes><additional_attributes>230;20;20;20</additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>770</y><w>280</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+void:actualizarProducto(producto)</panel_attributes><additional_attributes>260;20;10;20</additional_attributes></element><element><id>Text</id><coordinates><x>1020</x><y>590</y><w>80</w><h>60</h></coordinates><panel_attributes>// Text Element
+// DB Symbol
+_umletcode=
+fg='black';
+bg='#222222';
+drawArc(0,0,width,height*2/5,0,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='bg';
+drawArc(0,0,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+fg='#929292';
+bg='#222222';
+drawRectangle(0,(height+0.5)/5,width,(height)*3/5-1)  //Parameters (x, y, width, height)
+fg='black'
+drawLine(0,height/5,0,height*4/5) //Parameters (x1, y1, x2, y2)
+drawLine(width,height/5,width,height*4/5) //Parameters (x1, y1, x2, y2)
+bg='bg';
+drawArc(0,height*1/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+drawArc(0,height*2/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+bg='#222222'
+drawArc(0,height*3/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>140</x><y>0</y><w>80</w><h>80</h></coordinates><panel_attributes>// Boundary Element
+	  
+	  
+_umletcode=
+// Boundary Symbol
+drawCircle(50, 50, 20)
+drawLine(20, 50, 30, 50)
+drawLine(20, 30, 20, 70)	 
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>490</x><y>0</y><w>80</w><h>80</h></coordinates><panel_attributes>// Control Element
+	     
+	     
+_umletcode=
+// Control Symbol
+drawCircle(50, 50, 20)
+drawLine(44, 31, 54, 21)
+drawLine(44, 31, 54, 41)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>760</x><y>0</y><w>80</w><h>80</h></coordinates><panel_attributes>// Control Element
+	     
+	     
+_umletcode=
+// Control Symbol
+drawCircle(50, 50, 20)
+drawLine(44, 31, 54, 21)
+drawLine(44, 31, 54, 41)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>780</y><w>230</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+void:merge(producto)</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>40</x><y>160</y><w>20</w><h>720</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>740</y><w>180</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+setNombre(nombre)</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>170</x><y>160</y><w>20</w><h>700</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>300</x><y>190</y><w>20</w><h>660</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>530</x><y>200</y><w>20</w><h>630</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>800</x><y>780</y><w>20</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>590</y><w>280</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+buscarProductoPorNombre(nombre)</panel_attributes><additional_attributes>260;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>800</x><y>610</y><w>20</w><h>30</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>630</y><w>280</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;260;10</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>600</y><w>230</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+Object:query(stringSql)</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>620</y><w>230</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>Text</id><coordinates><x>1020</x><y>790</y><w>80</w><h>60</h></coordinates><panel_attributes>// Text Element
+// DB Symbol
+_umletcode=
+fg='black';
+bg='#222222';
+drawArc(0,0,width,height*2/5,0,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='bg';
+drawArc(0,0,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+fg='#929292';
+bg='#222222';
+drawRectangle(0,(height+0.5)/5,width,(height)*3/5-1)  //Parameters (x, y, width, height)
+fg='black'
+drawLine(0,height/5,0,height*4/5) //Parameters (x1, y1, x2, y2)
+drawLine(width,height/5,width,height*4/5) //Parameters (x1, y1, x2, y2)
+bg='bg';
+drawArc(0,height*1/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+drawArc(0,height*2/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+bg='#222222'
+drawArc(0,height*3/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>800</y><w>230</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>810</y><w>280</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;260;10</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>840</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>50</x><y>850</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;120;10</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>10</x><y>520</y><w>610</w><h>60</h></coordinates><panel_attributes>alt Error Validación: "Debe indicar el nombre"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>520</y><w>240</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>540</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>50</x><y>550</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>10</x><y>660</y><w>610</w><h>70</h></coordinates><panel_attributes>Error Validación: "Existe un producto con el nombre indicado"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>680</y><w>240</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>690</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>50</x><y>700</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>630</y><w>30</w><h>170</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>820</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>300</x><y>840</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>850</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>40</x><y>870</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Text</id><coordinates><x>260</x><y>0</y><w>80</w><h>80</h></coordinates><panel_attributes>// Control Element
+	     
+	     
+_umletcode=
+// Control Symbol
+drawCircle(50, 50, 20)
+drawLine(44, 31, 54, 21)
+drawLine(44, 31, 54, 41)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>200</y><w>270</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+Pais:buscarProducto(id_Producto)</panel_attributes><additional_attributes>250;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>800</x><y>220</y><w>20</w><h>210</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>210</y><w>230</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+Object:find(id_Producto)</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>230</y><w>230</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>Text</id><coordinates><x>1020</x><y>200</y><w>80</w><h>60</h></coordinates><panel_attributes>// Text Element
+// DB Symbol
+_umletcode=
+fg='black';
+bg='#222222';
+drawArc(0,0,width,height*2/5,0,180,true) //Parameters (x, y, width, height, start, extent, open)
+bg='bg';
+drawArc(0,0,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+fg='#929292';
+bg='#222222';
+drawRectangle(0,(height+0.5)/5,width,(height)*3/5-1)  //Parameters (x, y, width, height)
+fg='black'
+drawLine(0,height/5,0,height*4/5) //Parameters (x1, y1, x2, y2)
+drawLine(width,height/5,width,height*4/5) //Parameters (x1, y1, x2, y2)
+bg='bg';
+drawArc(0,height*1/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+drawArc(0,height*2/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+bg='#222222'
+drawArc(0,height*3/5,width,height*2/5,180,180,true)  //Parameters (x, y, width, height, start, extent, open)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>690</x><y>400</y><w>130</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>820</y><w>240</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;220;10</additional_attributes></element><element><id>Text</id><coordinates><x>650</x><y>290</y><w>80</w><h>80</h></coordinates><panel_attributes>// Entity Element
+	    
+	      
+_umletcode=
+// Entity Symbol
+drawCircle(50, 50, 20)
+drawLine(30, 70, 70, 70)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>420</y><w>280</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;260;10</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>420</y><w>30</w><h>210</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;190</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>550</x><y>210</y><w>20</w><h>60</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>250</y><w>260</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;240;20</additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>260</y><w>240</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>270</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>50</x><y>280</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>20</x><y>250</y><w>840</w><h>60</h></coordinates><panel_attributes>alt Error Validación: "No se encontró producto" </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>460</y><w>240</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>470</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>50</x><y>480</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;..
+Mensaje Error</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>10</x><y>440</y><w>610</w><h>70</h></coordinates><panel_attributes>Error Validación: "El producto indicado se encuentra de baja" </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>810</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element></diagram>
