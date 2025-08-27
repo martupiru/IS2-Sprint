@@ -1,0 +1,25 @@
+-- ESTUDIOS
+INSERT INTO estudios (nombre, activo) VALUES ('Square Enix', true);
+INSERT INTO estudios (nombre, activo) VALUES ('Toby Fox', true);
+INSERT INTO estudios (nombre, activo) VALUES ('Mojang', true);
+INSERT INTO estudios (nombre, activo) VALUES ('Shrek Studios', true);
+
+-- CATEGORIAS
+INSERT INTO categorias (nombre, activo) VALUES ('Aventura', true);
+INSERT INTO categorias (nombre, activo) VALUES ('RPG', true);
+INSERT INTO categorias (nombre, activo) VALUES ('Sandbox', true);
+INSERT INTO categorias (nombre, activo) VALUES ('Plataforma', true);
+
+-- VIDEOJUEGOS
+INSERT INTO videojuegos 
+(titulo, descripcion, precio, stock, fecha_lanzamiento, activo, fk_estudio, fk_categoria)
+VALUES 
+('Tomb Raider', 'Aventura y exploración con Lara Croft', 1500, 30, '2013-03-05', true, 1, 1),
+('Undertale', 'RPG independiente con elecciones morales', 500, 25, '2015-09-15', true, 2, 2),
+('Minecraft', 'Construcción y aventuras en mundo abierto', 1200, 50, '2011-11-18', true, 3, 3),
+('Shrek2', 'Aventura basada en la película Shrek 2', 800, 15, '2004-05-19', true, 4, 4);
+
+UPDATE videojuegos
+SET imagen = 'C:\\Users\\Usuario\\Desktop\\videojuegos\\sprintgames.png'
+WHERE id = 4;
+
