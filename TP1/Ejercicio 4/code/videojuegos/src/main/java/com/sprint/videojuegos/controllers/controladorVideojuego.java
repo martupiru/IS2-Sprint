@@ -32,6 +32,19 @@ public class controladorVideojuego {
     @Autowired
     private ServicioEstudio svcEstudio;
 
+
+    @GetMapping("/")
+    public String page(Model model){
+        try {
+            List<Videojuego> videojuegos = this.svcVideojuego.findAllByActivo();
+            model.addAttribute("videojuegos", videojuegos);
+            return "views/inicio";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
     @GetMapping("/inicio")
     public String inicio(Model model){
         try {

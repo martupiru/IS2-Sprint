@@ -1,0 +1,11 @@
+.bg-lila {
+    background-color: #b19cd9; /* lila claro */
+}
+
+.bg-violeta {
+    background-color: #6f42c1; /* violeta intenso */
+}
+
+.text-lila-claro {
+    color: #f0e6ff; /* texto claro sobre fondo violeta */
+}
