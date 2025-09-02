@@ -1,0 +1,22 @@
+ALTER TABLE zona 
+MODIFY COLUMN eliminado TINYINT(1) NOT NULL DEFAULT 0;
+
+INSERT INTO zona (id, nombre, descripcion) VALUES 
+(UUID(), 'Mendoza', 'capital'),
+(UUID(), 'Las Heras', NULL),
+(UUID(), 'Maipú', NULL),
+(UUID(), 'Godoy Cruz', NULL),
+(UUID(), 'Guaymallén', NULL),
+(UUID(), 'Luján de Cuyo', NULL),
+(UUID(), 'Lavalle', NULL),
+(UUID(), 'San Martin', NULL),
+(UUID(), 'Tupungato', NULL),
+(UUID(), 'Tunuyán', NULL),
+(UUID(), 'San Carlos', NULL),
+(UUID(), 'La Paz', NULL),
+(UUID(), 'Junín', NULL),
+(UUID(), 'Rivadavia', NULL),
+(UUID(), 'Santa Rosa', NULL),
+(UUID(), 'San Rafael', NULL),
+(UUID(), 'General Alvear', NULL),
+(UUID(), 'Malargüe', NULL);
