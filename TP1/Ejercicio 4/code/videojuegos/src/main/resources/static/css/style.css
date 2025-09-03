@@ -9,3 +9,10 @@
 .text-lila-claro {
     color: #f0e6ff; /* texto claro sobre fondo violeta */
 }
+.fixed-img {
+    height: 200px;     /* todas con la misma altura */
+    object-fit: cover; /* recorta sin deformar */
+    width: 100%;
+}
+
+
