@@ -6,7 +6,6 @@ import com.sprint.videojuegos.services.ServicioEstudio;
 import com.sprint.videojuegos.services.ServicioVideojuego;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,15 +33,8 @@ public class controladorVideojuego {
 
 
     @GetMapping("/")
-    public String page(Model model){
-        try {
-            List<Videojuego> videojuegos = this.svcVideojuego.findAllByActivo();
-            model.addAttribute("videojuegos", videojuegos);
-            return "views/inicio";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
+    public String redirectToInicio() {
+        return "redirect:/inicio";
     }
 
     @GetMapping("/inicio")
