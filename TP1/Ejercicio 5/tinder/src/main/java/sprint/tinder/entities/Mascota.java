@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sprint.tinder.enumerations.Tipo;
 
 @Getter
 @Setter
@@ -27,7 +28,8 @@ public class Mascota {
     private Usuario usuario;
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
-
+    @Enumerated(EnumType.STRING)
+    private Tipo tipo;
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,4 +37,6 @@ public class Mascota {
 
     @OneToOne
     private Foto foto;
+
+    private boolean eliminado;
 }

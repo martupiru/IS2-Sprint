@@ -1,6 +1,7 @@
 package sprint.tinder.services;
 
-import jakarta.transaction.Transactional;
+import jakarta.persistence.NoResultException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 /*
 import org.springframework.security.core.GrantedAuthority;
@@ -66,14 +67,14 @@ public class UsuarioServicio {
         usuarioRepositorio.save(usuario);
         //Nosotros recibimos los datos por un formulario web, se transforman en tipo usuario y cuando se transforman le decimos al repositorio que lo almacene en la base de datos
 
-        /* // Mensaje de bienvenida al mail, por ahora lo comento
+         // Mensaje de bienvenida al mail
         try {
             notificacionServicio.enviar("¡Bienvenido al Tinder de mascotas!", "Tinder de Mascotas", usuario.getMail());
         } catch (Exception ex) {
             // loguear pero no relanzar para no afectar la transacción ya completada
             Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, "Error enviando notificación: " + ex.getMessage(), ex);
         }
-       */
+
     }
 
     @Transactional
@@ -105,6 +106,32 @@ public class UsuarioServicio {
             usuarioRepositorio.save(usuario);
         } else{
             throw new ErrorServicio("No se encontró el usuario solicitado");
+        }
+    }
+    public Usuario login(String email, String clave) throws ErrorServicio {
+
+        try {
+
+            if (email == null || email.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            if (clave == null || clave.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar la clave");
+            }
+
+            Usuario usuario = null;
+            try {
+                usuario = usuarioRepositorio.buscarUsuarioPorEmailYClave(email, clave);
+            } catch (NoResultException ex) {
+                throw new ErrorServicio("No existe usuario con ese correo y clave");
+            }
+            return usuario;
+
+        }catch(ErrorServicio e) {
+            throw e;
+        }catch(Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
         }
     }
 
@@ -154,6 +181,42 @@ public class UsuarioServicio {
         if (zona == null){
             throw new ErrorServicio("No se encontró la zona solicitada");
         }
+    }
+
+    @Transactional(readOnly=true)
+    public Usuario buscarUsuario(String idUsuario) throws ErrorServicio {
+        try {
+            if (idUsuario == null || idUsuario.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            Optional<Usuario> optional = usuarioRepositorio.findById(idUsuario);
+            Usuario usuario = null;
+            if (optional.isPresent()) {
+                usuario= optional.get();
+                if (usuario.isEliminado()){
+                    throw new ErrorServicio("No se encuentra el usuario indicado");
+                }
+            }
+            return usuario;
+
+        } catch (ErrorServicio e) {
+            throw e;
+        }
+    }
+
+
+    @Transactional(readOnly=true)
+    public List<Usuario> listarUsuario()throws ErrorServicio {
+
+        try {
+
+            return usuarioRepositorio.findAll();
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
+        }
+
     }
     /*
     // Para implementar esto hay que poner arriba public class UsuarioServici implements UserDetailsService

@@ -1,7 +1,7 @@
 package sprint.tinder.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,6 @@ public class PortalControlador {
     public String index(){
         return "index.html";
     }
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/inicio")
     public String inicio(){
         return "inicio.html";
@@ -40,6 +39,7 @@ public class PortalControlador {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error,@RequestParam(required = false) String logout,ModelMap model){
+        // @RequestParam  le indica que son parametros que vienen del html (solicitud http) cuando llena el usuario el formulario
         if (error!=null){
             model.put("error", "Usuario o clave incorrectos");
         }
@@ -48,11 +48,23 @@ public class PortalControlador {
         }
         return "login.html";
     }
+    @GetMapping("/logout")
+    public String logaout(HttpSession session) {
+        session.setAttribute("usuariosession", null);
+        return "redirect:/inicio";
+    }
     @GetMapping("/registro")
     public String registro(ModelMap modelo){
-        List<Zona> zonas = zonaRepositorio.findAll(); // Para listar todas las zonas cuando se abra el registro
-        modelo.put("zonas", zonas);
-        return "registro.html";
+        try{
+            List<Zona> zonas = zonaRepositorio.findAll(); // Para listar todas las zonas cuando se abra el registro
+            modelo.put("zonas", zonas);
+            return "registro.html";
+        } catch(Exception e){
+            e.printStackTrace();
+            modelo.put("error", e.getMessage());
+            return "error.html";
+        }
+
     }
     @PostMapping("/registrar")
     public String registrar(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2, MultipartFile archivo, @RequestParam String idZona) throws ErrorServicio{

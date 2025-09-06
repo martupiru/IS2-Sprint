@@ -10,13 +10,17 @@ import org.springframework.stereotype.Service;
 public class NotificacionServicio {
 
     @Autowired
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+
+    public NotificacionServicio(final JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     @Async //El hilo de ejecucion no espera a que se termine de enviar el mail, sino que lo ejecuta en paralelo (Entonces el usuario no tiene que esperar a que se mande el mail)
-    public void enviar(String cuerpo, String titulo, String mail) {
+    public void enviar(String mail, String titulo, String cuerpo) {
         SimpleMailMessage mensaje = new SimpleMailMessage();
         mensaje.setTo(mail);
-        mensaje.setFrom(mail);
+        mensaje.setFrom("emaildepruebasprint@gmail.com");
         mensaje.setSubject(titulo);
         mensaje.setText(cuerpo);
         mailSender.send(mensaje);
