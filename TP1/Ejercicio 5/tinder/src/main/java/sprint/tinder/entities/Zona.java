@@ -23,4 +23,5 @@ public class Zona {
     private String id;
     private String nombre;
     private String descripcion;
+    private boolean eliminado;
 }

@@ -10,4 +10,7 @@ import sprint.tinder.entities.Usuario;
 public interface UsuarioRepositorio extends JpaRepository<Usuario,String> {
     @Query("SELECT c FROM Usuario c WHERE c.mail = :mail")
     public Usuario buscarPorMail(@Param("mail") String mail);
+
+    @Query("SELECT c FROM Usuario c WHERE c.mail = :mail AND c.clave = :clave")
+    public Usuario buscarUsuarioPorEmailYClave(@Param("mail")String mail, @Param("clave")String clave);
 }

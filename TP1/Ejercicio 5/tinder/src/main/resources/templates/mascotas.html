@@ -74,7 +74,8 @@
                 <tbody>
                     <tr th:each="mascota : ${mascotas}">
                         <td>
-                            <img th:if="${mascota.foto != null}" th:src="${'/foto/mascota/' + mascota.id}" alt="" style="max-height: 60px; border-radius: 100%">
+                            <img th:if="${mascota.foto != null}" th:src="@{/foto/mascota/{id}(id=${mascota.id})}"
+                                 alt="" style="max-height: 60px; border-radius: 100%">
                             <img th:if="${mascota.foto == null}" src="/img/m1.jpeg" alt="" style="max-height: 60px; border-radius: 100%">
                                 
                         </td>

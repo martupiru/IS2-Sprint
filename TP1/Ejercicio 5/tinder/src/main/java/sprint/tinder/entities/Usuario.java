@@ -35,5 +35,7 @@ public class Usuario {
 
     @OneToOne
     private Foto foto;
+
+    private boolean eliminado;
 }
 

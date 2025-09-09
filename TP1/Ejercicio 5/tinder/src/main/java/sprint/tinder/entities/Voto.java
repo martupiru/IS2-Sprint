@@ -29,4 +29,5 @@ public class Voto {
     private Mascota mascota1;
     @ManyToOne
     private Mascota mascota2;
+    private boolean eliminado;
 }
