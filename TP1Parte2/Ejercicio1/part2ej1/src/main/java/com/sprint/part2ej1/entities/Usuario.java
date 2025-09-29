@@ -12,7 +12,7 @@ import org.hibernate.annotations.UuidGenerator;
 @Getter
 @Setter
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario extends Persona {
     @Id
     @GeneratedValue
     @UuidGenerator
