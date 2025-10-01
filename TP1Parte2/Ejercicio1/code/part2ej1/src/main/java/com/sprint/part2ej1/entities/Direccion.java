@@ -23,6 +23,13 @@ public class Direccion {
     @UuidGenerator
     private String id;
 
+
+    @NotEmpty(message = "La latitud no puede estar vacía")
+    private String latitud;
+
+    @NotEmpty(message = "La longitud no puede estar vacía")
+    private String longitud;
+
     @NotEmpty(message = "El nombre no puede estar vacío")
     @Size(max = 100, message = "El nombre no puede superar los 100 caracteres")
     private String calle;

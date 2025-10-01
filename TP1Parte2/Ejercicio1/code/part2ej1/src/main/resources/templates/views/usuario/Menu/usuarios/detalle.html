@@ -35,19 +35,19 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Apellido</th>
                                 <th>Email</th>
-                                <th>Rol</th>
+                                <th>Cuenta</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="usuario : ${usuarios}">
-                                <td th:text="${usuario.id}"></td>
                                 <td th:text="${usuario.nombre}"></td>
-                                <td th:text="${usuario.email}"></td>
-                                <td th:text="${usuario.rol}"></td>
+                                <td th:text="${usuario.apellido}"></td>
+                                <td th:text="${usuario.correoElectronico}"></td>
+                                <td th:text="${usuario.cuenta}"></td>
                                 <td>
                                     <a th:href="@{'/usuario/editar/' + ${usuario.id}}" class="btn btn-sm btn-primary">Editar</a>
                                     <a th:href="@{'/usuario/eliminar/' + ${usuario.id}}" class="btn btn-sm btn-danger">Eliminar</a>
@@ -56,7 +56,7 @@
                             </tbody>
                         </table>
 
-                        <a th:href="@{/usuario/nuevo}" class="btn btn-success mt-3">
+                        <a th:href="@{/usuario/crear}" class="btn btn-success mt-3">
                             <i class="fas fa-plus"></i> Nuevo Usuario
                         </a>
                     </div>

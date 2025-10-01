@@ -41,6 +41,29 @@ public class UsuarioService {
 
 
     @Transactional
+    public void crearUsuarioConPersona(String nombre, String apellido, String telefono, String correoElectronico, String cuenta, String clave) throws Exception {
+        try {
+            // Validar campos usando el método de PersonaService
+            personaService.validar(nombre, apellido, telefono, correoElectronico);
+
+            Usuario user = new Usuario();
+            user.setNombre(nombre);
+            user.setApellido(apellido);
+            user.setTelefono(telefono);
+            user.setCorreoElectronico(correoElectronico);
+            user.setCuenta(cuenta);
+            user.setClave(HashForLogin.hashClave(clave));
+            user.setEliminado(false);
+
+            usuarioRepository.save(user);
+
+        } catch (Exception e) {
+            throw new Exception("Error al crear usuario con persona: " + e.getMessage());
+        }
+    }
+
+
+    @Transactional
     public void modificarUsuario(String idUsuario, String cuenta, String clave) throws Exception{
         try {
             Optional<Usuario> user = usuarioRepository.findById(idUsuario);

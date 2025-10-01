@@ -193,4 +193,13 @@ public class DireccionService {
             throw new Exception("Localidad no encontrada");
         }
     }
+
+    public String getGoogleMapsUrl(Direccion direccion) {
+        if (direccion.getLatitud() == null || direccion.getLongitud() == null) {
+            return null;
+        }
+        return "https://www.google.com/maps?q=" + direccion.getLatitud() + "," + direccion.getLongitud();
+    }
+
+
 }

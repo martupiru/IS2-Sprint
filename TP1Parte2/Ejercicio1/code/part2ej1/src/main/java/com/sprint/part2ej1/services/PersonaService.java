@@ -33,6 +33,19 @@ public class PersonaService {
         }
     }
 
+    @Transactional
+    public Persona crearPersonaRetorno(String nombre, String apellido, String telefono, String correoElectronico) throws Exception {
+        validar(nombre, apellido, telefono, correoElectronico);
+        Persona persona = new Persona();
+        persona.setNombre(nombre);
+        persona.setApellido(apellido);
+        persona.setTelefono(telefono);
+        persona.setCorreoElectronico(correoElectronico);
+        persona.setEliminado(false);
+        personaRepository.save(persona);
+        return persona;
+    }
+
     public void validar(String nombre, String apellido, String telefono, String correoElectronico) throws Exception {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new Exception("El nombre no puede estar vacío");
