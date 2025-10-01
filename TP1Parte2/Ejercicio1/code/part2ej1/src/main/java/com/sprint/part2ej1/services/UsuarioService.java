@@ -134,8 +134,8 @@ public class UsuarioService {
         }
     }
 
-    public Optional<Usuario> login(String email, String password) {
-        String claveHash = HashForLogin.hashClave(password);
-        return usuarioRepository.login(email, claveHash);
+    public Optional<Usuario> login(String cuenta, String password) {
+//        String claveHash = HashForLogin.hashClave(password);
+        return usuarioRepository.login(cuenta, password);
     }
 }
