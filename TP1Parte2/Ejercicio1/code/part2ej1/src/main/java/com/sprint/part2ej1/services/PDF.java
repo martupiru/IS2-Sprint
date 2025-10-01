@@ -3,6 +3,7 @@ package com.sprint.part2ej1.services;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sprint.part2ej1.entities.Proveedor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +23,12 @@ import java.util.List;
 @Service
 public class PDF {
 
-    public void generateDocument() throws Exception {
+    @Autowired
+    private ProveedorService ps;
+
+    public void generateDocument(OutputStream outputStream) throws Exception {
         Document doc = new Document();
-        PdfWriter.getInstance(doc, new FileOutputStream("sample.pdf"));
+        PdfWriter.getInstance(doc, outputStream);
         doc.open();
 
         Paragraph title = new Paragraph("Hola soy el pdf :).\n");
@@ -31,20 +36,17 @@ public class PDF {
         title.setFont(new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLACK));
         doc.add(title);
 
-        //subtitulo para la tabla
+        // Subtítulo para la tabla
         Paragraph subtitle = new Paragraph("Tabla de datos:\n");
         subtitle.setAlignment(Element.ALIGN_LEFT);
         subtitle.setFont(new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK));
         doc.add(subtitle);
 
-        //Regla de negocio : buscar los proovedores y meterlos en la tabla
-
-        //lista de proovedores
-        ProveedorService ps = new ProveedorService();
+        // Lista de proveedores
         List<Proveedor> proveedores = ps.listarProveedoresActivos();
-        int count = proveedores.size();
 
-        PdfPTable table = new PdfPTable(count);
+
+        PdfPTable table = new PdfPTable(7);
         tableHeader(table);
 
         for (Proveedor prov : proveedores) {
@@ -52,23 +54,22 @@ public class PDF {
         }
 
         doc.add(table);
-
         doc.close();
-
     }
 
     private static void tableHeader(PdfPTable table) {
-        Stream.of("Id", "nombre", "apellido","telefono","correoElectronico","eliminado","cuit").forEach( title -> {
-            PdfPCell header = new PdfPCell();
-            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            header.setBorderWidth(1);
-            header.setPhrase(new Phrase(title));
-            table.addCell(header);
-        });
+        Stream.of("Id", "Nombre", "Apellido", "Teléfono", "Correo Electrónico", "Eliminado", "CUIT")
+                .forEach(title -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(1);
+                    header.setPhrase(new Phrase(title));
+                    table.addCell(header);
+                });
     }
 
     private static void addRow(PdfPTable table, Proveedor prov) {
-        table.addCell(prov.getId());
+        table.addCell(String.valueOf(prov.getId()));
         table.addCell(prov.getNombre());
         table.addCell(prov.getApellido());
         table.addCell(prov.getTelefono());
@@ -76,6 +77,8 @@ public class PDF {
         table.addCell(String.valueOf(prov.getEliminado()));
         table.addCell(prov.getCuit());
     }
+}
+
 
 //    private static void addCustomRow(PdfPTable table) throws URISyntaxException, BadElementException, MalformedURLException, IOException {
 //        Path path = Paths.get(ClassLoader.getSystemResource("p3.jpg").toURI());
@@ -95,4 +98,3 @@ public class PDF {
 //        table.addCell(remarks);
 //    }
 
-}
