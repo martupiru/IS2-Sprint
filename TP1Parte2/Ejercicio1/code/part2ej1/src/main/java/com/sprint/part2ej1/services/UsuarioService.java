@@ -33,7 +33,6 @@ public class UsuarioService {
             user.setCuenta(cuenta);
             String claveHash = HashForLogin.hashClave(clave); //Encriptar clave
             user.setClave(claveHash);
-//            user.setPersona(persona);
             usuarioRepository.save(user);
         } catch (Exception e) {
             throw new Exception("Error al crear el usuario: " + e.getMessage());
@@ -50,7 +49,6 @@ public class UsuarioService {
                 userAct.setCuenta(cuenta);
                 String claveHash = HashForLogin.hashClave(clave); //Encriptar clave
                 userAct.setClave(claveHash);
-//                userAct.setPersona(persona);
                 usuarioRepository.save(userAct);
             } else {
                 throw new Exception("Usuario no encontrado");

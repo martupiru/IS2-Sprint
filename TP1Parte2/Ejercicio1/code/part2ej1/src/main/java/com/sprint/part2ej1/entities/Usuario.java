@@ -23,7 +23,4 @@ public class Usuario extends Persona {
     @NotEmpty(message = "La clave no puede estar vacía")
     private String clave;
 
-    @NotNull(message = "El campo eliminado no puede ser nulo")
-    private boolean eliminado;
-
 }
