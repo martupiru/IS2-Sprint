@@ -13,11 +13,11 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     // Lista los mensajes activos
-    @Query(value = "SELECT * FROM usuarios WHERE eliminado = false", nativeQuery = true)
+    @Query("SELECT u FROM Usuario u WHERE u.eliminado = false")
     List<Usuario> findAllByEliminadoFalse();
 
     // Encuentra un mensaje activo por id
-    @Query(value = "SELECT * FROM usuarios WHERE id = :id AND eliminado = false", nativeQuery = true)
+    @Query("SELECT u FROM Usuario u WHERE u.id = :id AND u.eliminado = false")
     Optional<Usuario> findByIdAndEliminadoFalse(@Param("id") String id);
 
     // Buscar por nombre de usuario

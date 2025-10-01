@@ -18,138 +18,146 @@
     <!-- FontAwesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="sb-nav-fixed">
 
-<!-- Navbar -->
-<nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+    <!-- Navbar -->
+    <nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
 
-<div id="layoutSidenav">
-    <!-- Sidebar -->
-    <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <!-- Sidebar -->
+            <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+        </div>
 
-    <!-- Contenido Principal -->
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Bienvenido admin :) </li>
-                </ol>
+        <!-- Contenido Principal -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Bienvenido admin :) </li>
+                    </ol>
 
-                <!-- Cards -->
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <th:block th:replace="~{views/usuario/components/cards :: card('primary', 'Primary Card')}"></th:block>
+                    <!-- Cards -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('primary', 'Primary Card')}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('warning', 'Warning Card')}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('success', 'Success Card')}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('danger', 'Danger Card')}"></th:block>
+                        </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <th:block th:replace="~{views/usuario/components/cards :: card('warning', 'Warning Card')}"></th:block>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <th:block th:replace="~{views/usuario/components/cards :: card('success', 'Success Card')}"></th:block>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <th:block th:replace="~{views/usuario/components/cards :: card('danger', 'Danger Card')}"></th:block>
-                    </div>
-                </div>
 
-                <!-- Charts -->
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
+                    <!-- Charts -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Area Chart Example
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Bar Chart Example
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myBarChart" width="100%" height="40"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                Bar Chart Example
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myBarChart" width="100%" height="40"></canvas>
-                            </div>
+
+                    <!-- DataTable -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            DataTable Example
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                </tr>
+                                <tr>
+                                    <td>Donna Snider</td>
+                                    <td>Customer Support</td>
+                                    <td>New York</td>
+                                    <td>27</td>
+                                    <td>2011/01/25</td>
+                                    <td>$112,000</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
                 </div>
+            </main>
 
-                <!-- DataTable -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        DataTable Example
-                    </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Donna Snider</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
-                                <td>27</td>
-                                <td>2011/01/25</td>
-                                <td>$112,000</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <div th:replace="~{components/footer :: footer}"></div>
+            <!-- Footer -->
+            <div th:replace="~{components/footer :: footer}"></div>
+        </div>
     </div>
-</div>
 
-<!-- Scripts -->
+    <!-- Scripts -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/datatables-simple-demo.js}"></script>
 
-<!-- Bootstrap JS (incluye Popper) -->
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
-<!-- Tus scripts -->
-<script th:src="@{/js/scripts.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/assets/demo/chart-area-demo.js}"></script>
-<script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/js/datatables-simple-demo.js}"></script>
-
-
-
+    <script>
+        // Esto asegura que Bootstrap “vea” los collapses cargados con Thymeleaf
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordions = document.querySelectorAll('#sidenavAccordion .collapse');
+            accordions.forEach(el => {
+                // Solo inicializa si no está ya activo
+                if (!el.classList.contains('show')) {
+                    new bootstrap.Collapse(el, { toggle: false });
+                }
+            });
+        });
+    </script>
 </body>
-</html>
