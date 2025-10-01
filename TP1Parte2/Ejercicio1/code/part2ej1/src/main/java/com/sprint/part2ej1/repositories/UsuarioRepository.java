@@ -29,10 +29,4 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     Optional<Usuario> login(@Param("nombreUsuario") String nombreUsuario,
                             @Param("clave") String clave);
 
-    // Para buscar el id de persona de ese usuario
-    @Query("SELECT u FROM Usuario u WHERE u.persona.id = :personaId")
-    Optional<Usuario> findByPersonaId(@Param("personaId") String personaId);
-
-    @Query("SELECT u FROM Usuario u WHERE u.persona = :persona")
-    Optional<Usuario> findByPersona(@Param("persona") Persona persona);
 }

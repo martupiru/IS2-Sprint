@@ -11,9 +11,9 @@ import lombok.Setter;
 @Setter
 @Table(name = "proveedores")
 public class Proveedor extends Persona{
-    @Id
+
     @NotEmpty(message = "El CUIT no puede estar vacío")
     @Size(max = 11, message = "El CUIT no puede superar los 11 caracteres")
-    @Column(name = "cuit")
+    @Column(name = "cuit", unique = true,nullable = false)
     private String cuit;
 }

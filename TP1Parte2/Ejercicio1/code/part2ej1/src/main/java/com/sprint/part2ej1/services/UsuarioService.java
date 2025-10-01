@@ -2,6 +2,7 @@ package com.sprint.part2ej1.services;
 
 import com.sprint.part2ej1.entities.Usuario;
 
+import com.sprint.part2ej1.repositories.ProveedorRepository;
 import com.sprint.part2ej1.repositories.UsuarioRepository;
 import com.sprint.part2ej1.utils.HashForLogin;
 import jakarta.transaction.Transactional;
@@ -18,14 +19,21 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PersonaService personaService;
+
+    @Autowired
+    private ProveedorRepository proveedorRepository;
+
+
     @Transactional
-    public void crearUsuario(String cuenta, String clave, Persona persona) throws Exception{
+    public void crearUsuario(String cuenta, String clave) throws Exception{
         try {
             Usuario user = new Usuario();
             user.setCuenta(cuenta);
             String claveHash = HashForLogin.hashClave(clave); //Encriptar clave
             user.setClave(claveHash);
-            user.setPersona(persona);
+//            user.setPersona(persona);
             usuarioRepository.save(user);
         } catch (Exception e) {
             throw new Exception("Error al crear el usuario: " + e.getMessage());
@@ -34,7 +42,7 @@ public class UsuarioService {
 
 
     @Transactional
-    public void modificarUsuario(String idUsuario, String cuenta, String clave, Persona persona) throws Exception{
+    public void modificarUsuario(String idUsuario, String cuenta, String clave) throws Exception{
         try {
             Optional<Usuario> user = usuarioRepository.findById(idUsuario);
             if (user.isPresent()) {
@@ -42,7 +50,7 @@ public class UsuarioService {
                 userAct.setCuenta(cuenta);
                 String claveHash = HashForLogin.hashClave(clave); //Encriptar clave
                 userAct.setClave(claveHash);
-                userAct.setPersona(persona);
+//                userAct.setPersona(persona);
                 usuarioRepository.save(userAct);
             } else {
                 throw new Exception("Usuario no encontrado");

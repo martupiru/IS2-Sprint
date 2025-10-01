@@ -13,8 +13,10 @@ public class SchedulerTask {
     }
 
     @Scheduled(cron = "0 0 15 5 * *" , zone = "America/Argentina/Buenos_Aires")
-    public void schedulePublicidad(String titulo, String cuerpo) throws Exception{
+    public void schedulePublicidad() throws Exception{
         try {
+            String titulo = "Oferta especial";
+            String cuerpo = "No te pierdas estas promos!";
             emailService.mailPublicidad(titulo, cuerpo);
         }
         catch (Exception e){

@@ -13,10 +13,7 @@ import org.hibernate.annotations.UuidGenerator;
 @Setter
 @Table(name = "usuarios")
 public class Usuario extends Persona {
-    @Id
-    @GeneratedValue
-    @UuidGenerator
-    private String id;
+
 
     @NotEmpty(message = "La sección cuenta no puede estar vacío")
     @Size(max = 50, message = "La sección cuenta no puede superar los 50 caracteres")
@@ -29,8 +26,4 @@ public class Usuario extends Persona {
     @NotNull(message = "El campo eliminado no puede ser nulo")
     private boolean eliminado;
 
-    @NotNull(message = "El campo rutina es requerido")
-    @ManyToOne
-    @JoinColumn(name = "fk_persona", nullable = false)
-    private Persona persona;
 }
