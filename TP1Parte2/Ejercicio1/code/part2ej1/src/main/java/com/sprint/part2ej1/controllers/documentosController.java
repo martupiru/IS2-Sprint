@@ -1,6 +1,9 @@
 package com.sprint.part2ej1.controllers;
 
 import com.sprint.part2ej1.services.PDF;
+import com.sprint.part2ej1.services.EXCEL;
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchTransactionManager;
 import org.springframework.stereotype.Controller;
@@ -13,14 +16,33 @@ public class documentosController {
     private PDF pdfService;
 
     @GetMapping("/generar-pdf")
-    public String documentosController() {
-        // Lógica para generar el PDF
+    public void generarPdf(HttpServletResponse response) {
         try {
-            pdfService.generateDocument();
-            return "redirect:/redirect:/usuario/dashboard"; // Redirige a una página de éxito
+
+            pdfService.generateDocument(response.getOutputStream());
+            response.getOutputStream().flush();
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "error"; // Redirige a una página de error
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Autowired
+    private EXCEL excelService;
+
+    @GetMapping("/generar-excel.xlsx")
+    public void generarExcel(HttpServletResponse response) {
+        try {
+
+            excelService.generateExcel(response.getOutputStream());
+
+            response.getOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

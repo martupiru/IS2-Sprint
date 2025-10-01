@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor,String> {
-    @Query(value = "SELECT * FROM proveedores WHERE eliminado = false", nativeQuery = true)
+    @Query("SELECT p FROM Proveedor p WHERE p.eliminado = false")
     List<Proveedor> findAllByEliminadoFalse();
 }
