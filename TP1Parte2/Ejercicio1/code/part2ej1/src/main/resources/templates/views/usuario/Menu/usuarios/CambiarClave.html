@@ -32,7 +32,11 @@
                         Actualizar Contraseña
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/usuario/cambiar-clave}" method="post">
+                        <!-- Mensajes -->
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+                        <form th:action="@{/usuario/clave}" method="post">
                             <div class="mb-3">
                                 <label for="passwordActual" class="form-label">Clave Actual</label>
                                 <input type="password" class="form-control" id="passwordActual" name="passwordActual" required>
@@ -48,6 +52,7 @@
                             <button type="submit" class="btn btn-primary">Actualizar Clave</button>
                         </form>
                     </div>
+
                 </div>
 
             </div>

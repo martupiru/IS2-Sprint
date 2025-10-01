@@ -32,8 +32,10 @@
                         Datos del Usuario
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/usuario/crear}" th:object="${usuario}" method="post">
-                            <!-- Campos de Persona -->
+                        <form th:action="${usuario.id} == null ? @{/usuario/crear} : @{/usuario/editar}" th:object="${usuario}" method="post">
+
+                            <input type="hidden" th:field="*{id}">
+                        <!-- Campos de Persona -->
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Nombre">
@@ -65,16 +67,21 @@
                                 <div class="text-danger" th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-3" th:if="${usuario.id} == null">
                                 <label for="clave" class="form-label">Clave</label>
                                 <input type="password" th:field="*{clave}" class="form-control" id="clave" placeholder="Contraseña">
                                 <div class="text-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
                             </div>
 
+                            <div class="mb-3" th:if="${usuario.id} != null">
+                                <label for="clave" class="form-label">Clave (no se puede cambiar aquí)</label>
+                                <input type="password" class="form-control" id="clave" placeholder="Contraseña no editable" disabled>
+                            </div>
+
                             <button type="submit" class="btn btn-success">
                                 <i class="fas fa-check"></i> Guardar Usuario
                             </button>
-                            <a th:href="@{/usuario}" class="btn btn-secondary">Cancelar</a>
+                            <a th:href="@{/usuario/detalle}" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>
