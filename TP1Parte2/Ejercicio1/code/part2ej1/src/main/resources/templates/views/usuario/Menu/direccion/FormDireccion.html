@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Formulario Dirección</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+</head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Formulario Dirección</h1>
+
+                <form th:action="@{${direccion.id != null} ? '/usuario/direccion/editar' : '/usuario/direccion/crear'}"
+                      method="post">
+
+                <input type="hidden" name="id" th:value="${direccion.id}"/>
+
+                    <div class="mb-3">
+                        <label class="form-label">Latitud</label>
+                        <input type="text" class="form-control" name="latitud"
+                               th:value="${direccion.latitud}" required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Longitud</label>
+                        <input type="text" class="form-control" name="longitud"
+                               th:value="${direccion.longitud}" required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Calle</label>
+                        <input type="text" class="form-control" name="calle"
+                               th:value="${direccion.calle}" required maxlength="100"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Numeración</label>
+                        <input type="text" class="form-control" name="numeracion"
+                               th:value="${direccion.numeracion}" required maxlength="10"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Barrio</label>
+                        <input type="text" class="form-control" name="barrio"
+                               th:value="${direccion.barrio}" required maxlength="50"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Manzana/Piso</label>
+                        <input type="text" class="form-control" name="manzanaPiso"
+                               th:value="${direccion.manzanaPiso}" required maxlength="10"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Casa/Departamento</label>
+                        <input type="text" class="form-control" name="casaDepartamento"
+                               th:value="${direccion.casaDepartamento}" required maxlength="10"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Referencia</label>
+                        <input type="text" class="form-control" name="referencia"
+                               th:value="${direccion.referencia}" required maxlength="100"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Localidad</label>
+                        <select class="form-select" name="localidad.id" required>
+                            <option th:each="loc : ${localidades}"
+                                    th:value="${loc.id}"
+                                    th:text="${loc.nombre}"
+                                    th:selected="${direccion.localidad != null} ? ${loc.id} == ${direccion.localidad.id} : false">
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a th:href="@{/usuario/direccion/detalle}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </main>
+        <div th:replace="~{components/footer :: footer}"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
