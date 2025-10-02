@@ -89,7 +89,7 @@ public class UsuarioController {
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("usuario", usuarioLogueado);
-            return "views/usuario/Menu/usuarios/usuario_form";
+            return "views/usuario/Menu/usuarios/FormUsuario";
         }
     }
 

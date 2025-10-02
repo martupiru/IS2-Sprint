@@ -1,7 +1,9 @@
 package com.sprint.part2ej1.services;
 
 import com.sprint.part2ej1.entities.Proveedor;
+import com.sprint.part2ej1.entities.Usuario;
 import com.sprint.part2ej1.repositories.ProveedorRepository;
+import com.sprint.part2ej1.utils.HashForLogin;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class ProveedorService {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    @Autowired
+    private PersonaService personaService;
+
     @Transactional
     public void crearProveedor(String cuit) throws Exception{
         try {
@@ -27,6 +32,26 @@ public class ProveedorService {
         }
     }
 
+    @Transactional
+    public void crearProveedorConPersona(String nombre, String apellido, String telefono, String correoElectronico, String cuit) throws Exception {
+        try {
+            // Validar campos usando el método de PersonaService
+            personaService.validar(nombre, apellido, telefono, correoElectronico);
+
+            Proveedor user = new Proveedor();
+            user.setNombre(nombre);
+            user.setApellido(apellido);
+            user.setTelefono(telefono);
+            user.setCorreoElectronico(correoElectronico);
+            user.setCuit(cuit);
+            user.setEliminado(false);
+
+            proveedorRepository.save(user);
+
+        } catch (Exception e) {
+            throw new Exception("Error al crear usuario con persona: " + e.getMessage());
+        }
+    }
 
     @Transactional
     public void modificarProveedor(String idProveedor, String cuit) throws Exception{

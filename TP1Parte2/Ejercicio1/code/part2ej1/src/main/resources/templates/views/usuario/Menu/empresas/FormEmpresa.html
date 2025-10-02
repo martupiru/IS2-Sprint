@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Formulario Empresa</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+</head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Formulario Empresa</h1>
+
+                <form th:action="@{${empresa.id != null} ? '/usuario/empresa/editar' : '/usuario/empresa/crear'}"
+                      method="post">
+
+                    <input type="hidden" name="id" th:value="${empresa.id}"/>
+
+                    <div class="mb-3">
+                        <label class="form-label">Razón Social</label>
+                        <input type="text" class="form-control" name="razonSocial"
+                               th:value="${empresa.razonSocial}" required/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a th:href="@{/usuario/empresa/detalle}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </main>
+        <div th:replace="~{components/footer :: footer}"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
