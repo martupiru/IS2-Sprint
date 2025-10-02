@@ -26,4 +26,5 @@ public interface LocalidadRepository extends JpaRepository<Localidad, String> {
     @Query(value = "SELECT * FROM localidades WHERE codigoPostal = :codigoPostal AND eliminado = false", nativeQuery = true)
     Optional<Localidad> findByCodigoPostalAndEliminadoFalse(@Param("codigoPostal") String codigoPostal);
 
+    Optional<Localidad> findByNombre(String nombre);
 }

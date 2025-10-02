@@ -28,21 +28,15 @@
                     </div>
 
                     <!-- Dirección -->
-                    <a class="nav-link" th:href="@{/usuario/direccion/FormDireccion}">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDireccion" aria-expanded="false" aria-controls="collapseDireccion">
                         <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
                         Dirección
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <a class="nav-link" th:href="@{/usuario/direccion/direccion-empresa}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        Dirección de empresa
-                    </a>
-
                     <div class="collapse" id="collapseDireccion" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/abmPais}">ABM País</a>
-                            <a class="nav-link" th:href="@{/abmProvincia}">ABM Provincia</a>
-                            <a class="nav-link" th:href="@{/abmDepartamento}">ABM Departamento</a>
-                            <a class="nav-link" th:href="@{/abmLocalidad}">ABM Localidad</a>
+                            <a class="nav-link" th:href="@{/usuario/direccion/FormDireccion}">ABM Dirección</a>
+                            <a class="nav-link" th:href="@{/usuario/direccion/direccion-empresa}">Dirección Empresa</a>
                         </nav>
                     </div>
 
@@ -54,7 +48,7 @@
                     </a>
                     <div class="collapse" id="collapseEmpresa" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/abmEmpresa}">ABM Empresa</a>
+                            <a class="nav-link" th:href="@{/usuario/empresa/detalle}">ABM Empresa</a>
                         </nav>
                     </div>
 
@@ -66,7 +60,7 @@
                     </a>
                     <div class="collapse" id="collapseProveedor" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/abmProveedor}">ABM Proveedor</a>
+                            <a class="nav-link" th:href="@{/usuario/proveedor/detalle}">ABM Proveedor</a>
                         </nav>
                     </div>
 
@@ -78,6 +72,11 @@
                     <a class="nav-link" th:href="@{/generar-excel.xlsx}" target="_blank">
                         <div class="sb-nav-link-icon"><i class="fas fa-file-excel"></i></div>
                         Excel empresas
+                    </a>
+
+                    <a class="nav-link" th:href="@{/usuario/migracion}" target="_blank">
+                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        Migración BD
                     </a>
                 </div>
             </div>

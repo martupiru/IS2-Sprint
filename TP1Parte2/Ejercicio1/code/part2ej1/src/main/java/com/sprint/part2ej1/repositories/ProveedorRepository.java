@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor,String> {
     @Query("SELECT p FROM Proveedor p WHERE p.eliminado = false")
     List<Proveedor> findAllByEliminadoFalse();
+
+    Optional<Proveedor> findByCuit(String cuit);
 }

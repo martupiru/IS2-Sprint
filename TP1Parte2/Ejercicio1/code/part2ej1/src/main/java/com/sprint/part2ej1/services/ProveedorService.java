@@ -93,12 +93,25 @@ public class ProveedorService {
         }
     }
 
+    public Optional<Proveedor> buscarProveedorPorCuit(String cuit) {
+        return proveedorRepository.findByCuit(cuit);
+    }
+
     @Transactional
     public List<Proveedor> listarProveedoresActivos() throws Exception {
         try {
             return this.proveedorRepository.findAllByEliminadoFalse();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public Proveedor guardarProveedor(Proveedor proveedor) throws Exception {
+        try {
+            return proveedorRepository.save(proveedor);
+        } catch (Exception e) {
+            throw new Exception("Error al guardar el proveedor durante la migración: " + e.getMessage());
         }
     }
 }
