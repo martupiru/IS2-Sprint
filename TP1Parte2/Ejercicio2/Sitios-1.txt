@@ -1,0 +1,12 @@
+AgendaPro
+Plataforma de agenda médica online que permite reservar citas, modificar turnos, enviar recordatorios
+https://agendapro.com/ar
+
+
+MediTurnos
+Sistema de gestión de turnos online para consultorios y clínicas en Argentina, con notificaciones automáticas (WhatsApp / email) y agenda centralizada.
+https://www.mediturnos.com.ar
+
+WebSalud
+Aplicaciones modulares para profesionales de la salud: gestión de turnos, recepción, sala de espera, historia clínica, etc. 
+https://www.websalud.com.ar

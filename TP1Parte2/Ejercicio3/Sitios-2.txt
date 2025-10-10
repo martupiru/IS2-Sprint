@@ -1,0 +1,9 @@
+https://www.mybooking.com.ar
+Portal de reservas de hoteles y cabañas. Publica alojamientos, filtro por ubicación, capacidad, precios. El usuario reserva a través de la plataforma.
+
+MisAlquileres.com.ar
+Sistema en la nube para complejos de cabañas: gestionan reservas, señas, pagos, recibos, informes de ingresos/egresos, consumos, alertas de check-in próximos
+
+https://reservafacil.com.ar
+Software de administración para alojamientos, cabañas, casas, departamentos. Calendario, reserva, ficha de cliente, control de ingresos/egresos, unidades funcionales, check-in online, etc.
+

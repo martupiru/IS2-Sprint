@@ -1,0 +1,8 @@
+https://www.entradaweb.com.ar/
+Plataforma de venta de tickets en Argentina para cine, teatro, espectáculos. Comprar entradas online, generar QR, etc.
+
+https://www.cinexo.com.ar
+Es una solución para cines. Permite gestión de salas, venta de entradas, administración de salas, administración de cartelera, integración web / app, múltiples canales de venta.
+
+https://eventio.com.ar
+Plataforma de venta de tickets para eventos en general, con panel de administración, reportes, control de acceso con QR, pasarelas de pago.
