@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${persona.id} != null ? 'Editar Persona' : 'Nueva Persona'">Persona</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}" class="current">Home</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <h1 th:text="${persona.id} != null ? 'Editar Persona' : 'Nueva Persona'">Formulario Persona</h1>
+
+        <form th:action="@{/personas}" th:object="${persona}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nombre}" />
+
+            <label>Apellido:</label>
+            <input type="text" th:field="*{apellido}" />
+
+            <button type="submit">Guardar</button>
+        </form>
+
+
+        <a th:href="@{/personas}">Volver a la lista</a>
+    </div>
+</div>
+</body>
+</html>

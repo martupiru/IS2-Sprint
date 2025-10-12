@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Persona</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/personas}" class="current">Personas</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <h1>Detalle de Persona</h1>
+
+        <p><strong>ID:</strong> <span th:text="${persona.id}"></span></p>
+        <p><strong>Nombre:</strong> <span th:text="${persona.nombre}"></span></p>
+        <p><strong>Apellido:</strong> <span th:text="${persona.apellido}"></span></p>
+        <p><strong>DNI:</strong> <span th:text="${persona.dni}"></span></p>
+
+        <a th:href="@{/personas}">Volver a la lista</a>
+        <a th:href="@{/personas/nueva}" th:if="${persona.id == null}">Nueva Persona</a>
+        <a th:href="@{/personas/nueva}" th:if="${persona.id != null}"
+           th:onclick="'location.href=\'/personas/nueva?id=' + ${persona.id} + '\''">Editar Persona</a>
+    </div>
+</div>
+</body>
+</html>

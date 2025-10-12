@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Personas - Book Store</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}" class="current">Home</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+            <li><a th:href="@{/subpage}">Subpage</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_header">
+        <h1 style="padding: 30px;">Listado de Personas</h1>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_left">
+            <div class="templatemo_content_left_section">
+                <h1>Categorías</h1>
+                <ul>
+                    <li><a href="#">Ficción</a></li>
+                    <li><a href="#">Ciencia</a></li>
+                    <li><a href="#">Historia</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="templatemo_content_right">
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+                </thead>
+                <tbody>
+                <button onclick="location.href='@{/personas/nueva}'">Crear Nueva Persona</button>
+                <tr th:each="persona : ${personas}">
+                    <td th:text="${persona.id}"></td>
+                    <td th:text="${persona.nombre}"></td>
+                    <td th:text="${persona.apellido}"></td>
+                    <td>
+                        <a th:href="@{'/personas/' + ${persona.id}}">Ver</a>
+                        <a th:href="@{'/personas/editar/' + ${persona.id}}">Editar</a>
+                        <a th:href="@{'/personas/eliminar/' + ${persona.id}}"
+                           onclick="return confirm('¿Seguro que querés eliminar a esta persona?');">Eliminar</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    </div>
+
+    <div id="templatemo_footer">
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/personas}">Personas</a> |
+        <a th:href="@{/subpage}">Subpage</a>
+        <br/>
+        Copyright © 2025
+    </div>
+</div>
+</body>
+</html>
+
