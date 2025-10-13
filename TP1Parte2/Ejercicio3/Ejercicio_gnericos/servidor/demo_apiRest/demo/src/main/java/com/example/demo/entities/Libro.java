@@ -6,6 +6,9 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,7 +18,8 @@ public class Libro extends BaseEntity<Long> {
     private String titulo;
     private String autor;
     private String genero;
-    private int fecha;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fecha;
     private int paginas;
 
     @ManyToMany

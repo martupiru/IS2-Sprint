@@ -34,4 +34,12 @@ public class Autor extends BaseEntity<Long>{
     public void setEliminado(Boolean eliminado) {
         this.eliminado = eliminado;
     }
+
+    public Autor(Long id) {
+        this.id = id;
+    }
+
+    public Autor() {
+    }
+
 }
