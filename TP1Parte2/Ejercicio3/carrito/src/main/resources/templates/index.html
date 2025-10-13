@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>FarmaING</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+    <!-- font awesome style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+        <div class="container">
+            <div class="top_contact-container">
+                <div class="tel_container">
+                    <a href="">
+                        <img th:src="@{/images/telephone-symbol-button.png}" alt=""> LLAMANOS : +54 9 261 246 4563
+                    </a>
+                </div>
+                <div class="social-container">
+                    <a href="">
+                        <img th:src="@{/images/fb.png}" alt="" class="s-1">
+                    </a>
+                    <a href="">
+                        <img th:src="@{/images/twitter.png}" alt="" class="s-2">
+                    </a>
+                    <a href="">
+                        <img th:src="@{/images/instagram.png}" alt="" class="s-3">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/images/logo.png}" alt="">
+                    <span>FarmaING</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-between">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/about}">Sobre nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/buy}">Venta Online</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/news}">Noticias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/contact}">Contactanos</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline">
+                            <input type="search" placeholder="Buscar">
+                            <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                        </form>
+                        <div class="login_btn-contanier ml-0 ml-lg-5">
+                            <a th:href="@{/login}">
+                                <img th:src="@{/images/user.png}" alt="">
+                                <span>Iniciar Sesión</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+
+    <!-- slider section -->
+    <section class="slider_section position-relative">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="img-box">
+                                    <img th:src="@{/images/logo_farmacia.png}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="detail-box">
+                                    <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
+                                    <p>
+                                        Hola Leandro, bienvenido a la farmacia online. Aquí podrás encontrar una gran variedad de productos y servicios para tu salud y bienestar.
+                                    </p>
+                                    <div>
+                                        <a th:href="@{/buy}">¡Compra Ahora!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="img-box">
+                                    <img th:src="@{/images/promo.png}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="detail-box">
+                                    <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
+                                    <p>No te pierdas nuestras promociones.</p>
+                                    <div><a th:href="@{/buy}">COMPRAR AHORA</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="img-box">
+                                    <img th:src="@{/images/fono.png}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="detail-box">
+                                    <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
+                                    <p>
+                                        No dudes en contactarnos o visitarnos en nuestros puntos de venta.
+                                    </p>
+                                    <div><a th:href="@{/buy}">COMPRA YA!</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+    </section>
+</div>
+
+<!-- JS -->
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>
