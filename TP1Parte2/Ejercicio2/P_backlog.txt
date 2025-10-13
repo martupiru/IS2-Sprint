@@ -1,0 +1,15 @@
+Product Backlog:
+
+Admin:
+Registrar Pacientes   (Prioridad Alta)
+Registrar Medicos  (Alta)
+Asignar turnos a paciente y medico que lo atiende (Alta)
+Registrar pagos de coseguro (Alta)
+Administrar usuarios del sistema? (Baja)
+
+Pacientes:
+Ver listado de turnos que tiene ( Media)
+Ver si pagó coseguro (Baja)
+
+Médicos:
+Ver listado de turnos que tiene (Media)
