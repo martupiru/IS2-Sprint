@@ -1,0 +1,104 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>- Mostrar estado de pago (sí/no).
+- Asociado a cada turno.
+- Solo ver mis datos.</help_text><element><id>UMLNote</id><coordinates><x>80</x><y>160</y><w>250</w><h>110</h></coordinates><panel_attributes>Como administrador, 
+quiero registrar clientes en el sistema,
+para que puedan reservar cabañas.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>160</y><w>250</w><h>110</h></coordinates><panel_attributes>- Se debe registrar nombre, email y 
+contraseña.
+- Validar campos obligatorios y que no 
+hayan correos duplicados.
+- Poder editar y eliminar clientes.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>80</x><y>30</y><w>250</w><h>110</h></coordinates><panel_attributes>Como administrador, 
+quiero registrar propietarios en el sistema,
+para que puedan poner a alquilar sus 
+cabañas.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>30</y><w>250</w><h>110</h></coordinates><panel_attributes>- Se debe registrar nombre, email y
+contraseña.
+- Validar campos obligatorios y que no 
+hayan correos duplicados.
+- Poder editar y eliminar propietarios.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>80</x><y>360</y><w>250</w><h>140</h></coordinates><panel_attributes>Como propietario, 
+quiero registrar mis cabañas en el sistema,
+para poder ofrecerlas en alquiler.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>360</y><w>260</w><h>140</h></coordinates><panel_attributes>- Se deben registrar datos como ubicación,
+ capacidad, precio por noche y descripción.
+- El sistema debe validar que la capacidad
+ sea una de las opciones válidas (2, 4 o 6).
+- Se puede modificar o eliminar una cabaña
+- No se puede eliminar una cabaña con 
+reservas activas.
+
+Alta 4 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>520</y><w>260</w><h>110</h></coordinates><panel_attributes>- Debe mostrar la lista de reservas por 
+cabaña.
+- Debe incluir fechas, datos del cliente y 
+estado del pago.
+
+Media 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>80</x><y>520</y><w>250</w><h>110</h></coordinates><panel_attributes>Como propietario, 
+quiero ver las reservas realizadas sobre 
+mis cabañas, 
+para saber cuándo están ocupadas.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>80</x><y>650</y><w>250</w><h>110</h></coordinates><panel_attributes>Como propietario, 
+quiero modificar o eliminar una cabaña, 
+para mantener actualizada la información.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>40</y><w>250</w><h>130</h></coordinates><panel_attributes>Como usuario, 
+quiero buscar cabañas disponibles por 
+fecha y/o capacidad, 
+para encontrar opciones que se adapten 
+a mis necesidades.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>650</y><w>260</w><h>110</h></coordinates><panel_attributes>- Solo el propietario debe poder modificar 
+o eliminar sus cabañas.
+- No debe permitir eliminar una cabaña 
+con reservas activas.
+
+Media 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>40</y><w>260</w><h>130</h></coordinates><panel_attributes>- El sistema debe permitir filtrar por fechas, 
+capacidad y ubicación.
+- Solo deben mostrarse cabañas disponibles
+ en el rango de fechas seleccionado.
+- Debe mostrarse nombre, ubicación, 
+descripción, capacidad, precio, fotos y datos del propietario.
+
+Alta 3 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>320</y><w>250</w><h>130</h></coordinates><panel_attributes>Como usuario, 
+quiero realizar una reserva de una cabaña 
+por un mínimo de 5 días corridos, 
+para asegurar mi alojamiento.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>320</y><w>260</w><h>130</h></coordinates><panel_attributes>- No debe permitir reservas de menos de 
+5 días.
+- Debe verificar disponibilidad en las fechas 
+seleccionadas.
+- Se debe registrar el total a pagar y las 
+fechas de entrada y salida.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>190</y><w>250</w><h>110</h></coordinates><panel_attributes>Como usuario, 
+quiero ver la información detallada de una 
+cabaña, 
+para decidir si deseo alquilarla.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>190</y><w>260</w><h>110</h></coordinates><panel_attributes>- Debe mostrarse nombre, ubicación, 
+descripción, capacidad, precio, fotos y 
+datos del propietario.
+- Debe permitir continuar al proceso
+de reserva
+
+Alta 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>80</x><y>780</y><w>250</w><h>110</h></coordinates><panel_attributes>Como propietario, 
+quiero subir fotos de mis cabañas, 
+para que los clientes puedan ver las
+cabañas.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>350</x><y>780</y><w>260</w><h>110</h></coordinates><panel_attributes>- Debe permitir subir varias imágenes.
+- Las imágenes deben almacenarse 
+correctamente y mostrarse en la vista 
+de la cabaña.
+
+Baja 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>470</y><w>250</w><h>130</h></coordinates><panel_attributes>Como usuario, 
+quiero pagar la reserva online,
+para confirmar el alquiler.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>620</y><w>250</w><h>110</h></coordinates><panel_attributes>Como usuario, 
+quiero consultar mis reservas activas 
+y pasadas, 
+para llevar control de mis alquileres.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>470</y><w>260</w><h>130</h></coordinates><panel_attributes>- El sistema debe calcular el monto total
+según la cantidad de días.
+- Se debe registrar la fecha y método de 
+pago.
+- Confirmar pago cuando fueron realmente
+pagadas.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>620</y><w>260</w><h>110</h></coordinates><panel_attributes>- Debe mostrar una lista de reservas con 
+sus fechas y estados (pendiente, 
+confirmada, finalizada).
+
+Media 30 minutos</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>720</x><y>750</y><w>250</w><h>100</h></coordinates><panel_attributes>Como usuario, 
+quiero cancelar una reserva, 
+para modificar mis planes si lo necesito.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1000</x><y>750</y><w>260</w><h>100</h></coordinates><panel_attributes>- Solo se puede cancelar si la reserva 
+no está confirmada o si faltan más de 10 días.
+
+Baja 30 minutos</panel_attributes><additional_attributes></additional_attributes></element></diagram>
