@@ -1,0 +1,14 @@
+Product Backlog:
+
+- (Admin) Registrar propietarios.
+- (Admin) Registrar clientes
+- (Propietario) Poner a alquilar mi o mis cabañas
+- (Usuario) Buscar una cabaña según filtros
+- (Usuario) Ver detalladamente una cabaña en específico
+- (Usuario) Alquilar una cabaña
+- (Usuario) Realizar el pago por el alquiler
+- (Usuario) Ver las cabañas que he alquilado, activas y pasadas
+- (Propietario) Ver las reservas sobre mis cabañas
+- (Propietario) Modificar o eliminar una cabaña
+- (Usuario) Cancelar mi reserva
+- (Propietario) Subir fotos de mis cabañas
