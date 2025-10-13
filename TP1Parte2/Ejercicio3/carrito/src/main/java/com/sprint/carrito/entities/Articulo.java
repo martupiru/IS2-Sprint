@@ -1,6 +1,8 @@
 package com.sprint.carrito.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +16,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Articulo extends BaseEntity<String>{
+
     private String nombre;
     private Double precio;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_imagen")
+    private Imagen imagen;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_proveedor")
+    private Proveedor proveedor;
 
     @Override
     public String getId() {return id;}
@@ -28,13 +39,5 @@ public class Articulo extends BaseEntity<String>{
 
     @Override
     public void setEliminado(Boolean eliminado) {this.eliminado = eliminado;}
-
-    public String getNombre() {return nombre;}
-
-    public void setNombre(String nombre) {this.nombre = nombre;}
-
-    public Double getPrecio() {return precio;}
-
-    public void setPrecio(Double precio) {this.precio = precio;}
 
 }

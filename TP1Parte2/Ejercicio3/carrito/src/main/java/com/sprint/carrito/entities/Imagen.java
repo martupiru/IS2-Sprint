@@ -14,6 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Imagen extends BaseEntity<String> {
+
     private String nombre;
     private String mime;
     private byte[] contenido;
@@ -30,16 +31,5 @@ public class Imagen extends BaseEntity<String> {
     @Override
     public void setEliminado(Boolean eliminado) {this.eliminado = eliminado;}
 
-    public String getNombre() {return nombre;}
-
-    public void setNombre(String nombre) {this.nombre = nombre;}
-
-    public String getMime() {return mime;}
-
-    public void setMime(String mime) {this.mime = mime;}
-
-    public byte[] getContenido() {return contenido;}
-
-    public void setContenido(byte[] contenido) {this.contenido = contenido;}
 
 }

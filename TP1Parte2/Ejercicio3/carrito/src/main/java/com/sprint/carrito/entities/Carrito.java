@@ -1,24 +1,30 @@
 package com.sprint.carrito.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "carrito")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Carrito extends BaseEntity<String> {
+
     private double total;
     @ManyToOne
     @JoinColumn(name = "fk_usuario", nullable = false)
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Detalle> detalles = new ArrayList<>();
 
     @Override
     public String getId() {return id;}
@@ -32,7 +38,4 @@ public class Carrito extends BaseEntity<String> {
     @Override
     public void setEliminado(Boolean eliminado) {this.eliminado = eliminado;}
 
-    public double getTotal() {return total;}
-
-    public void setTotal(double total) {this.total = total;}
 }
