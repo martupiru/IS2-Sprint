@@ -157,6 +157,6 @@ public class UsuarioService {
 
     public Optional<Usuario> login(String cuenta, String password) {
         String claveHash = HashForLogin.hashClave(password);
-        return usuarioRepository.login(cuenta, password);
+        return usuarioRepository.login(cuenta, claveHash);
     }
 }

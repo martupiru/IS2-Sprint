@@ -38,7 +38,7 @@ public class EmailService {
             String htmlTemplate = """
                 <html>
                     <body>
-                        <div style="background-color:#f0f0f0">
+                        <div style="background-color:#D2F57F">
                             <h2>%s</h2>
                             <img src="cid:logoImage" alt="Logo" style="width:150px;"/><br><br>
                             <p>%s</p>
@@ -74,7 +74,7 @@ public class EmailService {
 
         for (Proveedor proveedor : proveedores) {
             try {
-                enviarMensaje(proveedor.getCorreoElectronico(), "¡FELIZ AÑO NUEVO! 😁🥳🥳🔥", "Desde Sprint te deseamos un maravilloso año nuevo 💯💯🤑🤑", "src/main/resources/static/images/logo.png");
+                enviarMensaje(proveedor.getCorreoElectronico(), "¡FELIZ AÑO NUEVO! 😁🥳🥳🔥", "Desde Sprint te deseamos un maravilloso año nuevo 💯💯🤑🤑", "src/main/resources/static/images/logo_sprint.png");
             } catch (Exception e) {
                 System.err.println("Error al enviar mensaje de año nuevo: " + e.getMessage());
             }
@@ -86,7 +86,7 @@ public class EmailService {
 
         for (Usuario usuario : usuarios) {
             try {
-                enviarMensaje(usuario.getCorreoElectronico(), titulo, cuerpo, "src/main/resources/static/images/logo.png");
+                enviarMensaje(usuario.getCorreoElectronico(), titulo, cuerpo, "src/main/resources/static/images/logo_sprint.png");
             } catch (Exception e) {
                 System.err.println("Error al enviar mensaje de publicidad: " + e.getMessage());
             }

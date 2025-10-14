@@ -12,7 +12,8 @@ public class SchedulerTask {
         this.emailService = emailService;
     }
 
-    @Scheduled(cron = "0 0 15 5 * *" , zone = "America/Argentina/Buenos_Aires")
+    @Scheduled(cron = "0 25 19 2 10 *" , zone = "America/Argentina/Buenos_Aires")
+    //@Scheduled(cron = "0 0 15 5 * *" , zone = "America/Argentina/Buenos_Aires")
     public void schedulePublicidad() throws Exception{
         try {
             String titulo = "Oferta especial";
@@ -24,7 +25,8 @@ public class SchedulerTask {
         }
     }
 
-    @Scheduled(cron = "0 0 0 31 12 *", zone = "America/Argentina/Buenos_Aires") // segundo-minuto-hora-dia-mes-año
+    @Scheduled(cron = "0 25 19 2 10 *" , zone = "America/Argentina/Buenos_Aires")
+    //@Scheduled(cron = "0 0 0 31 12 *", zone = "America/Argentina/Buenos_Aires") // segundo-minuto-hora-dia-mes-año
     public void scheduleSaludosAnioNuevo() throws Exception{
         try {
             emailService.mailAnioNuevo();
