@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title th:text="${titleEdit}"></title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="~{fragments/menubody :: menu-principal}"></header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header">
+                <strong th:text="${titleEdit}"></strong>
+            </h4>
+            <div class="card-body">
+
+                <form th:action="@{/librodigital/actualizar}" method="post" th:object="${item}">
+
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Título</label>
+                            <input type="text" class="form-control" th:field="*{titulo}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Género</label>
+                            <input type="text" class="form-control" th:field="*{genero}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" th:field="*{fecha}" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Páginas</label>
+                            <input type="number" class="form-control" th:field="*{paginas}" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>url</label>
+                            <input type="text" class="form-control" th:field="*{urlDescarga}"
+                                   placeholder="Ej: https://misitio.com/miarchivo.pdf" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Autores</label>
+                            <select class="form-control" th:field="*{autores}" multiple>
+                                <option th:each="autor : ${autoresList}"
+                                        th:value="${autor.id}"
+                                        th:text="${autor.nombre}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <a class="btn btn-secondary" th:href="@{/librodigital/list}">CANCELAR</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
