@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+<nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Crear Usuario</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/usuario}">Usuario</a></li>
+                    <li class="breadcrumb-item active">Nuevo Usuario</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-user-plus me-1"></i>
+                        Datos del Usuario
+                    </div>
+                    <div class="card-body">
+                        <form th:action="${usuario.id} == null ? @{/usuario/crear} : @{/usuario/editar}" th:object="${usuario}" method="post">
+
+                            <input type="hidden" th:field="*{id}">
+                        <!-- Campos de Persona -->
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Nombre">
+                                <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" th:field="*{apellido}" class="form-control" id="apellido" placeholder="Apellido">
+                                <div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                                <input type="email" th:field="*{correoElectronico}" class="form-control" id="correoElectronico" placeholder="email@ejemplo.com">
+                                <div class="text-danger" th:if="${#fields.hasErrors('correoElectronico')}" th:errors="*{correoElectronico}"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" th:field="*{telefono}" class="form-control" id="telefono" placeholder="+541112345678">
+                                <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+                            </div>
+
+                            <!-- Campos de Usuario -->
+                            <div class="mb-3">
+                                <label for="cuenta" class="form-label">Cuenta</label>
+                                <input type="text" th:field="*{cuenta}" class="form-control" id="cuenta" placeholder="Nombre de usuario">
+                                <div class="text-danger" th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+                            </div>
+
+                            <div class="mb-3" th:if="${usuario.id} == null">
+                                <label for="clave" class="form-label">Clave</label>
+                                <input type="password" th:field="*{clave}" class="form-control" id="clave" placeholder="Contraseña">
+                                <div class="text-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
+                            </div>
+
+                            <div class="mb-3" th:if="${usuario.id} != null">
+                                <label for="clave" class="form-label">Clave (no se puede cambiar aquí)</label>
+                                <input type="password" class="form-control" id="clave" placeholder="Contraseña no editable" disabled>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Guardar Usuario
+                            </button>
+                            <a th:href="@{/usuario/detalle}" class="btn btn-secondary">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <div th:replace="~{components/footer :: footer}"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>

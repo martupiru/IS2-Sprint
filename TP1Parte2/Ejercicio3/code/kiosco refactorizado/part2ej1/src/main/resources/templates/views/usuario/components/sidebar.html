@@ -1,0 +1,90 @@
+<div th:fragment="sidebar">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+
+                    <!-- Core -->
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" th:href="@{/usuario/dashboard}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+
+                    <!-- Interface -->
+                    <div class="sb-sidenav-menu-heading">Gestión</div>
+
+                    <!-- Usuario -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsuario" aria-expanded="false" aria-controls="collapseUsuario">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                        Usuario
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseUsuario" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/usuario/detalle}">ABM Usuarios</a>
+                            <a class="nav-link" th:href="@{/usuario/clave}">Cambiar clave</a>
+                        </nav>
+                    </div>
+
+                    <!-- Dirección -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDireccion" aria-expanded="false" aria-controls="collapseDireccion">
+                        <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        Dirección
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseDireccion" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/usuario/direccion/FormDireccion}">ABM Dirección</a>
+                            <a class="nav-link" th:href="@{/usuario/direccion/direccion-empresa}">Dirección Empresa</a>
+                        </nav>
+                    </div>
+
+                    <!-- Empresa -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEmpresa" aria-expanded="false" aria-controls="collapseEmpresa">
+                        <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                        Empresa
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseEmpresa" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/usuario/empresa/detalle}">ABM Empresa</a>
+                        </nav>
+                    </div>
+
+                    <!-- Proveedor -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProveedor" aria-expanded="false" aria-controls="collapseProveedor">
+                        <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
+                        Proveedor
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseProveedor" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/usuario/proveedor/detalle}">ABM Proveedor</a>
+                        </nav>
+                    </div>
+
+                    <a class="nav-link" th:href="@{/generar-pdf}" target="_blank">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file-pdf"></i></div>
+                        PDF Proveedores
+                    </a>
+
+                    <a class="nav-link" th:href="@{/generar-excel.xlsx}" target="_blank">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file-excel"></i></div>
+                        Excel empresas
+                    </a>
+
+                    <a class="nav-link" th:href="@{/usuario/migracion}" target="_blank">
+                        <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
+                        Migración BD
+                    </a>
+                </div>
+            </div>
+
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Admin
+            </div>
+        </nav>
+    </div>
+</div>

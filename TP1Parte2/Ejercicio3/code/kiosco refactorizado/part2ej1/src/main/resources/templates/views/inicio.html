@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Kiosco Online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <!-- NAVBAR -->
+    <nav th:replace="components/navbar :: nav_bar"></nav>
+
+    <!-- HEADER -->
+    <header class="hero bg-light text-center d-flex align-items-center justify-content-center"
+            th:style="'height: 80vh; background: url(' + @{/images/kiosco.jpeg} + ') center/cover no-repeat;'">
+        <div class="overlay"></div>
+        <div class="content text-white">
+            <h1 class="display-3 fw-bold">Bienvenido a Kiosco Sprint</h1>
+            <p class="lead">Tu kiosco de confianza, ahora también digital</p>
+            <a th:href="@{/login}" class="btn btn-primary btn-lg mt-3">Login</a>
+        </div>
+    </header>
+
+
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre-nosotros" class="site-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <p class="text-muted mb-4">
+                Somos un kiosco comprometido con ofrecer productos de calidad y un servicio rápido y confiable.
+                Nuestra misión es facilitar tus compras diarias de manera sencilla y cómoda.
+            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <p>
+                        Contamos con un amplio catálogo de productos, atención personalizada y un equipo
+                        dedicado a satisfacer todas tus necesidades. ¡Compra desde cualquier lugar y recibe en tu casa!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿QUÉ OFRECEMOS? -->
+    <section id="que-ofrecemos" class="site-section py-5">
+        <div class="container text-center">
+            <h2 class="section-title">¿Qué ofrecemos?</h2>
+            <p class="text-muted mb-5">Gestión de productos, proveedores y clientes de forma simple y rápida.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Usuarios</h4>
+                        <p class="text-muted">Administración de usuarios y cambio de claves.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Direcciones</h4>
+                        <p class="text-muted">Gestión de Países, Provincias, Departamentos y Localidades.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Empresas & Proveedores</h4>
+                        <p class="text-muted">Organiza tu empresa y proveedores fácilmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="site-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Contacto</h2>
+            <p class="text-muted mb-4">Escríbenos o visítanos, estaremos felices de atenderte.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <p><strong>Email:</strong> contacto@kiosco.com</p>
+                    <p><strong>Teléfono:</strong> +54 9 1234 5678</p>
+                    <p><strong>Dirección:</strong> Calle Falsa 123, Ciudad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div th:replace="components/footer :: footer"></div>
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/aos.js}"></script>
+<script>
+    AOS.init();
+</script>
+</body>
+</html>
