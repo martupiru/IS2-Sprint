@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+
+    <!-- Bootstrap core -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- SB Admin core -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- extras -->
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+    <!-- Navbar -->
+    <nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <!-- Sidebar -->
+            <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Bienvenido admin :) </li>
+                    </ol>
+
+                    <!-- Cards -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('primary', 'ABM Usuario', @{/usuario/detalle})}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('warning', 'ABM Proveedor', @{/usuario/proveedor/detalle})}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('success', 'ABM Empresa', @{/usuario/empresa/detalle})}"></th:block>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <th:block th:replace="~{views/usuario/components/cards :: card('danger', 'Migración BD', @{/usuario/migracion})}"></th:block>
+                        </div>
+                    </div>
+
+
+                    <!-- Charts -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Ventas de Coca Cola en Marzo
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Ventas de Labubus en el primer semestre
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myBarChart" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DataTable -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Socios Compañia
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <td>Martina Nahman</td>
+                                    <td>Lic. Ciencias de la Computación</td>
+                                    <td>Maipu</td>
+                                    <td>22</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,000,800</td>
+                                </tr>
+                                <tr>
+                                    <td>Paula Martinez</td>
+                                    <td>Lic. Ciencias de la Computación</td>
+                                    <td>Las Heras</td>
+                                    <td>23</td>
+                                    <td>2011/01/25</td>
+                                    <td>$100,000,012,000</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <div th:replace="~{components/footer :: footer}"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/datatables-simple-demo.js}"></script>
+
+    <script>
+        // Esto asegura que Bootstrap “vea” los collapses cargados con Thymeleaf
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordions = document.querySelectorAll('#sidenavAccordion .collapse');
+            accordions.forEach(el => {
+                // Solo inicializa si no está ya activo
+                if (!el.classList.contains('show')) {
+                    new bootstrap.Collapse(el, { toggle: false });
+                }
+            });
+        });
+    </script>
+</body>

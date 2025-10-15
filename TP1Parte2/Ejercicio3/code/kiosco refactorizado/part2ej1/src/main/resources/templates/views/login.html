@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Kiosco Sprint - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .card-body input.form-control {
+            color: #212529 !important;
+            background-color: #fff !important;
+        }
+
+        .card-body input.form-control::placeholder {
+            color: #6c757d !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <!-- NAVBAR -->
+    <!-- components/navbar.html -->
+    <nav th:fragment="nav_bar"
+         class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" th:href="@{/}">
+                <img th:src="@{/images/logo_sprint.png}" alt="Logo Kiosco"
+                     style="height: 90px; width:auto;" class="me-2">
+                Kiosco Sprint
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarPublic" aria-controls="navbarPublic"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarPublic">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Inicio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- LOGIN -->
+    <div class="site-section mb-5" id="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-body p-4">
+                            <h2 class="text-center mb-4 text-dark">Iniciar Sesión</h2>
+                            <div th:if="${error}" class="alert alert-danger text-center">
+                                <p th:text="${error}"></p>
+                            </div>
+                            <!-- FORMULARIO -->
+                            <form th:action="@{/login}" method="post">
+                                <div class="form-group">
+                                    <label for="cuenta">Cuenta</label>
+                                    <input type="text" class="form-control" id="cuenta" name="cuenta" required style="color:#212529;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" required style="color:#212529;">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Ingresar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div th:replace="components/footer :: footer"></div>
+
+</div>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>
