@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>FarmaING - Iniciar Sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/images/logo.png}" alt="" style="height: 50px;">
+                    <span>FarmaING</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="site-section mb-5" id="login-section" style="padding-top: 50px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-body p-4">
+                            <h2 class="text-center mb-4 text-dark">Iniciar Sesión</h2>
+
+                            <div th:if="${error}" class="alert alert-danger text-center">
+                                <p th:text="${error}"></p>
+                            </div>
+
+                            <div th:if="${param.exito}" class="alert alert-success text-center">
+                                <p>¡Te has registrado exitosamente! Por favor, inicia sesión.</p>
+                            </div>
+                            <form th:action="@{/login}" method="post">
+                                <div class="form-group mb-3">
+                                    <label for="cuenta">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" id="cuenta" name="nombre" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="password">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Ingresar
+                                </button>
+                            </form>
+
+                            <div class="text-center mt-3">
+                                <a th:href="@{/registro}">¿No tienes una cuenta? Regístrate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer style="text-align: center; padding: 20px; background-color: #f2f2f2; margin-top: 50px;">
+        <p>&copy; 2025 FarmaING. Todos los derechos reservados.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

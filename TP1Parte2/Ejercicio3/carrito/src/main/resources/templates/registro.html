@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>FarmaING - Registro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="site-wrap">
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/images/logo.png}" alt="" style="height: 50px;">
+                    <span>FarmaING</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="site-section mb-5" style="padding-top: 50px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-body p-4">
+                            <h2 class="text-center mb-4 text-dark">Crear una Cuenta</h2>
+
+                            <div th:if="${error}" class="alert alert-danger text-center">
+                                <p th:text="${error}"></p>
+                            </div>
+
+                            <form th:action="@{/registro}" th:object="${usuario}" method="post">
+                                <div class="form-group mb-3">
+                                    <label for="nombre">Nombre de Usuario</label>
+                                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="clave">Contraseña</label>
+                                    <input type="password" class="form-control" id="clave" th:field="*{clave}" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Registrarse
+                                </button>
+                            </form>
+                            <div class="text-center mt-3">
+                                <a th:href="@{/login}">¿Ya tienes una cuenta? Inicia Sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
