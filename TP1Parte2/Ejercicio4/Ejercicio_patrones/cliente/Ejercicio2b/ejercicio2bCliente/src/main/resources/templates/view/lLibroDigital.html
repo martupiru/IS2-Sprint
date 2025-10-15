@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title th:text="${titleList}"></title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="~{fragments/menubody :: menu-principal}"></header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+        <h2>LIBROS DIGITAL</h2>
+
+        <a class="btn btn-primary" th:href="@{/librodigital/alta}">+ Nuevo Libro DIGITAL</a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Título</th>
+                <th>Fecha</th>
+                <th>Género</th>
+                <th>Páginas</th>
+                <th>url</th>
+                <th>Autores</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td>
+                    <a class="btn btn-success btn-sm" th:href="@{/librodigital/consultar/} + ${item.id}">👁️</a>
+                    <a class="btn btn-primary btn-sm" th:href="@{/librodigital/modificar/} + ${item.id}">✏️</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/librodigital/baja/} + ${item.id}"
+                       onclick="return confirm('¿Está seguro?')">🗑️</a>
+                </td>
+                <td th:text="${item.titulo}"></td>
+                <td th:text="${#dates.format(item.fecha, 'dd/MM/yyyy')}"></td>
+                <td th:text="${item.genero}"></td>
+                <td th:text="${item.paginas}"></td>
+                <td th:text="${item.urlDescarga}"></td>
+                <td th:text="${#strings.listJoin(item.autores.![nombre], ', ')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+
+    // Guardamos en una variable una funcion que muestra un cuadro de dialogo de tipo confirm
+    var dialogoConfirm = function (e) {
+        if (!confirm('¿Está seguro de eliminar la información?'))
+            e.preventDefault();
+    };
+
+    // Aplicamos a todos los elementos HTML que tengan la clase CSS 'confirmar' el evento click para que muestre el cuadro de dialogo de confirmacion.
+    document.querySelectorAll('.confirmar').forEach(function(elemento) {
+        elemento.addEventListener('click', dialogoConfirm, false);
+    });
+
+</script>
+
+</body>
+</html>

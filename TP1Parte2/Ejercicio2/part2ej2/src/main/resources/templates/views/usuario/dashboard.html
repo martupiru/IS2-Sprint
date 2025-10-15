@@ -69,6 +69,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-secondary text-white mb-4">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <i class="fas fa-cloud fa-2x mb-2"></i>
+                                    <h6>Clima - Mendoza</h6>
+                                    <small>Temperatura</small>
+                                    <h5 th:text="${weather != null ? weather.main.temp + '°C' : 'N/A'}">--°C</h5>
+                                    <small>Sensación térmica</small>
+                                    <h5 th:text="${weather != null ? weather.main.feelsLike + '°C' : 'N/A'}">--°C</h5>
+                                    <small class="d-block mt-2">Humedad: <span th:text="${weather != null ? weather.main.humidity + '%' : 'N/A'}">--%</span></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <!-- Charts -->

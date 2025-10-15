@@ -2,9 +2,11 @@ package com.sprint.part2ej1.controllers;
 
 import com.sprint.part2ej1.entities.Persona;
 import com.sprint.part2ej1.entities.Usuario;
+import com.sprint.part2ej1.models.WeatherResponse;
 import com.sprint.part2ej1.services.DolarService;
 import com.sprint.part2ej1.services.PersonaService;
 import com.sprint.part2ej1.services.UsuarioService;
+import com.sprint.part2ej1.services.WeatherService;
 import com.sprint.part2ej1.utils.HashForLogin;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -27,6 +30,9 @@ public class UsuarioController {
 
     @Autowired
     private PersonaService personaService;
+
+    @Autowired
+    private WeatherService weatherService;
 
     @GetMapping("/usuario/dashboard")
     public String mostrarDashboard(HttpSession session, Model model) {
@@ -45,6 +51,14 @@ public class UsuarioController {
         }
 
         model.addAttribute("usuario", usuario);
+
+        try {
+            WeatherResponse weather = weatherService.getWeatherByCity("Mendoza").block();
+            model.addAttribute("weather", weather);
+        } catch (Exception e) {
+            model.addAttribute("weather", null);
+        }
+
         return "views/usuario/dashboard";
     }
 
