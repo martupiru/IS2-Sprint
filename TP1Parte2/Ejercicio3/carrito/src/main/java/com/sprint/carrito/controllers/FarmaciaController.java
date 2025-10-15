@@ -1,5 +1,7 @@
 package com.sprint.carrito.controllers;
 
+import com.sprint.carrito.entities.Articulo;
+import com.sprint.carrito.services.ArticuloService;
 import com.sprint.carrito.entities.Usuario;
 import com.sprint.carrito.error.ErrorServiceException;
 import com.sprint.carrito.services.UsuarioService;
@@ -11,13 +13,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class FarmaciaController {
 
+    private final UsuarioService usuarioService;
+    private final ArticuloService articuloService;
+
     @Autowired
-    private UsuarioService usuarioService;
+    public FarmaciaController(UsuarioService usuarioService, ArticuloService articuloService) {
+        this.usuarioService = usuarioService;
+        this.articuloService = articuloService;
+    }
 
     @GetMapping("/")
     public String redirectToInicio() {
@@ -95,5 +104,29 @@ public class FarmaciaController {
             model.addAttribute("usuario", usuario); // Devolvemos el objeto para no borrar lo que el usuario ya escribió
             return "registro";
         }
+    }
+
+    @GetMapping("/usuario/indexLogueado")
+    public String inicioLogueado(HttpSession session, Model model) {
+        Object usuarioEnSesion = session.getAttribute("usuarioLogueado");
+
+        if (usuarioEnSesion == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("usuario", usuarioEnSesion);
+
+        return "usuario/indexLogueado";
+    }
+
+    @GetMapping("/buy")
+    public String mostrarPaginaDeVenta(Model model) {
+        try {
+            List<Articulo> listaDeArticulos = articuloService.listarActivos();
+            model.addAttribute("articulos", listaDeArticulos);
+        } catch (Exception e) {
+            model.addAttribute("error", "No se pudieron cargar los productos.");
+        }
+        return "buy";
     }
 }
