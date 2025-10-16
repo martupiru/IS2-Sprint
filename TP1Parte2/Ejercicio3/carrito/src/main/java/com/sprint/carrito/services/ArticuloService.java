@@ -28,4 +28,11 @@ public class ArticuloService extends BaseService<Articulo, String> {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
+
+    @Override
+    protected void preAlta(Articulo art) throws ErrorServiceException {
+        art.setId(null);
+    }
+
+
 }

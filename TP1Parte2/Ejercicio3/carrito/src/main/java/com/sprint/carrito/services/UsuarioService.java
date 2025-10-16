@@ -1,7 +1,9 @@
 package com.sprint.carrito.services;
 
+import com.sprint.carrito.entities.Carrito;
 import com.sprint.carrito.entities.Usuario;
 import com.sprint.carrito.error.ErrorServiceException;
+import com.sprint.carrito.repositories.CarritoRepository;
 import com.sprint.carrito.repositories.UsuarioRepository;
 import com.sprint.carrito.utils.HashForLogin;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,12 @@ public class UsuarioService extends BaseService<Usuario, String> {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository repository) {
+    private final CarritoRepository carritoRepository;
+
+    public UsuarioService(UsuarioRepository repository, CarritoRepository carritoRepository) {
         super(repository);
         this.usuarioRepository = repository;
+        this.carritoRepository = carritoRepository;
     }
 
     @Override
@@ -33,9 +38,6 @@ public class UsuarioService extends BaseService<Usuario, String> {
         String claveOriginal = user.getClave(); // Guardamos la clave original
         String claveHash = HashForLogin.hashClave(claveOriginal);
 
-        // --- AÑADE ESTA LÍNEA PARA DEPURAR ---
-        System.out.println("Clave Original: " + claveOriginal + " | Clave Hasheada: " + claveHash);
-
         user.setClave(claveHash);
     }
 
@@ -43,4 +45,15 @@ public class UsuarioService extends BaseService<Usuario, String> {
         String claveHash = HashForLogin.hashClave(password);
         return usuarioRepository.login(nombre, claveHash);
     }
+
+    public Carrito obtenerOCrearPorUsuario(String idUsuario) {
+        return carritoRepository.findByUsuarioIdAndEliminadoFalse(idUsuario)
+                .orElseGet(() -> {
+                    Carrito nuevo = new Carrito();
+                    nuevo.setUsuario(usuarioRepository.findById(idUsuario).get());
+                    nuevo.setTotal(0.0);
+                    return carritoRepository.save(nuevo);
+                });
+    }
+
 }

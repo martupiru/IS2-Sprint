@@ -1,11 +1,14 @@
 package com.sprint.carrito.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "proveedor")
@@ -14,6 +17,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Proveedor extends BaseEntity<String> {
+
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String id;
+
 
     private String nombre;
 

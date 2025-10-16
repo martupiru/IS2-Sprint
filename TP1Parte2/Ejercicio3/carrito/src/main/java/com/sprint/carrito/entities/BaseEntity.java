@@ -1,9 +1,11 @@
 package com.sprint.carrito.entities;
 
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 
 @MappedSuperclass
@@ -12,13 +14,14 @@ import org.hibernate.annotations.UuidGenerator;
 public abstract class BaseEntity<ID> {
 
     @Id
-    @UuidGenerator
-    protected String id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    protected ID id;
+
     protected Boolean eliminado = false;
 
     public abstract ID getId();
     public abstract void setId(ID id);
     public abstract Boolean getEliminado();
     public abstract void setEliminado(Boolean eliminado);
-
 }

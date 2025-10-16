@@ -156,14 +156,14 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID> {
     public String actualizar(@ModelAttribute("item") T entidad, RedirectAttributes attributes, Model model) {
         try {
             this.model=model;
-            preActualziacion();
+            preActualizacion();
 
             if(entidad.getId() == null)
                 service.alta(entidad);
             else
                 service.modificar(entidad.getId(), entidad);
 
-            postActualziacion();
+            postActualizacion();
             attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
@@ -185,7 +185,7 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID> {
     protected void preModificacion()throws ErrorServiceException {}
     protected void preBaja()throws ErrorServiceException {}
     protected void postBaja()throws ErrorServiceException {}
-    protected void preActualziacion()throws ErrorServiceException {}
-    protected void postActualziacion()throws ErrorServiceException {}
+    protected void preActualizacion()throws ErrorServiceException {}
+    protected void postActualizacion()throws ErrorServiceException {}
 
 }

@@ -40,20 +40,34 @@ public class CarritoService extends BaseService<Carrito,String>{
         Articulo articulo = articuloRepository.findById(idArticulo)
                 .orElseThrow(() -> new ErrorServiceException("No se encontró el artículo."));
 
-        // Creamos una nueva instancia de Detalle
-        Detalle nuevoDetalle = new Detalle();
-        nuevoDetalle.setArticulo(articulo);
-        nuevoDetalle.setCarrito(carrito); // Asignamos la relación
+        // Buscamos si el artículo ya está en el carrito
+        Detalle detalleExistente = carrito.getDetalles().stream()
+                .filter(d -> d.getArticulo().getId().equals(idArticulo))
+                .findFirst()
+                .orElse(null);
 
-        // Agregamos el nuevo detalle a la lista del carrito
-        carrito.getDetalles().add(nuevoDetalle);
+        if (detalleExistente != null) {
+            // Si ya existe, incrementamos cantidad
+            detalleExistente.setCantidad(detalleExistente.getCantidad() + 1);
+        } else {
+            // Si no existe, lo agregamos nuevo
+            Detalle nuevoDetalle = new Detalle();
+            nuevoDetalle.setArticulo(articulo);
+            nuevoDetalle.setCarrito(carrito);
+            nuevoDetalle.setCantidad(1);
+            carrito.getDetalles().add(nuevoDetalle);
+        }
 
-        // Recalculamos el total del carrito
-        carrito.setTotal(carrito.getTotal() + articulo.getPrecio());
+        // Recalcular total del carrito
+        double total = carrito.getDetalles().stream()
+                .mapToDouble(d -> d.getArticulo().getPrecio() * d.getCantidad())
+                .sum();
 
-        // Al guardar el carrito, la cascada guardará el nuevo detalle.
+        carrito.setTotal(total);
+
         return carritoRepository.save(carrito);
     }
+
 
     /**
      * Quita una unidad de un artículo del carrito. Busca y elimina una línea de Detalle.
@@ -62,33 +76,26 @@ public class CarritoService extends BaseService<Carrito,String>{
         Carrito carrito = carritoRepository.findById(idCarrito)
                 .orElseThrow(() -> new ErrorServiceException("No se encontró el carrito."));
 
-        //Creamos una variable para guardar el detalle que encontremos. La inicializamos en null.
-        Detalle detalleParaEliminar = null;
+        Detalle detalle = carrito.getDetalles().stream()
+                .filter(d -> d.getArticulo().getId().equals(idArticulo))
+                .findFirst()
+                .orElseThrow(() -> new ErrorServiceException("El artículo no se encuentra en el carrito."));
 
-        //Recorremos la lista de detalles del carrito, uno por uno.
-        for (Detalle detalleActual : carrito.getDetalles()) {
-
-            //Para cada detalle, comprobamos si el ID de su artículo es el que buscamos.
-            if (detalleActual.getArticulo().getId().equals(idArticulo)) {
-
-                //Si lo encontramos o guardamos en nuestra variable.
-                detalleParaEliminar = detalleActual;
-
-                //Como solo necesitabamos el primero, salimos del bucle para no seguir buscando.
-                break;
-            }
+        // Reducimos cantidad o eliminamos
+        if (detalle.getCantidad() > 1) {
+            detalle.setCantidad(detalle.getCantidad() - 1);
+        } else {
+            carrito.getDetalles().remove(detalle);
         }
 
-        //Después de recorrer la lista, comprobamos si lo encontramos.
-        if (detalleParaEliminar == null) {
-            // Si la variable sigue en null, significa que el artículo no estaba en el carrito.
-            throw new ErrorServiceException("El artículo no se encuentra en el carrito.");
-        }
-
-        carrito.getDetalles().remove(detalleParaEliminar);
-        carrito.setTotal(carrito.getTotal() - detalleParaEliminar.getArticulo().getPrecio());
+        // Recalculamos total
+        double total = carrito.getDetalles().stream()
+                .mapToDouble(d -> d.getArticulo().getPrecio() * d.getCantidad())
+                .sum();
+        carrito.setTotal(total);
 
         return carritoRepository.save(carrito);
     }
+
 
 }

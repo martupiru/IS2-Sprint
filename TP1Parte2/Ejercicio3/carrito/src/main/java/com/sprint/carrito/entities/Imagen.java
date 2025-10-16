@@ -1,11 +1,11 @@
 package com.sprint.carrito.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "imagen")
@@ -15,8 +15,16 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Imagen extends BaseEntity<String> {
 
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String id;
+
     private String nombre;
     private String mime;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "contenido", columnDefinition = "LONGBLOB")
     private byte[] contenido;
 
     @Override

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Carrito - FarmaING</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+    <!-- font awesome style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <h1>🛒 Mi Carrito</h1>
+    <a href="/articulos/buy">⬅ Volver a comprar</a>
+</header>
+
+<div>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Proveedor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="articulo : ${carrito}">
+            <td th:text="${articulo.nombre}"></td>
+            <td th:text="'$' + ${articulo.precio}"></td>
+            <td th:text="${articulo.proveedor.nombre}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${#lists.isEmpty(carrito)}">
+        <p>No hay artículos en el carrito.</p>
+    </div>
+</div>
+
+</body>
+</html>

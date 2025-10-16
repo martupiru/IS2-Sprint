@@ -24,7 +24,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
             postAlta(guardado);
             return guardado;
         }catch(Exception e) {
-            throw new ErrorServiceException("Error de Sistemas");
+            e.printStackTrace();
+            throw new ErrorServiceException(e.getMessage());
         }
     }
 
@@ -39,7 +40,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
             });
 
         }catch(Exception e) {
-            throw new ErrorServiceException("Error de Sistemas");
+            e.printStackTrace();
+            throw new ErrorServiceException(e.getMessage());
         }
     }
 
@@ -52,7 +54,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
                 return true;
             }).orElse(false);
         }catch(Exception e) {
-            throw new ErrorServiceException("Error de Sistemas");
+            e.printStackTrace();
+            throw new ErrorServiceException(e.getMessage());
         }
     }
 
@@ -61,7 +64,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
             return repository.findById(id).
                     filter(e -> !Boolean.TRUE.equals(e.getEliminado()));
         }catch(Exception e) {
-            throw new ErrorServiceException("Error de Sistemas");
+            e.printStackTrace();
+            throw new ErrorServiceException(e.getMessage());
         }
     }
 
@@ -71,7 +75,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
                     .filter(e -> !Boolean.TRUE.equals(e.getEliminado()))
                     .toList();
         }catch(Exception e) {
-            throw new ErrorServiceException("Error de Sistemas");
+            e.printStackTrace();
+            throw new ErrorServiceException(e.getMessage());
         }
     }
 

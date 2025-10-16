@@ -1,13 +1,11 @@
 package com.sprint.carrito.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "detalle")
@@ -16,6 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Detalle extends BaseEntity<String>{
+
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String id;
+
+    public Integer cantidad = 1; // por defecto
 
     @ManyToOne
     @JoinColumn(name = "fk_articulo")
