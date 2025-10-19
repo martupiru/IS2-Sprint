@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title th:text="${titleList}"></title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="~{fragments/menubody :: menu-principal}"></header>
+
+    <main role="main">
+      <hr>
+      <div class="container">
+
+        <div class="card">
+          <h4 class="card-header">
+             <strong th:text="${titleList}"></strong>
+          </h4>
+          <div class="card-body">
+
+            <a class="btn btn-primary" th:href="@{'/' + ${nameEntityLower} + '/alta'}" role="button"><i class="fa fa-plus" aria-hidden="true"></i> </a>
+
+            <hr>
+            <div th:if="${msgExito != null}" class='alert alert-success' th:text="${msgExito}" role='alert'></div>
+            <div th:if="${msgError != null}" class='alert alert-danger' th:text="${msgError}" role='alert'></div>
+
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Acciones</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Detalle</th>
+                  <th scope="col">Mecánico</th>
+                  <th scope="col">Vehículo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="item : ${items}">
+                  <td>
+                    <a th:href="@{'/' + ${nameEntityLower} + '/consultar/' + ${item.id}}" class="btn btn-success btn-sm" role="button" title="Consultar"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                    <a th:href="@{'/' + ${nameEntityLower} + '/modificar/' + ${item.id}}" class="btn btn-success btn-sm" role="button" title="Modificar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{'/' + ${nameEntityLower} + '/baja/' + ${item.id}}" class="btn btn-success btn-sm confirmar" role="button" title="Baja"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                  <td th:text="${#dates.format(item.fechaArreglo, 'yyyy-MM-dd HH:mm')}"></td>
+                  <td th:text="${item.detalleArreglo}"></td>
+                  <td th:text="${item.mecanico != null ? item.mecanico.nombre + ' ' + item.mecanico.apellido : ''}"></td>
+                  <td th:text="${item.vehiculo != null ? item.vehiculo.patente : ''}"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script>
+      var dialogoConfirm = function (e) {
+        if (!confirm('¿Está seguro de eliminar la información?'))
+          e.preventDefault();
+      };
+
+      document.querySelectorAll('.confirmar').forEach(function(elemento) {
+        elemento.addEventListener('click', dialogoConfirm, false);
+      });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${title} ?: 'Registro'"></title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="~{fragments/menubody :: menu-principal}"></header>
+
+<main role="main">
+    <div class="container mt-4">
+        <div class="card">
+            <h4 class="card-header"><strong th:text="${title} ?: 'Registro de Usuario'"></strong></h4>
+            <div class="card-body">
+
+                <div>
+                    <form th:action="@{/register}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}"></div>
+                        <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nombre2">Nombre</label>
+                                <input type="text" name="nombre" id="nombre2" class="form-control" required th:value="${nombre}" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="apellido2">Apellido</label>
+                                <input type="text" name="apellido" id="apellido2" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for="email2">Correo electrónico</label>
+                                <input type="email" name="email" id="email2" class="form-control" required th:value="${email}" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="clave2">Contraseña</label>
+                                <input type="password" name="clave" id="clave2" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="confirmPassword2">Confirmar contraseña</label>
+                                <input type="password" name="confirmPassword" id="confirmPassword2" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                            <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

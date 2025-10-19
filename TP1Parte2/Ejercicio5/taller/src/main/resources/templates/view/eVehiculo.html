@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title th:text="${titleEdit}"></title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="~{fragments/menubody :: menu-principal}"></header>
+
+    <main role="main">
+      <hr>
+      <div class="container">
+
+        <div class="card">
+		  <h4 class="card-header">
+			<strong th:text="${titleEdit}"></strong>
+		  </h4>
+          <div class="card-body">
+
+            <form th:action="@{'/' + ${nameEntityLower} + '/actualizar'}" method="post" th:object="${item}">
+                <input type="hidden" name="id" th:if="${item.id != null}" th:field="*{id}" />
+
+			  <div th:if="${msgExito != null}" class='alert alert-success' th:text="${msgExito}" role='alert'></div>
+			  <div th:if="${msgError != null}" class='alert alert-danger' th:text="${msgError}" role='alert'></div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="patente">Patente</label>
+                    <input type="text" class="form-control" th:field="*{patente}" placeholder="" required="required" th:disabled="${isDisabled}">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" th:field="*{marca}" placeholder="" th:disabled="${isDisabled}">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control" th:field="*{modelo}" placeholder="" th:disabled="${isDisabled}">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <select class="form-control" th:field="*{cliente.id}" th:disabled="${isDisabled}">
+                        <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre} + ' ' + ${c.apellido} + ' (' + ${c.documento} + ')'">--</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+			  <div class="d-grid gap-2 float-right justify-content-md-end">
+               <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}">ACEPTAR</button>
+			   <a class="btn btn-primary" th:href="@{'/' + ${nameEntityLower} + '/cancelar'}" role="button">CANCELAR</a>
+			  </div>
+
+			</form>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+  </body>
+</html>
