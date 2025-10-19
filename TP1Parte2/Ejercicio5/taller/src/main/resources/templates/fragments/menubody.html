@@ -1,0 +1,39 @@
+<nav th:fragment="menu-principal" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+
+  <a class="navbar-brand" th:href="@{/}">TALLER</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="#navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/cliente/list}">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/vehiculo/list}">Vehículos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/mecanico/list}">Mecánicos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/usuario/list}">Usuarios</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="nav-link" th:href="@{/historialarreglo/list}">Historial</a>
+        </li>
+
+        <li class="nav-item">
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; padding: 0.5rem 1rem; cursor: pointer;">
+                    Cerrar sesión
+                </button>
+            </form>
+        </li>
+
+    </ul>  
+  </div>
+  
+</nav>
