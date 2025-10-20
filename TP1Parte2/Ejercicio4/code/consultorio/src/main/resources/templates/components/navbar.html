@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="nav_bar_main" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/inicio}">
+            <img th:src="@{/images/logo_sblack.png}" alt="Logo Clinica" style="height: 100px; width:auto;" class="logo-img">
+            <span class="ms-2 fw-bold fs-5">Clinica Médica Sprint</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar"
+                aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/inicio}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#servicios">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#equipo">Equipo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+            </ul>
+            <a th:href="@{/login}" class="btn btn-primary ms-lg-3">Iniciar Sesión</a>
+        </div>
+    </div>
+</nav>
+
+
+<nav th:fragment="nav_bar_login" class="navbar navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center mx-auto mx-lg-0" th:href="@{/inicio}">
+            <img th:src="@{/images/logo_sblack.png}" alt="Logo Clinica" style="height: 100px; width:auto;" class="logo-img">
+            <span class="ms-2 fw-bold fs-5">Clinica Médica Sprint</span>
+        </a>
+    </div>
+</nav>
+
+<nav th:fragment="nav_bar_dashboard" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/admin/dashboard}">
+            <img th:src="@{/images/logo_sblack.png}" alt="Logo Clinica" class="logo-img">
+            <span class="ms-2 fw-bold fs-5">Clinica Médica Sprint</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar"
+                aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/dashboard}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/pacientes}">Pacientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/medicos}">Médicos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/historias}">Historias</a>
+                </li>
+            </ul>
+
+            <form th:action="@{/logout}" method="post" class="ms-lg-3">
+                <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

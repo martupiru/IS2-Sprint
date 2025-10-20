@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard - Clínica Médica Sprint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="bg-light">
+
+<div class="site-wrap">
+
+    <!-- NAVBAR -->
+    <nav th:replace="~{components/navbar :: nav_bar_dashboard}"></nav>
+
+    <!-- HEADER -->
+    <header class="dashboard-header text-center py-5">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-white mb-2 fade-in">Mi Dashboard</h1>
+            <p class="lead text-white-50 fade-in">Bienvenido al sistema de gestión de la clínica.</p>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="site-section py-5">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+
+                <!-- CARD PACIENTES -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card text-center shadow-sm h-100 hover-up">
+                        <div class="card-body">
+                            <i class="bi bi-people-fill dashboard-icon text-primary"></i>
+                            <h4 class="card-title mt-3">Gestionar Pacientes</h4>
+                            <p class="card-text text-muted">ABM (Alta, Baja, Modificación) de pacientes y asignación de fotos.</p>
+                            <a th:href="@{/pacientes}" class="btn btn-primary mt-3">Ir a Pacientes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD MÉDICOS -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card text-center shadow-sm h-100 hover-up">
+                        <div class="card-body">
+                            <i class="bi bi-person-badge dashboard-icon text-primary"></i>
+                            <h4 class="card-title mt-3">Gestionar Médicos</h4>
+                            <p class="card-text text-muted">ABM (Alta, Baja, Modificación) del staff de médicos.</p>
+                            <a th:href="@{/medicos}" class="btn btn-primary mt-3">Ir a Médicos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD HISTORIAS CLÍNICAS -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card text-center shadow-sm h-100 hover-up">
+                        <div class="card-body">
+                            <i class="bi bi-file-earmark-medical-fill dashboard-icon text-primary"></i>
+                            <h4 class="card-title mt-3">Historias Clínicas</h4>
+                            <p class="card-text text-muted">Consultar, crear y actualizar historias clínicas de pacientes.</p>
+                            <a th:href="@{/historias}" class="btn btn-primary mt-3">Ir a Historias</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD USUARIOS -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card text-center shadow-sm h-100 hover-up">
+                        <div class="card-body">
+                            <i class="bi bi-person-lock dashboard-icon text-primary"></i>
+                            <h4 class="card-title mt-3">Gestionar Usuarios</h4>
+                            <p class="card-text text-muted">Administrar cuentas de acceso y permisos del sistema.</p>
+                            <a th:href="@{/usuarios}" class="btn btn-primary mt-3">Ir a Usuarios</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <div th:replace="~{components/footer :: footer}"></div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

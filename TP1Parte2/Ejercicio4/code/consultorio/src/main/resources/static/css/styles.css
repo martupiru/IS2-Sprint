@@ -1,0 +1,160 @@
+/* =========================================
+   PALETA DE COLORES PERSONALIZADA (TEAL)
+   ========================================= */
+:root {
+    --bs-primary: #00796B; /* Un teal profesional para salud */
+    --bs-primary-rgb: 0, 121, 107;
+    --bs-primary-dark: #004D40; /* Versión más oscura para hovers */
+    --bs-link-color: #00796B;
+    --bs-link-hover-color: #004D40;
+}
+
+/* =========================================
+   ESTILOS GENERALES
+   ========================================= */
+body {
+    /* Da espacio para la navbar fija */
+    padding-top: 70px;
+}
+
+/* --- SOLUCIÓN FOOTER EN LOGIN --- */
+.site-wrap {
+    /* Hace que el contenedor principal sea una columna flexible */
+    display: flex;
+    flex-direction: column;
+    /* Ocupa al menos la altura visible (100% de la pantalla MENOS el padding del body) */
+    min-height: calc(100vh - 70px);
+}
+/* --- FIN SOLUCIÓN --- */
+
+
+/* =========================================
+   COMPONENTES (Navbar, Hero, Secciones)
+   ========================================= */
+
+/* Navbar */
+.logo-img {
+    height: 45px; /* Tamaño del logo en la navbar */
+    width: auto;
+}
+
+/* Colorea el enlace activo de la navbar */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: var(--bs-primary) !important;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.btn-primary:hover {
+    background-color: var(--bs-primary-dark);
+    border-color: var(--bs-primary-dark);
+}
+
+/* Hero (Banner) */
+.hero {
+    position: relative;
+    height: 80vh; /* Altura del banner principal */
+    min-height: 500px;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Capa oscura */
+    z-index: 1;
+}
+
+.hero .content {
+    position: relative;
+    z-index: 2; /* Contenido por encima de la capa oscura */
+}
+
+/* Secciones */
+.site-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   SECCIONES ESPECÍFICAS
+   ========================================= */
+
+/* Equipo Médico */
+.team-card {
+    border: none;
+    align-items: center;
+}
+.team-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 4px solid #e9ecef;
+}
+/* Colorea la especialidad del médico */
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+/* =========================================
+   PÁGINA DE LOGIN
+   ========================================= */
+
+
+.login-container {
+    /* Hace que el contenedor del login crezca para ocupar
+       todo el espacio disponible, empujando el footer hacia abajo */
+    flex-grow: 1;
+
+    /* Mantenemos el centrado vertical y el padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+/* =========================================
+   PÁGINA DE DASHBOARD
+   ========================================= */
+
+.dashboard-header {
+    background-color: var(--bs-primary); /* Fondo con el color verde primario */
+}
+
+.dashboard-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+}
+
+.dashboard-icon {
+    font-size: 3.5rem; /* Tamaño grande para el ícono */
+    color: var(--bs-primary); /* Color verde primario */
+}
+
+.login-logo {
+    height: 60px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}

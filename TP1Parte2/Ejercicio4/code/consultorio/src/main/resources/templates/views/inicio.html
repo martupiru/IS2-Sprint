@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Clinica Médica Sprint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <nav th:replace="~{components/navbar :: nav_bar_main}"></nav>
+
+    <header class="hero bg-light text-center d-flex align-items-center justify-content-center"
+            style="background: url(https://centromedicomendoza.com/wordpress/wp-content/uploads/2016/04/012.jpg) center/cover no-repeat;">
+        <div class="overlay"></div> <div class="content text-white">
+        <h1 class="display-3 fw-bold">Cuidando de tu Salud</h1>
+        <p class="lead">Tecnología y calidez humana al servicio de nuestros pacientes.</p>
+        <a th:href="@{/login}" class="btn btn-primary btn-lg mt-3">Iniciar Sesión</a>
+    </div>
+    </header>
+
+    <section id="servicios" class="site-section py-5">
+        <div class="container text-center">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="text-muted mb-5">Atención integral para toda la familia.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Medicina General</h4>
+                        <p class="text-muted">Atención primaria, prevención y tratamiento de enfermedades comunes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Cardiología</h4>
+                        <p class="text-muted">Estudio, diagnóstico y tratamiento de enfermedades del corazón.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 p-4">
+                        <h4>Pediatría</h4>
+                        <p class="text-muted">Cuidado especializado para la salud de bebés, niños y adolescentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="site-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Equipo Médico</h2>
+            <p class="text-muted mb-5">Profesionales dedicados a tu bienestar.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100 p-4">
+                        <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Dra. García" class="team-img">
+                        <h4>Dra. Elena García</h4>
+                        <p class="text-primary">Cardióloga</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100 p-4">
+                        <img src="https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Dr. Pérez" class="team-img">
+                        <h4>Dr. Juan Pérez</h4>
+                        <p class="text-primary">Médico General</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100 p-4">
+                        <img src="https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Dr. Spadaro" class="team-img">
+                        <h4>Dr. Leonardo Spadaro</h4>
+                        <p class="text-primary">Pediatra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="site-section py-5">
+        <div class="container text-center">
+            <h2 class="section-title">Contacto</h2>
+            <p class="text-muted mb-4">Estamos aquí para ayudarte. Escríbenos o visítanos.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <p><strong>Dirección:</strong> Av. San Martin 120, Ciudad</p>
+                    <p><strong>Teléfono:</strong> +54 9 261 123-4567</p>
+                    <p><strong>Email:</strong> sprint@estudiomedico.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="~{components/footer :: footer}"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
