@@ -1,0 +1,24 @@
+Product Backlog:
+
+Administrador:
+Registrar películas (Alta)
+Registrar salas y capacidad (Alta)
+Configurar precios variables (Alta)
+Administrar funciones (Alta)
+Ver listado de ventas (Alta)
+Generar reportes (Media)
+Administrar usuarios del sistema (Baja)
+
+Cliente:
+Ver cartelera y horarios (Alta)
+Seleccionar película y asiento (Alta)
+Comprar entrada (Alta)
+Ver mis entradas (Media)
+Cancelar compra (Baja)
+Valorar película (Baja)
+
+Sistema:
+Actualizar precios automáticamente (Alta)
+Bloquear asiento comprado (Alta)
+Enviar comprobante por correo (Media)
+Registrar transacciones (Alta)
