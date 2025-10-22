@@ -23,7 +23,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Formulario Dirección</h1>
 
-                <form th:action="@{${direccion.id != null} ? '/usuario/direccion/editar' : '/usuario/direccion/crear'}"
+                <form th:action="${direccion.id} != null ? @{/usuario/direccion/editar} : @{/usuario/direccion/crear}"
                       method="post">
 
                 <input type="hidden" name="id" th:value="${direccion.id}"/>
@@ -78,7 +78,8 @@
 
                     <div class="mb-3">
                         <label class="form-label">Localidad</label>
-                        <select class="form-select" name="localidad.id" required>
+                        <select class="form-select" name="idLocalidad" required>
+                            <option value="" disabled th:selected="${direccion.localidad == null}">-- Seleccione --</option>
                             <option th:each="loc : ${localidades}"
                                     th:value="${loc.id}"
                                     th:text="${loc.nombre}"

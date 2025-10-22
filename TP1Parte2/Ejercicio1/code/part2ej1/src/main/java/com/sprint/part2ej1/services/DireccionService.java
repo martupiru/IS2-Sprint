@@ -21,10 +21,12 @@ public class DireccionService {
     private LocalidadRepository localidadRepository;
 
     @Transactional
-    public void crearDireccion(String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
+    public void crearDireccion(String latitud, String longitud, String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
         try {
-            validar(calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
+            validar(latitud, longitud, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
             Direccion direccion = new Direccion();
+            direccion.setLatitud(latitud);
+            direccion.setLongitud(longitud);
             direccion.setCalle(calle);
             direccion.setNumeracion(numeracion);
             direccion.setBarrio(barrio);
@@ -40,10 +42,12 @@ public class DireccionService {
         }
     }
     @Transactional
-    public Direccion crearDireccionObj(String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
+    public Direccion crearDireccionObj(String latitud, String longitud, String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
         try {
-            validar(calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
+            validar(latitud, longitud, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
             Direccion direccion = new Direccion();
+            direccion.setLatitud(latitud);
+            direccion.setLongitud(longitud);
             direccion.setCalle(calle);
             direccion.setNumeracion(numeracion);
             direccion.setBarrio(barrio);
@@ -60,7 +64,13 @@ public class DireccionService {
         }
     }
 
-    public void validar(String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
+    public void validar(String latitud, String longitud, String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
+        if (latitud == null || latitud.trim().isEmpty()) {
+            throw new Exception("La latitud no puede estar vacía");
+        }
+        if (longitud == null || longitud.trim().isEmpty()) {
+            throw new Exception("La longitud no puede estar vacía");
+        }
         if (calle == null || calle.trim().isEmpty()) {
             throw new Exception("La calle no puede estar vacía");
         }
@@ -107,12 +117,14 @@ public class DireccionService {
     }
 
     @Transactional
-    public void modificarDireccion(String idDireccion, String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
+    public void modificarDireccion(String idDireccion, String latitud, String longitud, String calle, String numeracion, String barrio, String manzanaPiso, String casaDepartamento, String referencia, String idLocalidad) throws Exception {
         try {
-            validar(calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
+            validar(latitud, longitud, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
             Optional<Direccion> direccion = direccionRepository.findById(idDireccion);
             if (direccion.isPresent()) {
                 Direccion direccionActual = direccion.get();
+                direccionActual.setLatitud(latitud);
+                direccionActual.setLongitud(longitud);
                 direccionActual.setCalle(calle);
                 direccionActual.setNumeracion(numeracion);
                 direccionActual.setBarrio(barrio);

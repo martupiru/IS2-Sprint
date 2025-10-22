@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>ABM Direcciones</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="~{views/usuario/components/navbarUs :: navbar_usuario}"></nav>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav th:replace="~{views/usuario/components/sidebar :: sidebar}"></nav>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">ABM Direcciones</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Usuario / Direcciones</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-map-marker-alt me-1"></i>
+                        Listado de Direcciones
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Calle</th>
+                                <th>Número</th>
+                                <th>Localidad</th>
+                                <th>Latitud</th>
+                                <th>Longitud</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="dir : ${direcciones}">
+                                <td th:text="${dir.calle}"></td>
+                                <td th:text="${dir.numeracion}"></td>
+                                <td th:text="${dir.localidad.nombre}"></td>
+                                <td th:text="${dir.latitud}"></td>
+                                <td th:text="${dir.longitud}"></td>
+                                <td>
+                                    <a th:href="@{'/usuario/direccion/editar/' + ${dir.id}}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a th:href="@{'/usuario/direccion/eliminar/' + ${dir.id}}" class="btn btn-sm btn-danger" onclick="return confirm('¿Confirma eliminar esta dirección?');">Eliminar</a>
+
+                                    <a th:if="${googleMapsUrls[dir.id]} != null"
+                                       th:href="${googleMapsUrls[dir.id]}" target="_blank" class="btn btn-sm btn-success">
+                                        <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                                    </a>
+
+                                    <a th:if="${googleMapsUrls[dir.id]} == null"
+                                       th:href="@{'/direccion/googlemaps/' + ${dir.id}}" class="btn btn-sm btn-info">
+                                        Detalle
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <a th:href="@{/usuario/direccion/crear}" class="btn btn-success mt-3">
+                            <i class="fas fa-plus"></i> Nueva Dirección
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="~{components/footer :: footer}"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</body>
+</html>
