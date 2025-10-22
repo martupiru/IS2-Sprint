@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class DireccionController {
-
 
     @Autowired
     private DireccionService direccionService;
@@ -24,122 +27,171 @@ public class DireccionController {
     private LocalidadService localidadService;
 
     @GetMapping("/direccion/googlemaps/{id}")
-    public String verDireccion(@PathVariable String id, Model model) throws Exception {
-        Direccion direccion = direccionService.buscarDireccion(id);
-        String url = direccionService.getGoogleMapsUrl(direccion);
-
-        model.addAttribute("direccion", direccion);
-        model.addAttribute("googleMapsUrl", url);
-        return "views/usuario/Menu/direccion/detalle";
+    public String verDireccion(@PathVariable String id, Model model) {
+        try {
+            Direccion direccion = direccionService.buscarDireccion(id);
+            String url = direccionService.getGoogleMapsUrl(direccion);
+            model.addAttribute("direccion", direccion);
+            model.addAttribute("googleMapsUrl", url);
+            return "views/usuario/Menu/direccion/detalle";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "views/usuario/Menu/direccion/detalle";
+        }
     }
 
-    @GetMapping("/usuario/direccion/direccion-empresa")
-    public String redirigirADireccionEmpresa() {
-        return "redirect:https://www.google.com/maps?q=-32.88970575178735,-68.84457510855037";
-    }
-
-
-    // ABM de Direccion
+    // Mostrar formulario (con sesión)
     @GetMapping("/usuario/direccion/FormDireccion")
     public String mostrarFormDireccion(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
         if (usuario == null) {
             return "redirect:/login";
         }
-        try {
-            model.addAttribute("direccion", new Direccion());
-            model.addAttribute("localidades", localidadService.listarLocalidadesActivas());
-        } catch (Exception e) {
-            return "error";
-        }
 
+        model.addAttribute("direccion", new Direccion());
+        List localidades;
+        try {
+            localidades = localidadService.listarLocalidadesActivas();
+        } catch (Exception e) {
+            localidades = List.of();
+        }
+        model.addAttribute("localidades", localidades);
         return "views/usuario/Menu/direccion/FormDireccion";
     }
 
+    @GetMapping("/usuario/direccion/crear")
+    public String mostrarFormularioCrearDireccion(Model model) {
+        model.addAttribute("direccion", new Direccion());
+        List localidades;
+        try {
+            localidades = localidadService.listarLocalidadesActivas();
+        } catch (Exception e) {
+            localidades = List.of();
+        }
+        model.addAttribute("localidades", localidades);
+        return "views/usuario/Menu/direccion/FormDireccion";
+    }
 
-        @GetMapping("/usuario/direccion/crear")
-        public String mostrarFormularioCrearDireccion(Model model) {
+    @PostMapping("/usuario/direccion/crear")
+    public String crearDireccion(
+            @RequestParam String latitud,
+            @RequestParam String longitud,
+            @RequestParam String calle,
+            @RequestParam String numeracion,
+            @RequestParam String barrio,
+            @RequestParam String manzanaPiso,
+            @RequestParam String casaDepartamento,
+            @RequestParam String referencia,
+            @RequestParam(required = false) String idLocalidad,
+            Model model
+    ) {
+        try {
+            if (idLocalidad == null || idLocalidad.trim().isEmpty()) {
+                throw new Exception("La localidad es requerida");
+            }
+            direccionService.crearDireccion(latitud, longitud, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
+            return "redirect:/usuario/direccion/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
             model.addAttribute("direccion", new Direccion());
-            // Suponiendo que necesitas pasar la lista de localidades al formulario
-            // model.addAttribute("localidades", localidadService.listarLocalidades());
+            List localidades;
+            try {
+                localidades = localidadService.listarLocalidadesActivas();
+            } catch (Exception ex) {
+                localidades = List.of();
+            }
+            model.addAttribute("localidades", localidades);
             return "views/usuario/Menu/direccion/FormDireccion";
         }
+    }
 
-        @PostMapping("/usuario/direccion/crear")
-        public String crearDireccion(
-                @RequestParam String calle,
-                @RequestParam String numeracion,
-                @RequestParam String barrio,
-                @RequestParam String manzanaPiso,
-                @RequestParam String casaDepartamento,
-                @RequestParam String referencia,
-                @RequestParam String idLocalidad,
-                Model model
-        ) {
+    @GetMapping("/usuario/direccion/editar/{id}")
+    public String mostrarFormularioEditarDireccion(@PathVariable("id") String idDireccion, Model model) {
+        try {
+            Direccion direccionEditar = direccionService.buscarDireccion(idDireccion);
+            model.addAttribute("direccion", direccionEditar);
+            List localidades;
             try {
-                direccionService.crearDireccion(calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
-                return "redirect:/direccion/lista";
+                localidades = localidadService.listarLocalidadesActivas();
             } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                model.addAttribute("direccion", new Direccion());
-                return "views/usuario/Menu/direccion/FormDireccion";
+                localidades = List.of();
             }
+            model.addAttribute("localidades", localidades);
+            return "views/usuario/Menu/direccion/FormDireccion";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "redirect:/usuario/direccion/lista";
         }
+    }
 
-        @GetMapping("/usuario/direccion/editar/{id}")
-        public String mostrarFormularioEditarDireccion(@PathVariable("id") String idDireccion, Model model) {
-            try {
-                Direccion direccionEditar = direccionService.buscarDireccion(idDireccion);
-                model.addAttribute("direccion", direccionEditar);
-                // model.addAttribute("localidades", localidadService.listarLocalidades());
-                return "views/usuario/Menu/direccion/FormDireccion";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "redirect:/direccion/lista";
+    @PostMapping("/usuario/direccion/editar")
+    public String editarDireccion(
+            @RequestParam String id,
+            @RequestParam String latitud,
+            @RequestParam String longitud,
+            @RequestParam String calle,
+            @RequestParam String numeracion,
+            @RequestParam String barrio,
+            @RequestParam String manzanaPiso,
+            @RequestParam String casaDepartamento,
+            @RequestParam String referencia,
+            @RequestParam(required = false) String idLocalidad,
+            Model model
+    ) {
+        try {
+            if (idLocalidad == null || idLocalidad.trim().isEmpty()) {
+                throw new Exception("La localidad es requerida");
             }
-        }
-
-        @PostMapping("/usuario/direccion/editar")
-        public String editarDireccion(
-                @RequestParam String id,
-                @RequestParam String calle,
-                @RequestParam String numeracion,
-                @RequestParam String barrio,
-                @RequestParam String manzanaPiso,
-                @RequestParam String casaDepartamento,
-                @RequestParam String referencia,
-                @RequestParam String idLocalidad,
-                Model model
-        ) throws Exception {
+            direccionService.modificarDireccion(id, latitud, longitud, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
+            return "redirect:/usuario/direccion/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
             try {
-                direccionService.modificarDireccion(id, calle, numeracion, barrio, manzanaPiso, casaDepartamento, referencia, idLocalidad);
-                return "redirect:/direccion/lista";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
                 model.addAttribute("direccion", direccionService.buscarDireccion(id));
-                return "views/usuario/Menu/direccion/FormDireccion";
+            } catch (Exception ex) {
+                model.addAttribute("direccion", new Direccion());
             }
-        }
-
-        @GetMapping("/usuario/direccion/eliminar/{id}")
-        public String eliminarDireccion(@PathVariable("id") String idDireccion, Model model) {
+            List localidades;
             try {
-                direccionService.eliminarDireccion(idDireccion);
-                return "redirect:/direccion/lista";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "views/usuario/Menu/direccion/detalle";
+                localidades = localidadService.listarLocalidadesActivas();
+            } catch (Exception ex) {
+                localidades = List.of();
             }
+            model.addAttribute("localidades", localidades);
+            return "views/usuario/Menu/direccion/FormDireccion";
         }
+    }
 
-        @GetMapping("/usuario/direccion/lista")
-        public String listarDirecciones(Model model) {
-            try {
-                model.addAttribute("direcciones", direccionService.listarDireccionesActivas());
-                return "views/usuario/Menu/direccion/lista";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "views/usuario/Menu/direccion/lista";
-            }
+    @GetMapping("/usuario/direccion/eliminar/{id}")
+    public String eliminarDireccion(@PathVariable("id") String idDireccion, Model model) {
+        try {
+            direccionService.eliminarDireccion(idDireccion);
+            return "redirect:/usuario/direccion/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "views/usuario/Menu/direccion/detalle";
         }
+    }
+
+    @GetMapping("/usuario/direccion/lista")
+    public String listarDirecciones(Model model) {
+        try {
+            List<Direccion> direcciones = direccionService.listarDireccionesActivas();
+            model.addAttribute("direcciones", direcciones);
+            Map<String, String> googleMapsUrls = new HashMap<>();
+            for (Direccion d : direcciones) {
+                String url = direccionService.getGoogleMapsUrl(d);
+                if (url != null) {
+                    googleMapsUrls.put(d.getId(), url);
+                }
+            }
+            model.addAttribute("googleMapsUrls", googleMapsUrls);
+            return "views/usuario/Menu/direccion/lista";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("direcciones", List.of());
+            model.addAttribute("googleMapsUrls", Map.of());
+            return "views/usuario/Menu/direccion/lista";
+        }
+    }
 }
