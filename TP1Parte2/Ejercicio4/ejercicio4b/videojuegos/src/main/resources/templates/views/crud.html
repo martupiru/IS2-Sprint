@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>CRUD</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- BARRA NAVEGACION -->
+    <nav th:replace="components/navbar :: nav_bar"></nav>
+
+    <!-- CONTENIDO PAG -->
+    <main class="flex-fill container my-4">
+
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-3">
+                    <h4>CRUD Videojuegos</h4>
+                </div>
+                <div class="col-9 d-flex flex-row-reverse">
+                    <a th:href="@{/videojuegos/formulario/0}" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Agregar Videojuego
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="videojuego : ${videojuegos}"
+                            th:classappend="${videojuego.eliminado} == true ? 'table-danger' : 'table-success'">
+                        <td th:text="${videojuego.id}"></td>
+                            <td th:text="${videojuego.titulo}"></td>
+                            <td th:text="${videojuego.precio}"></td>
+                            <td th:text="${videojuego.stock}"></td>
+                            <td>
+                                <!-- Botón editar con icono lápiz -->
+                                <a th:href="@{/videojuegos/formulario/{id}(id=${videojuego.id})}" class="btn btn-sm btn-warning">Editar</a>
+                                <i class="bi bi-pencil-fill"></i>
+                                </a>
+                                <!-- Botón eliminar con icono basurero -->
+                                <a th:href="@{/videojuegos/eliminar/{id}(id=${videojuego.id})}" class="btn btn-sm btn-danger">Eliminar</a>
+                                <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <div th:replace="components/footer :: footer"></div>
+</body>
+</html>

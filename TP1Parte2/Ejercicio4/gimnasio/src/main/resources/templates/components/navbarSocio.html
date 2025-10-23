@@ -1,0 +1,37 @@
+<nav th:fragment="nav_bar_socio">
+    <header class="site-navbar py-3 js-sticky-header site-navbar-target bg-dark" role="banner">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between">
+
+                <!-- Logo -->
+                <div class="site-logo text-white">
+                    <a th:href="@{/socio/dashboard}" class="text-white">Sport Gym</a>
+                </div>
+
+                <!-- Menú -->
+                <nav class="site-navigation position-relative" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav d-none d-lg-flex">
+                        <li><a th:href="@{/socio/dashboard}" class="nav-link text-white">Inicio</a></li>
+                        <li><a th:href="@{/socio/rutinas}" class="nav-link text-white">Mis Rutinas</a></li>
+                        <li><a th:href="@{/socio/cuotas}" class="nav-link text-white">Mis Cuotas</a></li>
+                        <li><a th:href="@{/socio/deuda}" class="nav-link text-white">Mi Deuda</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Cerrar sesión -->
+                <ul class="site-menu main-menu site-menu-dark js-clone-nav d-none d-lg-flex">
+                    <li class="cta">
+                        <a th:href="@{/logout}" class="nav-link text-white" onclick="mostrarMensajeLogout(event)">
+                            <span class="rounded border border-light px-2">Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Menu responsive -->
+                <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-white float-right">
+                    <span class="icon-menu h3"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+</nav>

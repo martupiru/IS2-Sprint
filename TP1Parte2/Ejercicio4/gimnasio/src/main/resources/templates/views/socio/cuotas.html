@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Cuotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/jquery.mb.YTPlayer.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        main h1 {
+            color: #212529 !important;
+        }
+        .estado-adeudada {
+            color: red;
+            font-weight: bold;
+        }
+        .estado-pagada {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div class="site-wrap">
+
+    <!-- BARRA NAVEGACION -->
+    <nav th:replace="components/navbarSocio :: nav_bar_socio"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Mis Cuotas</h1>
+                <p class="lead text-secondary">Consulta tus pagos y deudas</p>
+            </div>
+
+            <!-- Tabla de cuotas -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Mes</th>
+                                <th scope="col">Año</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha Vencimiento</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cuota : ${cuotas}">
+                                <!-- Mes -->
+                                <td th:text="${cuota.mes}"></td>
+                                <!-- Año -->
+                                <td th:text="${cuota.anio}"></td>
+                                <!-- Estado -->
+                                <td>
+                                    <span th:text="${cuota.estado}"
+                                          th:classappend="${cuota.estado.name() == 'PAGADA'} ? 'estado-pagada' : 'estado-adeudada'">
+                                    </span>
+                                </td>
+                                <!-- Fecha Vencimiento -->
+                                <td th:text="${#dates.format(cuota.fechaVencimiento, 'dd/MM/yyyy')}"></td>
+                                <!-- Valor de la cuota -->
+                                <td th:text="${cuota.valorCuota.valorCuota}"></td>
+                                <!-- Acciones -->
+                                <td>
+                                    <a th:if="${cuota.estado.name() == 'ADEUDADA'}"
+                                          th:href="@{/socio/pagar-cuota/{id}(id=${cuota.id})}"
+                                          class="btn btn-sm btn-success">Pagar</a>
+
+                                    <a th:if="${cuota.estado.name() == 'PAGADA'}"
+                                       th:href="@{/socio/factura/{id}(id=${cuota.id})}"
+                                       class="btn btn-sm btn-success">Ver factura</a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a th:href="@{/socio/dashboard}" class="btn btn-secondary">Volver</a>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+</body>
+</html>

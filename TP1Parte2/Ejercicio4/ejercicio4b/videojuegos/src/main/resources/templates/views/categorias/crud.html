@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>CRUD Categorías</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav th:replace="components/navbar :: nav_bar"></nav>
+<main class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Categorías</h3>
+        <!-- RUTA CORREGIDA -->
+        <a th:href="@{/categoria/alta}" class="btn btn-success">+ Agregar Categoría</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${items}">
+            <td th:text="${cat.id}">1</td>
+            <td th:text="${cat.nombre}">Acción</td>
+            <td>
+                <a th:href="@{/categoria/modificar/{id}(id=${cat.id})}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{/categoria/baja/{id}(id=${cat.id})}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
+

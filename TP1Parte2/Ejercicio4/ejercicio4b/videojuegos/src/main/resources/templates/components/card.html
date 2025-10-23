@@ -1,0 +1,61 @@
+<!-- DISEÑO ANTERIOR
+<div th:fragment="_card" class="card" th:each="videojuego : ${videojuegos}">
+    <img th:src="@{/images/{img}(img=${videojuego.imagen})}" class="card-img-top" alt="videojuego imagen">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${videojuego.titulo}">Card title</h5>
+        <p class="card-text">Precio : <span th:text="${videojuego.precio}">1</span></p>
+        <a th:href="@{detalle/{id}(id=${videojuego.id})}" class="btn btn-primary">
+            Ver detalles
+        </a>
+    </div>
+</div>
+-->
+<div th:fragment="_cards">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5"
+             th:each="videojuego : ${videojuegos}">
+            <div class="card h-100">
+                <!-- Sale badge -->
+                <div class="badge bg-dark text-white position-absolute"
+                     style="top: 0.5rem; right: 0.5rem">Nuevo</div>
+
+                <!-- Product image -->
+                <img class="card-img-top fixed-img"
+                     th:src="@{/images/{img}(img=${videojuego.imagen})}"
+                     th:alt="${videojuego.titulo}" />
+
+                <!-- Product details -->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <h5 class="fw-bolder" th:text="${videojuego.titulo}">Título</h5>
+
+                        <!-- Reviews (estático por ahora) -->
+                        <div class="d-flex justify-content-center small text-warning mb-2">
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                        </div>
+
+                        <!-- Precio -->
+                        <span th:text="'$' + ${videojuego.precio}">Precio</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn mt-auto text-white"
+                           style="background-color: #6f42c1;"
+                           th:href="@{/detalle/{id}(id=${videojuego.id})}">
+                            Ver Detalles
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

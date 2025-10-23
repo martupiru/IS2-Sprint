@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Inicio - Catálogo</title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <h1 class="brand">Mi Catálogo de Videojuegos</h1>
+        <nav class="site-nav">
+            <a th:href="@{/}">Inicio</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <h2>Todos los juegos</h2>
+        <p class="sub">Explora títulos, mira detalles.</p>
+
+        <!-- Botón Agregar -->
+        <div style="margin-top:1rem; margin-bottom:1rem;">
+            <a th:href="@{/videojuegos/nueva}" class="btn btn-success">+ Agregar Videojuego</a>
+        </div>
+    </section>
+
+    <section class="gallery" th:if="${videojuegos}">
+        <div th:each="v : ${videojuegos}" class="card">
+            <!-- poster-link contiene sólo la imagen y el overlay (ahora position:relative) -->
+            <a th:href="@{/videojuegos/{id}(id=${v.id})}" class="poster-link"
+               onclick="/* dejamos que el click en la imagen vaya al detalle */">
+                <img th:src="${imagesBase + v.imagen}"
+                     th:alt="${v.titulo}"
+                     class="poster-img"
+                     onerror="this.src='${imagesBase}placeholder.jpg';" />
+                <div class="overlay">
+                    <div class="title" th:text="${v.titulo}">Título</div>
+                    <div class="price" th:text="${'$' + v.precio}">$0.00</div>
+                </div>
+            </a>
+
+            <div class="meta">
+                <p class="desc" th:text="${v.descripcion}">Descripcion</p>
+                <div class="actions">
+                    <a th:href="@{/videojuegos/{id}(id=${v.id})}"
+                       class="btn"
+                       onclick="event.stopPropagation();">
+                        Ver
+                    </a>
+
+                    <a th:href="@{/videojuegos/editar/{id}(id=${v.id})}"
+                       class="btn btn-outline"
+                       onclick="event.stopPropagation();">
+                        Editar
+                    </a>
+
+                    <a th:href="@{/videojuegos/eliminar/{id}(id=${v.id})}"
+                       class="btn btn-danger"
+                       onclick="event.stopPropagation(); return confirm('¿Eliminar este videojuego?');">
+                        Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="empty" th:if="${videojuegos == null || #lists.isEmpty(videojuegos)}">
+        <p>No hay videojuegos para mostrar.</p>
+    </section>
+</main>
+
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© 2025 Mi Catálogo</small>
+    </div>
+</footer>
+
+</body>
+</html>

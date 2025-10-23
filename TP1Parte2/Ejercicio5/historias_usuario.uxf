@@ -1,0 +1,98 @@
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>- Mostrar estado de pago (sí/no).
+- Asociado a cada turno.
+- Solo ver mis datos.</help_text><element><id>UMLNote</id><coordinates><x>207</x><y>369</y><w>225</w><h>99</h></coordinates><panel_attributes>Como administrador, 
+quiero crear y gestionar aulas/grados, 
+para agrupar alumnos.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>369</y><w>225</w><h>99</h></coordinates><panel_attributes>- Se puede crear grado + sección + turno
+ (mañana/tarde).
+- Se debe poder asignar alumnos y
+profesores a las aulas correspondientes.
+- Mostrar lista de alumnos por aula.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>252</y><w>225</w><h>99</h></coordinates><panel_attributes>Como administrador, 
+quiero registrar profesores y asignarlo a 
+su/s materia/s
+para asignarlos a cursos.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>252</y><w>225</w><h>99</h></coordinates><panel_attributes>- Se guarda nombre, documento, email,
+materias que dicta, horario de 
+disponibilidad.
+- Un profesor puede asociarse a múltiples
+ grados/materias.
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>729</y><w>225</w><h>72</h></coordinates><panel_attributes>Como admin, 
+quiero gestionar permisos/ roles,
+para controlar quién puede ver/editar 
+notas y datos personales.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>621</y><w>225</w><h>90</h></coordinates><panel_attributes>- Plantilla en PDF con datos del alumno, 
+notas y firma digitalizada.
+
+Baja 30 minutos</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>135</y><w>225</w><h>99</h></coordinates><panel_attributes>Como administrador,
+quiero gestionar materias,
+para asignarlas a profesores.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>765</x><y>234</y><w>225</w><h>117</h></coordinates><panel_attributes>Como profesor, 
+quiero registrar asistencia diaria por aula, 
+para llevar control.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>135</y><w>225</w><h>99</h></coordinates><panel_attributes>- Crear, editar y eliminar materias.
+- Debo poder asignarlas a profesores y 
+a los alumnos que la cursen.
+
+Alta 30 minutos</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1008</x><y>234</y><w>225</w><h>117</h></coordinates><panel_attributes>- Marcar presente/ausente/tarde por
+alumno y fecha.
+- Generar resumen por alumno y por
+período.
+
+Media 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>765</x><y>459</y><w>225</w><h>99</h></coordinates><panel_attributes>Como padre/madre/tutor, 
+quiero recibir notificaciones por correo
+cuando se cargan notas nuevas o faltas, 
+para estar informado.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1026</x><y>459</y><w>225</w><h>99</h></coordinates><panel_attributes>- Email enviado cuando se registra nota
+ o ausencia.
+- Opción de desactivar notificaciones.
+
+Media 30 minutos</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>765</x><y>576</y><w>225</w><h>99</h></coordinates><panel_attributes>Como padre/madre o alumno, 
+quiero ver el boletín, 
+para consultar notas y promedios.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1026</x><y>576</y><w>225</w><h>99</h></coordinates><panel_attributes>- Mostrar notas por materia y periodo, 
+promedio del periodo y promedio general.
+- Acceso sólo al alumno o a padres 
+autorizados.
+
+Alta 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>18</y><w>225</w><h>99</h></coordinates><panel_attributes>Como administrador, 
+quiero registrar alumnos, 
+para tener el padrón actualizado.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>18</y><w>225</w><h>99</h></coordinates><panel_attributes>- Se guardan: nombre completo, 
+documento, fecha de nacimiento, 
+datos de contacto y datos médicos.
+- Validación: DNI único por alumno.
+- Posibilidad de editar y eliminar.
+
+Alta 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>765</x><y>72</y><w>225</w><h>144</h></coordinates><panel_attributes>Como profesor, 
+quiero registrar notas por alumno y 
+por materia, 
+para evaluar su rendimiento.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1008</x><y>72</y><w>225</w><h>144</h></coordinates><panel_attributes>- Se puede seleccionar aula, materia
+ y periodo(ej cuatrimestre) y registrar nota.
+- Validaciones: rango válido para la escala
+ (ej 0-10).
+- Nota queda vinculada a alumno+materia
++periodo.
+- Se debe poder editar/eliminar y guardar
+un historial de cambios 
+
+Alta 3 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>486</y><w>225</w><h>117</h></coordinates><panel_attributes>Como administrador, 
+quiero registrar padres o tutores de 
+los alumnos, 
+para que estos puedan hacer un
+seguimiento del alumno.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>486</y><w>225</w><h>117</h></coordinates><panel_attributes>- Se guardan: nombre completo, 
+documento, fecha de nacimiento, relación
+con el alumno, y si tienen más alumnos 
+a su cargo en la escuela.
+- Se debe poder editar y eliminar.
+- Validación por DNI
+
+Alta 2 horas</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>198</x><y>819</y><w>243</w><h>81</h></coordinates><panel_attributes>Como sistema,
+quiero calcular automáticamente 
+promedios y estado (aprobado/desaprobado) 
+por materia y curso, 
+para evitar cálculos manuales.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>819</y><w>225</w><h>81</h></coordinates><panel_attributes>- Definir regla de cálculo
+ (ej. promedio &gt;= 6 = aprobado).
+- Mostrar resultados en el boletín.
+
+Alta 1 hora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>207</x><y>621</y><w>225</w><h>90</h></coordinates><panel_attributes>Como administrador, 
+quiero generar actas o certificados de 
+alumno, 
+para trámites.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>450</x><y>729</y><w>225</w><h>72</h></coordinates><panel_attributes>- Asignación por rol.
+- Logs de acceso y de cambios críticos.
+
+Alta 30 minutos</panel_attributes><additional_attributes></additional_attributes></element></diagram>

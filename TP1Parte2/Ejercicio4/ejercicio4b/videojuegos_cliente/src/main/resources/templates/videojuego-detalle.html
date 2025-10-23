@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title th:text="${videojuego.titulo}">Detalle del videojuego</title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <h1 class="brand">Mi Catálogo de Videojuegos</h1>
+        <nav class="site-nav">
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/videojuegos}">Todos</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container detalle">
+    <div class="detalle-card">
+
+        <img th:src="${imagesBase + videojuego.imagen}"
+             alt="Imagen del videojuego"
+             class="detalle-img"
+             onerror="this.src='${imagesBase}placeholder.jpg';"/>
+
+        <div class="detalle-info">
+            <h2 th:text="${videojuego.titulo}">Título del videojuego</h2>
+            <p class="descripcion" th:text="${videojuego.descripcion}">Descripción del videojuego</p>
+            <p><strong>Precio:</strong> <span th:text="${'$' + videojuego.precio}">$0.00</span></p>
+            <p><strong>Categoría:</strong> <span th:text="${videojuego.categoria != null ? videojuego.categoria.nombre : 'N/A'}"></span></p>
+            <p><strong>Estudio:</strong> <span th:text="${videojuego.estudio != null ? videojuego.estudio.nombre : 'N/A'}"></span></p>
+
+
+            <div class="acciones">
+                <a th:href="@{/}" class="btn">Volver</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© 2025 Mi Catálogo</small>
+    </div>
+</footer>
+
+</body>
+</html>

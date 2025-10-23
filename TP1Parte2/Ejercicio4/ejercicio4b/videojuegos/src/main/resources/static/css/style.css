@@ -1,0 +1,18 @@
+.bg-lila {
+    background-color: #b19cd9; /* lila claro */
+}
+
+.bg-violeta {
+    background-color: #6f42c1; /* violeta intenso */
+}
+
+.text-lila-claro {
+    color: #f0e6ff; /* texto claro sobre fondo violeta */
+}
+.fixed-img {
+    height: 200px;     /* todas con la misma altura */
+    object-fit: cover; /* recorta sin deformar */
+    width: 100%;
+}
+
+

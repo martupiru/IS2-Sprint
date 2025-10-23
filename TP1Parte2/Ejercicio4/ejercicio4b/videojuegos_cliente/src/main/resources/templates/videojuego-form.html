@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="${videojuego.id != null} ? 'Editar: ' + ${videojuego.titulo} : 'Nuevo Videojuego'">Formulario</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+        <h1 class="brand">Mi Catálogo</h1>
+        <nav class="site-nav"><a th:href="@{/}">Inicio</a></nav>
+    </div>
+</header>
+
+<main class="container">
+    <div class="card" style="padding:1rem; margin-top:1rem; max-width:900px;">
+        <form th:action="@{/videojuegos}" th:object="${videojuego}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label>Título</label>
+            <input type="text" th:field="*{titulo}" required />
+
+            <label>Descripción</label>
+            <textarea th:field="*{descripcion}" rows="4"></textarea>
+
+            <div style="display:flex; gap:1rem; margin-top:.6rem;">
+                <div>
+                    <label>Precio</label>
+                    <input type="number" step="0.01" th:field="*{precio}" />
+                </div>
+                <div>
+                    <label>Stock</label>
+                    <input type="number" th:field="*{stock}" />
+                </div>
+                <div>
+                    <label>Fecha de Lanzamiento</label>
+                    <input type="date" th:field="*{fechaLanzamiento}" />
+                </div>
+            </div>
+
+            <label>Imagen (nombre de archivo en servidor)</label>
+            <input type="text" th:field="*{imagen}" placeholder="1761157879276.jpg" />
+
+            <div style="display:flex; gap:.5rem; margin-top:1rem;">
+                <button type="submit" class="btn">Guardar</button>
+                <a th:href="@{/}" class="btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="site-footer"><div class="container"><small>© 2025 Mi Catálogo</small></div></footer>
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Formulario Estudio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav th:replace="components/navbar :: nav_bar"></nav>
+<main class="container my-4">
+    <h4 th:text="${item.id} != null ? 'Editar Estudio' : 'Nuevo Estudio'">Formulario</h4>
+
+    <form th:action="@{/estudio/actualizar}" th:object="${item}" method="post">
+        <input type="hidden" th:if="${item.id != null}" th:field="*{id}" />
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-control" th:field="*{nombre}" />
+        </div>
+        <div class="d-flex">
+            <a th:href="@{/estudio/list}" class="btn btn-secondary mr-2">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
+
