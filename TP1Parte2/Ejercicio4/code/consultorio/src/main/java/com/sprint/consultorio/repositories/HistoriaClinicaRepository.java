@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HistoriaClinicaRepository extends BaseRepository<HistoriaClinica, Long> {
+    boolean existsByPaciente_Id(Long pacienteId);
 }

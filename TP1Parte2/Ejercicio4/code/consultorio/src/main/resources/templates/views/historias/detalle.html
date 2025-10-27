@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Detalle Historia Clínica - Clínica Médica Sprint</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+<nav th:replace="~{components/navbar :: nav_bar_dashboard}"></nav>
+
+<div class="container mt-5 pt-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Historia Clínica</h2>
+        <p class="text-muted">Visualizar los detalles médicos del paciente.</p>
+    </div>
+
+    <!-- Información del paciente -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3">
+                Paciente: <span th:text="${historia.paciente.nombre + ' ' + historia.paciente.apellido}"></span>
+            </h5>
+            <p><strong>Usuario creador:</strong> <span th:text="${historia.usuarioCreador.nombreUsuario}"></span></p>
+            <p><strong>ID Historia:</strong> <span th:text="${historia.id}"></span></p>
+            <a th:href="@{/historias}" class="btn btn-secondary mt-2"><i class="bi bi-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+
+    <!-- Detalles -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-success mb-0">Detalles de la Historia Clínica</h5>
+                <a th:href="@{'/detalles/nuevo/' + ${historia.id}}" class="btn btn-success btn-sm">
+                    <i class="bi bi-plus-circle"></i> Agregar nuevo detalle
+                </a>
+            </div>
+
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-success">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Detalle</th>
+                    <th>Médico</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="detalle : ${historia.detalles}">
+                    <td th:text="${#temporals.format(detalle.fechaHistoria, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${detalle.detalleHistoria}"></td>
+                    <td th:text="${detalle.medico != null ? detalle.medico.nombre + ' ' + detalle.medico.apellido : 'No asignado'}"></td>
+                    <td class="text-center">
+                        <a th:href="@{'/detalles/editar/' + ${detalle.id}}" class="btn btn-warning btn-sm me-1">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form th:action="@{'/detalles/eliminar/' + ${detalle.id}}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Seguro que deseas eliminar este detalle?');">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(historia.detalles)}">
+                    <td colspan="4" class="text-center text-muted">No hay detalles registrados</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-5" th:replace="~{components/footer :: footer}"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import com.sprint.consultorio.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +43,15 @@ public class PacienteServiceImpl extends BaseServiceImpl<Paciente, Long> impleme
             // Se podria crear un FotoPaciente con imagen por defecto
             // paciente.setFoto(new FotoPaciente("default.png"));
             // pacienteRepository.save(paciente);
+        }
+    }
+
+    @Override
+    public List<Paciente> findAll() throws Exception {
+        try {
+            return pacienteRepository.findAllActivos();
+        } catch (Exception e) {
+            throw new Exception("Error al listar pacientes activos: " + e.getMessage());
         }
     }
 }

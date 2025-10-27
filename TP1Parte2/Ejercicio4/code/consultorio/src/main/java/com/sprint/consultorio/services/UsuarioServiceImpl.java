@@ -1,11 +1,13 @@
 package com.sprint.consultorio.services;
 
+import com.sprint.consultorio.entities.Paciente;
 import com.sprint.consultorio.entities.Usuario;
 import com.sprint.consultorio.repositories.UsuarioRepository;
 import com.sprint.consultorio.utils.HashForLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,15 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
     }
 
     // --- Métodos específicos de Usuario ---
+
+    @Override
+    public List<Usuario> findAll() throws Exception {
+        try {
+            return usuarioRepository.findAllActivos();
+        } catch (Exception e) {
+            throw new Exception("Error al listar usuarios activos: " + e.getMessage());
+        }
+    }
 
     @Override
     public Optional<Usuario> findByNombreUsuario(String nombreUsuario) {

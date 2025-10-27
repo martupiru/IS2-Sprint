@@ -1,10 +1,12 @@
 package com.sprint.consultorio.services;
 
 import com.sprint.consultorio.entities.Medico;
+import com.sprint.consultorio.entities.Paciente;
 import com.sprint.consultorio.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,6 +58,15 @@ public class MedicoServiceImpl extends BaseServiceImpl<Medico, Long> implements 
 
         if (existente.isPresent() && (medico.getId() == null || !existente.get().getId().equals(medico.getId()))) {
             throw new Exception("Ya existe un médico con el documento " + medico.getDocumento());
+        }
+    }
+
+    @Override
+    public List<Medico> findAll() throws Exception {
+        try {
+            return medicoRepository.findAllActivos();
+        } catch (Exception e) {
+            throw new Exception("Error al listar medicos activos: " + e.getMessage());
         }
     }
 }

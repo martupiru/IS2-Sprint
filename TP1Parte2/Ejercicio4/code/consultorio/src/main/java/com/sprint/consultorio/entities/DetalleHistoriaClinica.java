@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,10 +17,15 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class DetalleHistoriaClinica extends Base {
-    private Date fechaHistoria;
+    private LocalDate fechaHistoria;
     private String detalleHistoria;
 
     @ManyToOne
     @JoinColumn(name = "fk_medico")
     private Medico medico;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_historia_clinica")
+    private HistoriaClinica historiaClinica;
+
 }
