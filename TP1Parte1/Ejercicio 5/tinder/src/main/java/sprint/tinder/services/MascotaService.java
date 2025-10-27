@@ -9,36 +9,35 @@ import org.springframework.web.multipart.MultipartFile;
 import sprint.tinder.entities.Foto;
 import sprint.tinder.entities.Mascota;
 import sprint.tinder.entities.Usuario;
-import sprint.tinder.services.UsuarioServicio;
 import sprint.tinder.enumerations.Sexo;
 import sprint.tinder.enumerations.Tipo;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.repositories.MascotaRepositorio;
-import sprint.tinder.repositories.UsuarioRepositorio;
+import sprint.tinder.repositories.MascotaRepository;
+import sprint.tinder.repositories.UsuarioRepository;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class MascotaServicio {
+public class MascotaService {
     @Autowired
-    private UsuarioRepositorio usuarioRepositorio;
+    private UsuarioRepository usuarioRepository;
     @Autowired
-    private MascotaRepositorio mascotaRepositorio;
+    private MascotaRepository mascotaRepository;
 
     @Autowired
-    private FotoServicio fotoServicio;
+    private FotoService fotoService;
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private UsuarioService usuarioService;
 
     @Transactional //Si el metodo se ejecuta sin largar excepciones, entonces se hace un commit a la base de datos y se aplican todos los cambios. Si hay una excepcion, se hace un rollback y no se aplica nada a la BD
     public void agregarMascota(String idUsuario, String nombre, Sexo sexo, MultipartFile archivo, Tipo tipo) throws ErrorServicio {
         try {
-            Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
+            Usuario usuario = usuarioRepository.findById(idUsuario).get();
             validar(nombre, sexo);
             try { // Verificar si ya existe (no se pueden tener 2 mascotas con el mismo nombre)
-                Mascota mascotaAux = mascotaRepositorio.buscarMascota(idUsuario, nombre);
+                Mascota mascotaAux = mascotaRepository.buscarMascota(idUsuario, nombre);
                 if (mascotaAux != null && !mascotaAux.isEliminado()) {
                     throw new ErrorServicio("Ya cargó esa mascota en el sistema");
                 }
@@ -48,12 +47,12 @@ public class MascotaServicio {
             mascota.setNombre(nombre);
             mascota.setSexo(sexo);
             mascota.setAlta(new Date());
-            Foto foto = fotoServicio.guardar(archivo);
+            Foto foto = fotoService.guardar(archivo);
             mascota.setFoto(foto);
             mascota.setTipo(tipo);
             mascota.setUsuario(usuario);
 
-            mascotaRepositorio.save(mascota);
+            mascotaRepository.save(mascota);
         } catch (ErrorServicio e) {
             throw e;
         }
@@ -78,7 +77,7 @@ public class MascotaServicio {
     public void modificar(String idUsuario,String idMascota, String nombre, Sexo sexo, MultipartFile archivo, Tipo tipo) throws ErrorServicio {
         try {
             validar(nombre, sexo);
-            Optional<Mascota> respuesta = mascotaRepositorio.findById(idMascota); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea esa mascota como respuesta a ese id)
+            Optional<Mascota> respuesta = mascotaRepository.findById(idMascota); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea esa mascota como respuesta a ese id)
             if (respuesta.isPresent()) {
                 Mascota mascota = respuesta.get();
                 if(mascota.getUsuario().getId().equals(idUsuario)) { //Verificar si el usuario es dueño de la mascota
@@ -88,13 +87,13 @@ public class MascotaServicio {
                     if(mascota.getFoto() != null){ // Verifico si ya tenía una foto
                         idFoto = mascota.getFoto().getId();
                     }
-                    Foto foto = fotoServicio.actualizar(idFoto, archivo);
+                    Foto foto = fotoService.actualizar(idFoto, archivo);
                     mascota.setFoto(foto);
                     mascota.setTipo(tipo);
-                    Usuario usuario = usuarioRepositorio.findById(idUsuario).get();
+                    Usuario usuario = usuarioRepository.findById(idUsuario).get();
                     mascota.setUsuario(usuario);
 
-                    mascotaRepositorio.save(mascota); // Guardo la mascota en el repositorio
+                    mascotaRepository.save(mascota); // Guardo la mascota en el repositorio
                 } else{
                     throw new ErrorServicio("Usted no es dueño de esa mascota");
                 }
@@ -110,12 +109,12 @@ public class MascotaServicio {
     @Transactional
     public void eliminar(String idUsuario,String idMascota) throws ErrorServicio {
         try {
-            Optional<Mascota> respuesta = mascotaRepositorio.findById(idMascota); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea esa mascota como respuesta a ese id)
+            Optional<Mascota> respuesta = mascotaRepository.findById(idMascota); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea esa mascota como respuesta a ese id)
             if (respuesta.isPresent()) {
                 Mascota mascota = respuesta.get();
                 if(mascota.getUsuario().getId().equals(idUsuario)) { //Verificar si el usuario es dueño de la mascota
                     mascota.setBaja(new Date());
-                    mascotaRepositorio.save(mascota);
+                    mascotaRepository.save(mascota);
                 } else {
                     throw new ErrorServicio("Usted no es dueño de esa mascota");
                 }
@@ -132,7 +131,7 @@ public class MascotaServicio {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void agregarMascota(String idUsuario, String idMascota) throws ErrorServicio {
         try {
-            Usuario usuario = usuarioServicio.buscarUsuario(idUsuario);
+            Usuario usuario = usuarioService.buscarUsuario(idUsuario);
             Mascota mascota = buscarMascota(idMascota);
 
             if(!mascota.getUsuario().getId().equals(idUsuario)){
@@ -140,7 +139,7 @@ public class MascotaServicio {
             }
             mascota.setUsuario(usuario);
             mascota.setBaja(null);
-            mascotaRepositorio.save(mascota);
+            mascotaRepository.save(mascota);
         }catch(ErrorServicio e) {
             throw e;
         }catch(Exception e) {
@@ -155,7 +154,7 @@ public class MascotaServicio {
             if (idMascota == null || idMascota.trim().isEmpty()) {
                 throw new ErrorServicio("Debe indicar una mascota");
             }
-            Optional<Mascota> optional = mascotaRepositorio.findById(idMascota);
+            Optional<Mascota> optional = mascotaRepository.findById(idMascota);
             Mascota mascota = null;
             if (optional.isPresent()) {
                 mascota= optional.get();
@@ -175,7 +174,7 @@ public class MascotaServicio {
             if(idUsuario == null || idUsuario.trim().isEmpty()){
                 throw new ErrorServicio("Debe indicar el usuario");
             }
-            return mascotaRepositorio.listarMascotasPorUsuario(idUsuario);
+            return mascotaRepository.listarMascotasPorUsuario(idUsuario);
         }catch(ErrorServicio e) {
             throw e;
         }
@@ -186,14 +185,14 @@ public class MascotaServicio {
             if(idUsuario == null || idUsuario.trim().isEmpty()){
                 throw new ErrorServicio("Debe indicar el usuario");
             }
-            return mascotaRepositorio.listarMascotasDeBaja(idUsuario);
+            return mascotaRepository.listarMascotasDeBaja(idUsuario);
         }catch(ErrorServicio e) {
             throw e;
         }
     }
 
     public Foto obtenerFotoMascota(String id) throws Exception {
-        Mascota mascota = mascotaRepositorio.findById(id)
+        Mascota mascota = mascotaRepository.findById(id)
                 .orElseThrow(() -> new Exception("Mascota no encontrada"));
 
         if (mascota.getFoto() == null) {
@@ -203,6 +202,39 @@ public class MascotaServicio {
         return mascota.getFoto();
     }
 
+    @Transactional(readOnly = true)
+    public Collection<Mascota> listarTodasMascotasMenosUsuario(String idUsuario) throws ErrorServicio {
+        try {
+            if (idUsuario == null || idUsuario.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            return mascotaRepository.listarMascotasMenosUsuario(idUsuario);
+        } catch (ErrorServicio e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
+        }
+    }
+
+    // Filtrar por tipo de animal
+    @Transactional(readOnly = true)
+    public Collection<Mascota> listarMascotasPorTipo(String idUsuario, Tipo tipo) throws ErrorServicio {
+        try {
+            if (idUsuario == null || idUsuario.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            if (tipo == null) {
+                return listarTodasMascotasMenosUsuario(idUsuario);
+            }
+            return mascotaRepository.listarMascotasMenosUsuarioPorTipo(idUsuario, tipo);
+        } catch (ErrorServicio e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
+        }
+    }
 
 
 }

@@ -12,24 +12,24 @@ import org.springframework.web.multipart.MultipartFile;
 import sprint.tinder.entities.Usuario;
 import sprint.tinder.entities.Zona;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.services.UsuarioServicio;
-import sprint.tinder.services.ZonaServicio;
+import sprint.tinder.services.UsuarioService;
+import sprint.tinder.services.ZonaService;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/usuario") //Indica cual es la url que va a ejecutar este controlador
-public class UsuarioControlador {
+public class UsuarioController {
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private UsuarioService usuarioService;
     @Autowired
-    private ZonaServicio zonaServicio;
+    private ZonaService zonaService;
 
     @PostMapping("/loginUsuario")
     public String loginUsuario(@RequestParam String email, @RequestParam String clave, ModelMap modelo,
                                HttpSession session) {
         try {
-            Usuario usuario = usuarioServicio.login(email, clave);
+            Usuario usuario = usuarioService.login(email, clave);
             session.setAttribute("usuariosession", usuario);
             return "redirect:/mascota/mis-mascotas";
 
@@ -50,14 +50,14 @@ public class UsuarioControlador {
     public String crearUsuario(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2, @RequestParam String idZona) {
 
         try {
-            usuarioServicio.registrar(nombre, apellido, mail, clave1, clave2, archivo, idZona);
+            usuarioService.registrar(nombre, apellido, mail, clave1, clave2, archivo, idZona);
             modelo.put("titulo", "Bienvenido al Tinder de Mascotas. ");
             modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria. ");
             return "exito.html";
 
         } catch (ErrorServicio ex) {
             try {
-                List<Zona> zonas = zonaServicio.listarZona();
+                List<Zona> zonas = zonaService.listarZona();
                 modelo.put("zonas", zonas);
             } catch (ErrorServicio e) {}
             modelo.put("error", ex.getMessage());
@@ -77,7 +77,7 @@ public class UsuarioControlador {
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, ModelMap model) {
         try {
-            List<Zona> zonas = zonaServicio.listarZona();
+            List<Zona> zonas = zonaService.listarZona();
             model.put("zonas", zonas);
             Usuario usuario = (Usuario) session.getAttribute("usuariosession");
             model.addAttribute("perfil", usuario);
@@ -95,14 +95,14 @@ public class UsuarioControlador {
             if (login == null || !login.getId().equals(id)) {
                 return "redirect:/inicio";
             }
-            usuario = usuarioServicio.buscarUsuario(id);
-            usuarioServicio.modificar(id, nombre, apellido, mail, clave2, clave2, archivo, idZona);
+            usuario = usuarioService.buscarUsuario(id);
+            usuarioService.modificar(id, nombre, apellido, mail, clave2, clave2, archivo, idZona);
             session.setAttribute("usuariosession", usuario);
             return "exito.html";
 
         } catch (ErrorServicio ex) {
             try {
-                List<Zona> zonas = zonaServicio.listarZona();
+                List<Zona> zonas = zonaService.listarZona();
                 modelo.put("zonas", zonas);
             } catch (ErrorServicio e) {}
 

@@ -205,4 +205,40 @@ public class MascotaService {
 
         return mascota.getFoto();
     }
+
+    @Transactional(readOnly = true)
+    public Collection<Mascota> listarTodasMascotasMenosUsuario(String idUsuario) throws ErrorServicio {
+        try {
+            if (idUsuario == null || idUsuario.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            return mascotaRepositorio.listarMascotasMenosUsuario(idUsuario);
+        } catch (ErrorServicio e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
+        }
+    }
+
+    // Filtrar por tipo de animal
+    @Transactional(readOnly = true)
+    public Collection<Mascota> listarMascotasPorTipo(String idUsuario, Tipo tipo) throws ErrorServicio {
+        try {
+            if (idUsuario == null || idUsuario.trim().isEmpty()) {
+                throw new ErrorServicio("Debe indicar el usuario");
+            }
+            if (tipo == null) {
+                return listarTodasMascotasMenosUsuario(idUsuario);
+            }
+            return mascotaRepositorio.listarMascotasMenosUsuarioPorTipo(idUsuario, tipo);
+        } catch (ErrorServicio e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ErrorServicio("Error de Sistemas");
+        }
+    }
+
+
 }

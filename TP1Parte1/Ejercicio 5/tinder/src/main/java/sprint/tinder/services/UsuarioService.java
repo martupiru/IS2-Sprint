@@ -19,10 +19,9 @@ import sprint.tinder.entities.Foto;
 import sprint.tinder.entities.Usuario;
 import sprint.tinder.entities.Zona;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.repositories.UsuarioRepositorio;
-import sprint.tinder.repositories.ZonaRepositorio;
+import sprint.tinder.repositories.UsuarioRepository;
+import sprint.tinder.repositories.ZonaRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -30,20 +29,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioService {
 
     @Autowired //Le indica que lo tiene que inicializar
-    private UsuarioRepositorio usuarioRepositorio;
+    private UsuarioRepository usuarioRepository;
     @Autowired
-    private FotoServicio fotoServicio;
+    private FotoService fotoService;
     @Autowired
-    private NotificacionServicio notificacionServicio;
+    private NotificationService notificationService;
     @Autowired
-    private ZonaRepositorio zonaRepositorio;
+    private ZonaRepository zonaRepository;
 
     @Transactional
     public void registrar(String nombre, String apellido, String mail, String clave, String clave2, MultipartFile archivo, String idZona) throws ErrorServicio { // hay que indicar que puede largar errores de ese tipo cpm throws ErrorServicio
-        Optional<Zona> zonaOpt = zonaRepositorio.findById(idZona); //getOne() del video estaba deprecado
+        Optional<Zona> zonaOpt = zonaRepository.findById(idZona); //getOne() del video estaba deprecado
         if (!zonaOpt.isPresent()) {
             throw new ErrorServicio("No se encontró la zona solicitada");
         }
@@ -61,32 +60,32 @@ public class UsuarioServicio {
         usuario.setZona(zona);
         usuario.setAlta(new Date());
 
-        Foto foto = fotoServicio.guardar(archivo);
+        Foto foto = fotoService.guardar(archivo);
         usuario.setFoto(foto);
 
-        usuarioRepositorio.save(usuario);
+        usuarioRepository.save(usuario);
         //Nosotros recibimos los datos por un formulario web, se transforman en tipo usuario y cuando se transforman le decimos al repositorio que lo almacene en la base de datos
 
          // Mensaje de bienvenida al mail
         try {
-            notificacionServicio.enviar("¡Bienvenido al Tinder de mascotas!", "Tinder de Mascotas", usuario.getMail());
+            notificationService.enviar("¡Bienvenido al Tinder de mascotas!", "Tinder de Mascotas", usuario.getMail());
         } catch (Exception ex) {
             // loguear pero no relanzar para no afectar la transacción ya completada
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, "Error enviando notificación: " + ex.getMessage(), ex);
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error enviando notificación: " + ex.getMessage(), ex);
         }
 
     }
 
     @Transactional
     public void modificar(String id, String nombre, String apellido, String mail, String clave,String clave2, MultipartFile archivo, String idZona) throws ErrorServicio {
-        Optional<Zona> zonaOpt = zonaRepositorio.findById(idZona); //getOne() del video estaba deprecado
+        Optional<Zona> zonaOpt = zonaRepository.findById(idZona); //getOne() del video estaba deprecado
         if (!zonaOpt.isPresent()) {
             throw new ErrorServicio("No se encontró la zona solicitada");
         }
         Zona zona = zonaOpt.get();
 
         validar(nombre, apellido, mail, clave, clave2, zona);
-        Optional<Usuario> respuesta = this.usuarioRepositorio.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
+        Optional<Usuario> respuesta = this.usuarioRepository.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
         if(respuesta.isPresent()){ //Si me devuelve la base de datos un usuario con ese id
             Usuario usuario = respuesta.get();
             usuario.setNombre(nombre);
@@ -101,9 +100,9 @@ public class UsuarioServicio {
             if(usuario.getFoto() != null){ //Me fijo si tenia una foto antes
                 idFoto = usuario.getFoto().getId();
             }
-            Foto foto = fotoServicio.actualizar(idFoto, archivo);
+            Foto foto = fotoService.actualizar(idFoto, archivo);
             usuario.setFoto(foto);
-            usuarioRepositorio.save(usuario);
+            usuarioRepository.save(usuario);
         } else{
             throw new ErrorServicio("No se encontró el usuario solicitado");
         }
@@ -121,7 +120,7 @@ public class UsuarioServicio {
 
             Usuario usuario = null;
             try {
-                usuario = usuarioRepositorio.buscarUsuarioPorEmailYClave(email, clave);
+                usuario = usuarioRepository.buscarUsuarioPorEmailYClave(email, clave);
             } catch (NoResultException ex) {
                 throw new ErrorServicio("No existe usuario con ese correo y clave");
             }
@@ -137,11 +136,11 @@ public class UsuarioServicio {
 
     @Transactional
     public void deshabilitar(String id) throws ErrorServicio {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
+        Optional<Usuario> respuesta = usuarioRepository.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
         if(respuesta.isPresent()){ //Si me devuelve la base de datos un usuario con ese id
             Usuario usuario = respuesta.get();
             usuario.setBaja(new Date());
-            usuarioRepositorio.save(usuario);
+            usuarioRepository.save(usuario);
         } else{
             throw new ErrorServicio("No se encontró el usuario solicitado");
         }
@@ -149,11 +148,11 @@ public class UsuarioServicio {
 
     @Transactional
     public void habilitar(String id) throws ErrorServicio {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
+        Optional<Usuario> respuesta = usuarioRepository.findById(id); // Con optional puedo ver si lo que devolvio la base de datos está presente (o sea ese usuario como respuesta a ese id)
         if(respuesta.isPresent()){ //Si me devuelve la base de datos un usuario con ese id
             Usuario usuario = respuesta.get();
             usuario.setBaja(null);
-            usuarioRepositorio.save(usuario);
+            usuarioRepository.save(usuario);
         } else{
             throw new ErrorServicio("No se encontró el usuario solicitado");
         }
@@ -189,7 +188,7 @@ public class UsuarioServicio {
             if (idUsuario == null || idUsuario.trim().isEmpty()) {
                 throw new ErrorServicio("Debe indicar el usuario");
             }
-            Optional<Usuario> optional = usuarioRepositorio.findById(idUsuario);
+            Optional<Usuario> optional = usuarioRepository.findById(idUsuario);
             Usuario usuario = null;
             if (optional.isPresent()) {
                 usuario= optional.get();
@@ -210,7 +209,7 @@ public class UsuarioServicio {
 
         try {
 
-            return usuarioRepositorio.findAll();
+            return usuarioRepository.findAll();
 
         }catch(Exception e) {
             e.printStackTrace();

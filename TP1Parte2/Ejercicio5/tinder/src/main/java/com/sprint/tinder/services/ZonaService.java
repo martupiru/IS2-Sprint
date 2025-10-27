@@ -92,15 +92,11 @@ public class ZonaService {
 
     @Transactional
     public void eliminarZona(String idZona) throws ErrorServicio {
-
         try {
-
-
             Zona zona = buscarZona(idZona);
             zona.setEliminado(true);
 
-            zonaRepositorio.delete(zona);
-
+            zonaRepositorio.save(zona);
         }catch(ErrorServicio e) {
             throw e;
         }catch(Exception e) {
@@ -110,13 +106,10 @@ public class ZonaService {
     }
 
     public Zona buscarZona(String idZona) throws ErrorServicio{
-
         try {
-
             if (idZona == null || idZona.trim().isEmpty()) {
                 throw new ErrorServicio("Debe indicar la zona");
             }
-
             Optional<Zona> optional = zonaRepositorio.findById(idZona);
             Zona zona = null;
             if (optional.isPresent()) {
@@ -125,9 +118,7 @@ public class ZonaService {
                     throw new ErrorServicio("No se encuentra la zona indicada");
                 }
             }
-
             return zona;
-
         } catch (ErrorServicio ex) {
             throw ex;
         } catch (Exception ex) {
@@ -138,24 +129,17 @@ public class ZonaService {
 
     @Transactional(readOnly=true)
     public List<Zona> listarZona()throws ErrorServicio {
-
         try {
-
             return zonaRepositorio.findAll();
-
         }catch(Exception e) {
             e.printStackTrace();
             throw new ErrorServicio("Error de Sistemas");
         }
-
     }
 
     public Collection<Zona> listarZonaActiva()throws ErrorServicio {
-
         try {
-
             return zonaRepositorio.listarZonaActiva();
-
         }catch(Exception e) {
             e.printStackTrace();
             throw new ErrorServicio("Error de Sistemas");

@@ -1,13 +1,13 @@
-package com.sprint.tinder.services;
+package sprint.tinder.services;
 
-import com.sprint.tinder.entities.Mascota;
-import com.sprint.tinder.entities.Voto;
-import com.sprint.tinder.errors.ErrorServicio;
-import com.sprint.tinder.repositories.MascotaRepository;
-import com.sprint.tinder.repositories.VotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sprint.tinder.entities.Mascota;
+import sprint.tinder.entities.Voto;
+import sprint.tinder.errors.ErrorServicio;
+import sprint.tinder.repositories.MascotaRepository;
+import sprint.tinder.repositories.VotoRepository;
 
 import java.util.Date;
 import java.util.Optional;

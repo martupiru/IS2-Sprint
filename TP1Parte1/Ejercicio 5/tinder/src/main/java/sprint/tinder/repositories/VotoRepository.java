@@ -8,7 +8,7 @@ import sprint.tinder.entities.Voto;
 
 import java.util.List;
 @Repository
-public interface VotoRepositorio extends JpaRepository<Voto,String> {
+public interface VotoRepository extends JpaRepository<Voto,String> {
     @Query("SELECT c FROM Voto c WHERE c.mascota1.id = :id ORDER BY c.fecha DESC")
     public List<Voto> buscarVotosPropios(@Param("id") String id);
 

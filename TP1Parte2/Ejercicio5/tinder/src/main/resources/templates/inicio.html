@@ -48,6 +48,7 @@
          <h2 class="masthead-subheading mb-0" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2> 
         <a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.id}__)}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Configura tu Perfil!</a>
         <a th:href="@{/mascota/mis-mascotas}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Mis Mascotas!</a>
+          <a th:href="@{/mascota/explorar-mascotas}" class="btn btn-primary btn-xl rounded-pill mt-5">¡Explorar Mascotas y vota!</a>
       </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -60,7 +61,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-black">
     <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; INGENIERIA SOFTWARE 2</p>
+      <p class="m-0 text-center text-white small">Copyright &copy; Tinder de Mascotas - Sprint 2025</p>
     </div>
     <!-- /.container -->
   </footer>

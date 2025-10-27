@@ -9,7 +9,7 @@ import sprint.tinder.entities.Zona;
 import java.util.Collection;
 
 @Repository
-public interface ZonaRepositorio extends JpaRepository<Zona,String> {
+public interface ZonaRepository extends JpaRepository<Zona,String> {
     @Query("SELECT c FROM Zona c WHERE c.nombre = :nombre AND c.eliminado = FALSE")
     public Zona buscarZonaPorNombre(@Param("nombre")String id);
 

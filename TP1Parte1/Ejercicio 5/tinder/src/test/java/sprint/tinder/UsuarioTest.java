@@ -1,25 +1,22 @@
 package sprint.tinder;
 
 import org.junit.jupiter.api.*;
-import sprint.tinder.entities.Usuario;
 import sprint.tinder.entities.Zona;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.services.UsuarioServicio;
-
-import java.util.Date;
+import sprint.tinder.services.UsuarioService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsuarioTest {
 
-    private static UsuarioServicio usuarioServicio;
+    private static UsuarioService usuarioService;
     private static Zona zonaTest;
 
     @BeforeAll
     public static void setup() {
         System.out.println("Iniciando tests de Usuario");
-        usuarioServicio = new UsuarioServicio();
+        usuarioService = new UsuarioService();
         // Creamos una zona de prueba
         zonaTest = new Zona();
         zonaTest.setId("1");
@@ -31,7 +28,7 @@ public class UsuarioTest {
     public void testValidarUsuarioCorrecto() {
         System.out.println("Validacion de usuario");
         assertDoesNotThrow(() -> {
-            usuarioServicio.validar("Martina", "Nahman", "martina@mail.com", "123456", "123456", zonaTest);
+            usuarioService.validar("Martina", "Nahman", "martina@mail.com", "123456", "123456", zonaTest);
         });
     }
 
@@ -40,7 +37,7 @@ public class UsuarioTest {
     public void testValidarUsuarioSinNombre() {
         System.out.println("Validar usuario sin nombre");
         Exception ex = assertThrows(ErrorServicio.class, () -> {
-            usuarioServicio.validar("", "Nahman", "martina@mail.com", "123456", "123456", zonaTest);
+            usuarioService.validar("", "Nahman", "martina@mail.com", "123456", "123456", zonaTest);
         });
         assertEquals("El nombre es obligatorio", ex.getMessage());
     }
@@ -50,7 +47,7 @@ public class UsuarioTest {
     public void testValidarUsuarioClavesDiferentes() {
         System.out.println("Validar usuario claves diferentes");
         Exception ex = assertThrows(ErrorServicio.class, () -> {
-            usuarioServicio.validar("Martina", "Nahman", "martina@mail.com", "123456", "123457", zonaTest);
+            usuarioService.validar("Martina", "Nahman", "martina@mail.com", "123456", "123457", zonaTest);
         });
         assertEquals("Las claves deben coincidir", ex.getMessage());
     }
@@ -60,7 +57,7 @@ public class UsuarioTest {
     public void testLoginSinEmail() {
         System.out.println("Validar login sin email");
         Exception ex = assertThrows(ErrorServicio.class, () -> {
-            usuarioServicio.login("", "123456");
+            usuarioService.login("", "123456");
         });
         assertEquals("Debe indicar el usuario", ex.getMessage());
     }
@@ -70,7 +67,7 @@ public class UsuarioTest {
     public void testLoginSinClave() {
         System.out.println("Validar login sin clave");
         Exception ex = assertThrows(ErrorServicio.class, () -> {
-            usuarioServicio.login("martina@mail.com", "");
+            usuarioService.login("martina@mail.com", "");
         });
         assertEquals("Debe indicar la clave", ex.getMessage());
     }

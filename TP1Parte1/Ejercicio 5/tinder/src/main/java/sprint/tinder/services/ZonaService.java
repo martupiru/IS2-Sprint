@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sprint.tinder.entities.Zona;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.repositories.ZonaRepositorio;
+import sprint.tinder.repositories.ZonaRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ZonaServicio {
+public class ZonaService {
 
     @Autowired
-    private ZonaRepositorio zonaRepositorio;
+    private ZonaRepository zonaRepository;
 
     public void validar (String nombre, String descripcion) throws ErrorServicio {
         try {
@@ -42,7 +42,7 @@ public class ZonaServicio {
             validar(nombre, descripcion);
 
             try {
-                Zona zonaAux = zonaRepositorio.buscarZonaPorNombre(nombre);
+                Zona zonaAux = zonaRepository.buscarZonaPorNombre(nombre);
                 if (zonaAux != null && !zonaAux.isEliminado()) {
                     throw new ErrorServicio("Existe una zona con el nombre indicado");
                 }
@@ -54,7 +54,7 @@ public class ZonaServicio {
             zona.setDescripcion(descripcion);
             zona.setEliminado(false);
 
-            zonaRepositorio.save(zona);
+            zonaRepository.save(zona);
 
         }catch(ErrorServicio e) {
             throw e;
@@ -72,7 +72,7 @@ public class ZonaServicio {
             validar(nombre, descripcion);
 
             try {
-                Zona zonaAux = zonaRepositorio.buscarZonaPorNombre(nombre);
+                Zona zonaAux = zonaRepository.buscarZonaPorNombre(nombre);
                 if (zonaAux != null && !zonaAux.isEliminado() && !zonaAux.getId().equals(idZona)) {
                     throw new ErrorServicio("Existe una zona con el nombre indicado");
                 }
@@ -82,7 +82,7 @@ public class ZonaServicio {
             zona.setNombre(nombre);
             zona.setDescripcion(descripcion);
 
-            zonaRepositorio.save(zona);
+            zonaRepository.save(zona);
 
         }catch(ErrorServicio e) {
             throw e;
@@ -101,7 +101,7 @@ public class ZonaServicio {
             Zona zona = buscarZona(idZona);
             zona.setEliminado(true);
 
-            zonaRepositorio.delete(zona);
+            zonaRepository.save(zona);
 
         }catch(ErrorServicio e) {
             throw e;
@@ -119,7 +119,7 @@ public class ZonaServicio {
                 throw new ErrorServicio("Debe indicar la zona");
             }
 
-            Optional<Zona> optional = zonaRepositorio.findById(idZona);
+            Optional<Zona> optional = zonaRepository.findById(idZona);
             Zona zona = null;
             if (optional.isPresent()) {
                 zona= optional.get();
@@ -143,7 +143,7 @@ public class ZonaServicio {
 
         try {
 
-            return zonaRepositorio.findAll();
+            return zonaRepository.findAll();
 
         }catch(Exception e) {
             e.printStackTrace();
@@ -156,7 +156,7 @@ public class ZonaServicio {
 
         try {
 
-            return zonaRepositorio.listarZonaActiva();
+            return zonaRepository.listarZonaActiva();
 
         }catch(Exception e) {
             e.printStackTrace();

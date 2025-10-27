@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import sprint.tinder.entities.Foto;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.repositories.FotoRepositorio;
+import sprint.tinder.repositories.FotoRepository;
 
 import java.util.Optional;
 
 @Service
-public class FotoServicio {
+public class FotoService {
     @Autowired
-    private FotoRepositorio fotoRepositorio;
+    private FotoRepository fotoRepository;
 
     @Transactional //Si el metodo se ejecuta sin largar excepciones, entonces se hace un commit a la base de datos y se aplican todos los cambios. Si hay una excepcion, se hace un rollback y no se aplica nada a la BD
     public Foto guardar (MultipartFile archivo) throws ErrorServicio {  // MultipartFile es donde se va a almacenar el archivo cuando la cargue el usuario
@@ -36,7 +36,7 @@ public class FotoServicio {
             foto.setNombre(archivo.getOriginalFilename());
             foto.setContenido(archivo.getBytes());
             foto.setEliminado(false);
-            Foto guardada = fotoRepositorio.save(foto);
+            Foto guardada = fotoRepository.save(foto);
 
             // DEBUG: confirmar guardado y tamaño del blob
             System.out.println("Foto guardada: id=" + guardada.getId()
@@ -57,7 +57,7 @@ public class FotoServicio {
         try {
             Foto foto;
             if (idFoto != null) {
-                Optional<Foto> respuesta = fotoRepositorio.findById(idFoto);
+                Optional<Foto> respuesta = fotoRepository.findById(idFoto);
                 foto = respuesta.orElse(new Foto());
             } else {
                 foto = new Foto();
@@ -68,7 +68,7 @@ public class FotoServicio {
             foto.setContenido(archivo.getBytes());
             foto.setEliminado(false);
 
-            Foto guardada = fotoRepositorio.save(foto);
+            Foto guardada = fotoRepository.save(foto);
             System.out.println("Foto actualizada: id=" + guardada.getId()
                     + " bytes=" + (guardada.getContenido() != null ? guardada.getContenido().length : "null"));
             return guardada;
@@ -97,7 +97,7 @@ public class FotoServicio {
             if (idFoto == null || idFoto.trim().isEmpty()) {
                 throw new ErrorServicio("Debe indicar la foto");
             }
-            Optional<Foto> optional = fotoRepositorio.findById(idFoto);
+            Optional<Foto> optional = fotoRepository.findById(idFoto);
             Foto foto = null;
             if (optional.isPresent()) {
                 foto= optional.get();

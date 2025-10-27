@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import sprint.tinder.entities.Zona;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.repositories.ZonaRepositorio;
-import sprint.tinder.services.UsuarioServicio;
+import sprint.tinder.repositories.ZonaRepository;
+import sprint.tinder.services.UsuarioService;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -20,13 +20,13 @@ import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/") //Indica cual es la url que va a ejecutar este controlador
-public class PortalControlador {
+public class PortalController {
 
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private UsuarioService usuarioService;
 
     @Autowired
-    private ZonaRepositorio zonaRepositorio;
+    private ZonaRepository zonaRepository;
 
     @GetMapping("/")
     public String index(){
@@ -56,7 +56,7 @@ public class PortalControlador {
     @GetMapping("/registro")
     public String registro(ModelMap modelo){
         try{
-            List<Zona> zonas = zonaRepositorio.findAll(); // Para listar todas las zonas cuando se abra el registro
+            List<Zona> zonas = zonaRepository.findAll(); // Para listar todas las zonas cuando se abra el registro
             modelo.put("zonas", zonas);
             return "registro.html";
         } catch(Exception e){
@@ -70,9 +70,9 @@ public class PortalControlador {
     public String registrar(ModelMap modelo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2, MultipartFile archivo, @RequestParam String idZona) throws ErrorServicio{
         // @RequestParam  le indica que son parametros que vienen del html (solicitud http) cuando llena el usuario el formulario
         try {
-            usuarioServicio.registrar(nombre, apellido, mail, clave1,clave2, archivo, idZona);
+            usuarioService.registrar(nombre, apellido, mail, clave1,clave2, archivo, idZona);
         } catch (ErrorServicio e) {
-            List<Zona> zonas = zonaRepositorio.findAll(); // Para listar todas las zonas cuando se abra el registro
+            List<Zona> zonas = zonaRepository.findAll(); // Para listar todas las zonas cuando se abra el registro
             modelo.put("zonas", zonas);
             modelo.put("error", e.getMessage());
             modelo.put("nombre", nombre);
@@ -80,7 +80,7 @@ public class PortalControlador {
             modelo.put("mail", mail);
             modelo.put("clave1", clave1);
             modelo.put("clave2", clave2);
-            Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(PortalController.class.getName()).log(Level.SEVERE, null, e);
             return "registro.html";
         }
         modelo.put("titulo", "Bienvenido al Tinder de Mascotas!");

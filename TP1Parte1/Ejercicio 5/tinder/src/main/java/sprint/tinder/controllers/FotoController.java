@@ -8,28 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import sprint.tinder.entities.Foto;
 import sprint.tinder.entities.Mascota;
 import sprint.tinder.entities.Usuario;
-import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.services.FotoServicio;
-import sprint.tinder.services.MascotaServicio;
-import sprint.tinder.services.UsuarioServicio;
+import sprint.tinder.services.MascotaService;
+import sprint.tinder.services.UsuarioService;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class FotoControlador {
+public class FotoController {
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private UsuarioService usuarioService;
     @Autowired
-    private MascotaServicio mascotaServicio;
+    private MascotaService mascotaService;
 
     @GetMapping("/foto/usuario/{id}")
     public ResponseEntity<byte[]> fotoUsuario(@PathVariable String id) {
         try {
-            Usuario usuario = usuarioServicio.buscarUsuario(id);
+            Usuario usuario = usuarioService.buscarUsuario(id);
             if (usuario == null || usuario.getFoto() == null) {
                 return ResponseEntity.notFound().build();
             }
@@ -42,7 +39,7 @@ public class FotoControlador {
 
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
         } catch (Exception e) {
-            Logger.getLogger(FotoControlador.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FotoController.class.getName()).log(Level.SEVERE, null, e);
             return ResponseEntity.notFound().build();
         }
     }
@@ -50,7 +47,7 @@ public class FotoControlador {
     @GetMapping("/foto/mascota/{id}")
     public ResponseEntity<byte[]> fotoMascota(@PathVariable String id) {
         try {
-            Mascota mascota = mascotaServicio.buscarMascota(id);
+            Mascota mascota = mascotaService.buscarMascota(id);
             if (mascota == null || mascota.getFoto() == null) {
                 return ResponseEntity.notFound().build();
             }
@@ -63,7 +60,7 @@ public class FotoControlador {
 
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
         } catch (Exception e) {
-            Logger.getLogger(FotoControlador.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FotoController.class.getName()).log(Level.SEVERE, null, e);
             return ResponseEntity.notFound().build();
         }
     }

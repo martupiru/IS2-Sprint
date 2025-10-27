@@ -155,4 +155,35 @@ public class MascotaController {
             return "mascota.html";
         }
     }
+
+    @GetMapping("/explorar-mascotas")
+    public String explorarMascotas(HttpSession session, @RequestParam(required = false) String idMascotaPropia, ModelMap model) {
+        try {
+            Usuario login = (Usuario) session.getAttribute("usuariosession");
+            if (login == null) {
+                return "redirect:/login";
+            }
+            // Obtenmer mascotas
+            Collection<Mascota> misMascotas = mascotaServicio.listarMascotaPorUsuario(login.getId());
+            model.put("misMascotas", misMascotas);
+            //Si no tiene mascotas, redirigir a crear una
+            if (misMascotas == null || misMascotas.isEmpty()) {
+                model.put("error", "Debes tener al menos una mascota para explorar");
+                return "redirect:/mascota/editar-perfil";
+            }
+            if (idMascotaPropia != null && !idMascotaPropia.isEmpty()) {
+                Mascota mascotaSeleccionada = mascotaServicio.buscarMascota(idMascotaPropia);
+                model.put("mascotaSeleccionada", mascotaSeleccionada);
+                // Filtra por el tipo de mascota que tiene el usuario seleccionada
+                Tipo tipoMascota = mascotaSeleccionada.getTipo();
+                Collection<Mascota> mascotas = mascotaServicio.listarMascotasPorTipo(login.getId(), tipoMascota);
+                model.put("mascotas", mascotas);
+            }
+            return "mascotas_explorar";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/inicio";
+        }
+    }
 }

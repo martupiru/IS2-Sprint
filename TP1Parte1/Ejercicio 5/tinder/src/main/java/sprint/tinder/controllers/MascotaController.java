@@ -14,7 +14,7 @@ import sprint.tinder.entities.Usuario;
 import sprint.tinder.enumerations.Sexo;
 import sprint.tinder.enumerations.Tipo;
 import sprint.tinder.errors.ErrorServicio;
-import sprint.tinder.services.MascotaServicio;
+import sprint.tinder.services.MascotaService;
 
 import java.util.Collection;
 import java.util.logging.Level;
@@ -22,10 +22,10 @@ import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/mascota")
-public class MascotaControlador {
+public class MascotaController {
 
     @Autowired
-    private MascotaServicio mascotaServicio;
+    private MascotaService mascotaService;
 
     @PostMapping("/eliminar-perfil")
     public String eliminar(HttpSession session, @RequestParam String id) {
@@ -33,10 +33,10 @@ public class MascotaControlador {
         try {
 
             Usuario login = (Usuario) session.getAttribute("usuariosession");
-            mascotaServicio.eliminar(login.getId(), id);
+            mascotaService.eliminar(login.getId(), id);
 
         } catch (ErrorServicio ex) {
-            Logger.getLogger(MascotaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MascotaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "redirect:/mascota/mis-mascotas";
     }
@@ -46,10 +46,10 @@ public class MascotaControlador {
 
         try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");
-            mascotaServicio.agregarMascota(login.getId(), id);
+            mascotaService.agregarMascota(login.getId(), id);
 
         } catch (ErrorServicio ex) {
-            Logger.getLogger(MascotaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MascotaController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return "redirect:/mascota/mis-mascotas";
@@ -65,7 +65,7 @@ public class MascotaControlador {
                 return "redirect:/login";
             }
 
-            Collection<Mascota> mascotas = mascotaServicio.listarMascotaDeBaja(login.getId());
+            Collection<Mascota> mascotas = mascotaService.listarMascotaDeBaja(login.getId());
             model.put("mascotas", mascotas);
 
             return "mascotasdebaja";
@@ -86,7 +86,7 @@ public class MascotaControlador {
                 return "redirect:/login";
             }
 
-            Collection<Mascota> mascotas = mascotaServicio.listarMascotaPorUsuario(login.getId());
+            Collection<Mascota> mascotas = mascotaService.listarMascotaPorUsuario(login.getId());
             model.put("mascotas", mascotas);
 
             return "mascotas";
@@ -111,9 +111,9 @@ public class MascotaControlador {
         Mascota mascota = new Mascota();
         if (id != null && !id.isEmpty()) {
             try {
-                mascota = mascotaServicio.buscarMascota(id);
+                mascota = mascotaService.buscarMascota(id);
             } catch (ErrorServicio ex) {
-                Logger.getLogger(MascotaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MascotaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         model.put("perfil", mascota);
@@ -134,9 +134,9 @@ public class MascotaControlador {
         try {
 
             if (id == null || id.isEmpty()) {
-                mascotaServicio.agregarMascota(login.getId(), nombre, sexo, archivo, tipo);
+                mascotaService.agregarMascota(login.getId(), nombre, sexo, archivo, tipo);
             } else {
-                mascotaServicio.modificar(login.getId(), id, nombre, sexo,archivo, tipo);
+                mascotaService.modificar(login.getId(), id, nombre, sexo,archivo, tipo);
             }
 
             return "redirect:/inicio";
@@ -156,6 +156,37 @@ public class MascotaControlador {
             modelo.put("perfil", login);
 
             return "mascota.html";
+        }
+    }
+
+    @GetMapping("/explorar-mascotas")
+    public String explorarMascotas(HttpSession session, @RequestParam(required = false) String idMascotaPropia, ModelMap model) {
+        try {
+            Usuario login = (Usuario) session.getAttribute("usuariosession");
+            if (login == null) {
+                return "redirect:/login";
+            }
+            // Obtenmer mascotas
+            Collection<Mascota> misMascotas = mascotaService.listarMascotaPorUsuario(login.getId());
+            model.put("misMascotas", misMascotas);
+            //Si no tiene mascotas, redirigir a crear una
+            if (misMascotas == null || misMascotas.isEmpty()) {
+                model.put("error", "Debes tener al menos una mascota para explorar");
+                return "redirect:/mascota/editar-perfil";
+            }
+            if (idMascotaPropia != null && !idMascotaPropia.isEmpty()) {
+                Mascota mascotaSeleccionada = mascotaService.buscarMascota(idMascotaPropia);
+                model.put("mascotaSeleccionada", mascotaSeleccionada);
+                // Filtra por el tipo de mascota que tiene el usuario seleccionada
+                Tipo tipoMascota = mascotaSeleccionada.getTipo();
+                Collection<Mascota> mascotas = mascotaService.listarMascotasPorTipo(login.getId(), tipoMascota);
+                model.put("mascotas", mascotas);
+            }
+            return "mascotas_explorar";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/inicio";
         }
     }
 }

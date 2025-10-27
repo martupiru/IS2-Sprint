@@ -1,16 +1,22 @@
-package com.sprint.tinder.services;
+package sprint.tinder.services;
 
-import com.sprint.tinder.entities.Mascota;
-import com.sprint.tinder.entities.Usuario;
+import sprint.tinder.entities.Mascota;
+import sprint.tinder.entities.Usuario;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class NotificationService {
+
+    @Autowired
     private final JavaMailSender emailSender;
 
     public NotificationService(JavaMailSender emailSender) {
@@ -204,3 +210,4 @@ public class NotificationService {
                 "</html>";
     }
 }
+
