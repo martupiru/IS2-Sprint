@@ -1,0 +1,48 @@
+<!-- components/navbarAdmin.html -->
+<nav th:fragment="nav_bar_adm">
+    <header class="site-navbar py-3 js-sticky-header site-navbar-target bg-dark" role="banner">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between">
+
+                <!-- Logo -->
+                <div class="site-logo text-white">
+                    <a th:href="@{/admin/dashboard}" class="text-white">Sport Gym</a>
+                </div>
+
+                <!-- Menú -->
+                <nav class="site-navigation position-relative" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav d-none d-lg-flex">
+                        <li><a th:href="@{/admin/dashboard}" class="nav-link text-white">Inicio</a></li>
+
+                        <!-- Dropdown Gestión -->
+                        <li class="has-children">
+                            <a href="#" class="nav-link text-white">Gestión</a>
+                            <ul class="dropdown arrow-top bg-dark">
+                                <li><a th:href="@{/admin/socios}" class="nav-link text-white">Socios</a></li>
+                                <li><a th:href="@{/admin/cuotas/menu}" class="nav-link text-white">Cuotas</a></li>
+                                <li><a th:href="@{/admin/deudas}" class="nav-link text-white">Deuda</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a th:href="@{/admin/promociones}" class="nav-link text-white">Promociones</a></li>
+                        <li><a th:href="@{/admin/cumpleaños}" class="nav-link text-white">Cumpleaños</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Cerrar sesión -->
+                <ul class="site-menu main-menu site-menu-dark js-clone-nav d-none d-lg-flex">
+                    <li class="cta">
+                        <a th:href="@{/logout}" class="nav-link text-white" onclick="mostrarMensajeLogout(event)">
+                            <span class="rounded border border-light px-2">Cerrar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Menu responsive -->
+                <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-white float-right">
+                    <span class="icon-menu h3"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+</nav>

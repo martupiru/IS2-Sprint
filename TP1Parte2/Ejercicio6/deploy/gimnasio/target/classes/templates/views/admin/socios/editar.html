@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>LISTADO SOCIOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.mb.YTPlayer.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        main h1, main h2, main h3, main h4, main h5,
+        main .h1, main .h2, main .h3, main .h4, main .h5 {
+            color: #212529 !important;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div class="site-wrap">
+
+    <!-- BARRA NAVEGACION -->
+    <nav th:replace="components/navbarAdmin :: nav_bar_adm"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <h2>Nuevo Socio</h2>
+
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <form th:action="@{/admin/socios/guardar}" th:object="${socio}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" th:field="*{fechaNacimiento}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tipo de Documento</label>
+                    <select class="form-control" th:field="*{tipoDocumento}" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione un tipo</option>
+                        <option th:each="tipo : ${tiposDocumentos}" th:value="${tipo}" th:text="${tipo}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Número de Documento</label>
+                    <input type="text" class="form-control" th:field="*{numeroDocumento}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" th:field="*{correoElectronico}" required style="color:#212529 !important;">
+                </div>
+                <div class="form-group">
+                    <label for="clave">Clave</label>
+                    <input type="password" class="form-control" id="clave" name="clave" required style="color:#212529 !important;">
+                </div>
+                <hr>
+                <h2> Dirección </h2>
+                <div class="mb-3">
+                    <label class="form-label">Calle</label>
+                    <input type="text" class="form-control" th:field="*{direccion.calle}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Numeración</label>
+                    <input type="text" class="form-control" th:field="*{direccion.numeracion}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Barrio</label>
+                    <input type="text" class="form-control" th:field="*{direccion.barrio}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Manzana o Piso</label>
+                    <input type="text" class="form-control" th:field="*{direccion.manzanaPiso}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Casa o Departamento</label>
+                    <input type="text" class="form-control" th:field="*{direccion.casaDepartamento}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Referencia</label>
+                    <input type="text" class="form-control" th:field="*{direccion.referencia}" required style="color:#212529 !important;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">País</label>
+                    <select class="form-control" id="pais" name="idPais" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione un país</option>
+                        <option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Provincia</label>
+                    <select class="form-control" id="provincia" name="idProvincia" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione una provincia</option>
+                        <option th:each="provincia : ${provincias}" th:value="${provincia.id}" th:text="${provincia.nombre}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Departamento</label>
+                    <select class="form-control" id="departamento" name="idDepartamento" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione un departamento</option>
+                        <option th:each="departamento : ${departamentos}" th:value="${departamento.id}" th:text="${departamento.nombre}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Localidad</label>
+                    <select class="form-control" id="localidad" name="idLocalidad" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione una localidad</option>
+                        <option th:each="localidad : ${localidades}" th:value="${localidad.id}" th:text="${localidad.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sucursal</label>
+                    <select class="form-control" name="idSucursal" required style="color:#212529 !important;">
+                        <option value="" disabled selected>Seleccione una sucursal</option>
+                        <option th:each="sucursal : ${sucursales}" th:value="${sucursal.id}" th:text="${sucursal.nombre}"></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/admin/socios}" class="btn btn-secondary">Cancelar</a>
+            </form>
+
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <div th:replace="components/footerDash :: footer_dash">
+
+    </div>
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault(); // Evita que salga sin mostrar el mensaje
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>
