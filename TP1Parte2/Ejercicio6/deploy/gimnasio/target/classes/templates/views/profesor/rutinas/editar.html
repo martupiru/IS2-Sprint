@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Editar Rutina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <!-- Navbar Profesor -->
+    <nav th:replace="components/navbarProfe :: nav_bar_prof"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Editar Rutina</h1>
+            </div>
+
+            <!-- Mensaje de error -->
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <form th:action="@{'/profesor/rutinas/editar/' + ${rutina.id}}" method="post" th:if="${rutina != null}">
+                <div class="mb-3">
+                    <label for="idSocio" class="form-label">Socio</label>
+                    <select class="form-select" id="idSocio" name="idSocio" required style="color:#212529 !important;">
+                        <option th:each="socio : ${socios}"
+                                th:value="${socio.id}"
+                                th:text="${socio.nombre + ' ' + socio.apellido}"
+                                th:selected="${socio.id == rutina.socio.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                           th:value="${#dates.format(rutina.fechaInicio,'yyyy-MM-dd')}" required
+                           style="color:#212529 !important;">
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaFinalizacion" class="form-label">Fecha de Finalización</label>
+                    <input type="date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion"
+                           th:value="${#dates.format(rutina.fechaFinalizacion,'yyyy-MM-dd')}" required
+                           style="color:#212529 !important;">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Actividades</label>
+                    <div id="actividades-container">
+                        <div th:each="det : ${rutina.detalleRutinas}">
+                            <input type="text" class="form-control mb-2" name="actividades"
+                                   th:value="${det.actividad}" required style="color:#212529 !important;">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="agregarActividad()">Agregar otra actividad</button>
+                </div>
+
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="estado" name="estado" required style="color:#212529 !important;">
+                        <option th:each="estado : ${T(com.gimnasio.gimnasio.enumerations.EstadoRutina).values()}"
+                                th:value="${estado}"
+                                th:text="${estado}"
+                                th:selected="${rutina.estadoRutina == estado}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a th:href="@{/profesor/rutinas}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </main>
+
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function agregarActividad() {
+        const container = document.getElementById('actividades-container');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'actividades';
+        input.className = 'form-control mb-2';
+        input.placeholder = 'Nombre de la actividad';
+        input.required = true;
+        input.style.color = '#212529';
+        container.appendChild(input);
+    }
+</script>
+
+</body>
+</html>
