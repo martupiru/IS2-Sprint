@@ -21,6 +21,7 @@ public class MedicoController implements BaseController {
             model.addAttribute("medicos", medicoService.findAll());
             return "views/medicos/lista";
         } catch (Exception e) {
+            e.printStackTrace(); // para ver el error real en consola
             model.addAttribute("error", e.getMessage());
             return "error";
         }
@@ -38,6 +39,7 @@ public class MedicoController implements BaseController {
             medicoService.save(medico);
             redirect.addFlashAttribute("success", "Médico guardado correctamente");
         } catch (Exception e) {
+            e.printStackTrace(); // para ver el error real en consola
             redirect.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/medicos";
@@ -49,6 +51,7 @@ public class MedicoController implements BaseController {
             model.addAttribute("medico", medicoService.findById(id));
             return "views/medicos/form";
         } catch (Exception e) {
+            e.printStackTrace(); // para ver el error real en consola
             redirect.addFlashAttribute("error", e.getMessage());
             return "redirect:/medicos";
         }
@@ -60,6 +63,7 @@ public class MedicoController implements BaseController {
             medicoService.update(id, medico);
             redirect.addFlashAttribute("success", "Médico actualizado correctamente");
         } catch (Exception e) {
+            e.printStackTrace(); // para ver el error real en consola
             redirect.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/medicos";
@@ -71,6 +75,7 @@ public class MedicoController implements BaseController {
             medicoService.delete(id);
             redirect.addFlashAttribute("success", "Médico eliminado correctamente");
         } catch (Exception e) {
+            e.printStackTrace(); // para ver el error real en consola
             redirect.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/medicos";
