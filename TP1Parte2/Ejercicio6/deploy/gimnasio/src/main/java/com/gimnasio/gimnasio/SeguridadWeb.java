@@ -28,6 +28,7 @@ public class SeguridadWeb {
                 .authenticationProvider(customAuthenticationProvider)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/views/login", "/css/**", "/js/**", "/img/**", "/static/**", "/bootstrap/**").permitAll()
+                        .requestMatchers("/inicio").permitAll()
                         .requestMatchers("/views/admin/**").hasRole("ADMINISTRATIVO")
                         .requestMatchers("/views/profesor/**").hasRole("PROFESOR")
                         .requestMatchers("/views/socio/**").hasRole("SOCIO")
