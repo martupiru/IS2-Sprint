@@ -4,7 +4,7 @@ services:
     build: ./gimnasio
     mem_limit: 512m
     ports:
-      - "9000:9000"
+      - "8090:8090"
     environment:
       DB_URL: jdbc:mysql://gimnasio_dep:3306/gimnasio?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
