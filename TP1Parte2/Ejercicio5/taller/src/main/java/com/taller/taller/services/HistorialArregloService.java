@@ -12,6 +12,13 @@ public class HistorialArregloService extends BaseService<HistorialArreglo, Strin
     }
 
     @Override
+    protected HistorialArreglo createEmpty() {
+        HistorialArreglo h = new HistorialArreglo();
+        h.setEliminado(false);
+        return h;
+    }
+
+    @Override
     protected void validar(HistorialArreglo entidad) throws ErrorServiceException {
         if (entidad == null) throw new ErrorServiceException("Historial nulo");
         if (entidad.getDetalleArreglo() == null || entidad.getDetalleArreglo().isBlank())

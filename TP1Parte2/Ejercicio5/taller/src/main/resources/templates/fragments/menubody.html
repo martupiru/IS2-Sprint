@@ -19,6 +19,9 @@
             <a class="nav-link" th:href="@{/mecanico/list}">Mecánicos</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" th:href="@{/historialarreglo/list}">Historial</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" th:href="@{/usuario/list}">Usuarios</a>
         </li>
         <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">

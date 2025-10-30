@@ -15,6 +15,13 @@ public class MecanicoService extends BaseService<Mecanico, String> {
     }
 
     @Override
+    protected Mecanico createEmpty() {
+        Mecanico m = new Mecanico();
+        m.setEliminado(false);
+        return m;
+    }
+
+    @Override
     protected void validar(Mecanico entidad) throws ErrorServiceException {
         if (entidad == null) throw new ErrorServiceException("Mecánico nulo");
         if (entidad.getLegajo() == null || entidad.getLegajo().isBlank())

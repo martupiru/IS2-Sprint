@@ -1,0 +1,30 @@
+version: '3'
+services:
+  gimnasio:
+    build: ./gimnasio
+    mem_limit: 512m
+    ports:
+      - "8090:8090"
+    environment:
+      DB_URL: jdbc:mysql://gimnasio_dep:3306/gimnasio?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 123456789
+      EMAIL_PRUEBAS: emaildepruebasprint@gmail.com
+      EMAIL_PRUEBAS_PASSWORD: cjvs vfsj yghl jnqp
+    restart: always
+    depends_on:
+      gimnasio_dep:
+        condition: service_healthy
+        
+  gimnasio_dep:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: gimnasio
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

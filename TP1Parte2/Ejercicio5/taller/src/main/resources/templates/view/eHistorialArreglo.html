@@ -24,50 +24,58 @@
 		  </h4>
           <div class="card-body">
 
-            <form th:action="@{'/' + ${nameEntityLower} + '/actualizar'}" method="post" th:object="${item}">
-                <input type="hidden" name="id" th:if="${item.id != null}" th:field="*{id}" />
+            <form th:action="@{/historialarreglo/registrarReparacion}" method="post">
+                <div th:if="${msgExito != null}" class='alert alert-success' th:text="${msgExito}" role='alert'></div>
+                <div th:if="${msgError != null}" class='alert alert-danger' th:text="${msgError}" role='alert'></div>
 
-			  <div th:if="${msgExito != null}" class='alert alert-success' th:text="${msgExito}" role='alert'></div>
-			  <div th:if="${msgError != null}" class='alert alert-danger' th:text="${msgError}" role='alert'></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fechaArreglo">Fecha y hora del arreglo</label>
+                            <input type="datetime-local"
+                                   class="form-control"
+                                   id="fechaArreglo"
+                                   name="fechaArreglo"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="vehiculo">Vehículo</label>
+                            <select class="form-control" id="vehiculo" name="idVehiculo" required>
+                                <option value="">Seleccione un vehículo</option>
+                                <option th:each="v : ${vehiculos}" th:value="${v.id}"
+                                        th:text="${v.patente + (v.cliente != null ? ' - ' + v.cliente.nombre + ' ' + v.cliente.apellido : '')}"></option>
+                            </select>
+                        </div>
+                    </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="fechaArreglo">Fecha y hora</label>
-                    <input type="datetime-local" class="form-control" th:field="*{fechaArreglo}" required="required" th:disabled="${isDisabled}">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="mecanico">Mecánico</label>
-                    <select class="form-control" th:field="*{mecanico.id}" th:disabled="${isDisabled}">
-                        <option th:each="m : ${mecanicos}" th:value="${m.id}" th:text="${m.nombre + ' ' + m.apellido}"></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="vehiculo">Vehículo</label>
-                    <select class="form-control" th:field="*{vehiculo.id}" th:disabled="${isDisabled}">
-                        <option th:each="v : ${vehiculos}" th:value="${v.id}" th:text="${v.patente + (v.cliente != null ? ' - ' + v.cliente.nombre + ' ' + v.cliente.apellido : '')}"></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="detalleArreglo">Detalle</label>
-                        <textarea class="form-control" th:field="*{detalleArreglo}" rows="3" th:disabled="${isDisabled}"></textarea>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mecanico">Mecánico</label>
+                            <select class="form-control" id="mecanico" name="idMecanico" required>
+                                <option value="">Seleccione un mecánico</option>
+                                <option th:each="m : ${mecanicos}" th:value="${m.id}"
+                                        th:text="${m.nombre + ' ' + m.apellido}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="detalle">Detalle del arreglo</label>
+                            <textarea class="form-control" id="detalle" name="detalle" rows="3" required></textarea>
+                        </div>
                     </div>
                 </div>
-              </div>
 
-              <hr>
-		  <div class="d-grid gap-2 float-right justify-content-md-end">
-               <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}">ACEPTAR</button>
-			   <a class="btn btn-primary" th:href="@{'/' + ${nameEntityLower} + '/cancelar'}" role="button">CANCELAR</a>
-		  </div>
+                <hr>
+                <div class="d-grid gap-2 float-right justify-content-md-end">
+                    <button type="submit" class="btn btn-primary">Guardar reparación</button>
+                    <a class="btn btn-secondary" th:href="@{'/' + ${nameEntityLower} + '/list'}" role="button">Cancelar</a>
+                </div>
 
-			</form>
+            </form>
 
           </div>
         </div>

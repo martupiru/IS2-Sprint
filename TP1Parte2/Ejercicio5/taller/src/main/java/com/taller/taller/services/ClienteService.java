@@ -15,6 +15,13 @@ public class ClienteService extends BaseService<Cliente, String> {
     }
 
     @Override
+    protected Cliente createEmpty() {
+        Cliente c = new Cliente();
+        c.setEliminado(false); // default coherente
+        return c;
+    }
+
+    @Override
     protected void validar(Cliente entidad) throws ErrorServiceException {
         if (entidad == null) throw new ErrorServiceException("Cliente nulo");
         if (entidad.getDocumento() == null || entidad.getDocumento().isBlank())

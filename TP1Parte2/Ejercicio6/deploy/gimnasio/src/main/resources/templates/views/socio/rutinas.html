@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Cuotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/jquery.mb.YTPlayer.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        main h1 {
+            color: #212529 !important;
+        }
+        .estado-finalizada {
+            color: green;
+            font-weight: bold;
+        }
+        .estado-anulada {
+            color: red;
+            font-weight: bold;
+        }
+        .estado-en-proceso {
+            color: orange;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div class="site-wrap">
+
+    <!-- BARRA NAVEGACION -->
+    <nav th:replace="components/navbarSocio :: nav_bar_socio"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Mis Rutinas</h1>
+                <p class="lead text-secondary">Consulta tus rutinas</p>
+            </div>
+
+            <!-- Tabla de rutinas -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Fecha de Inicio</th>
+                                <th scope="col">Fecha de Finalización</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Profesor</th>
+                                <th scope="col">Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="rutina : ${rutinas}">
+                                <!-- Fecha de Inicio -->
+                                <td th:text="${#dates.format(rutina.fechaInicio, 'dd/MM/yyyy')}"></td>
+                                <!-- Fecha de Finalizacion -->
+                                <td th:text="${#dates.format(rutina.fechaFinalizacion, 'dd/MM/yyyy')}"></td>
+                                <!-- Estado -->
+                                <td>
+                                    <span th:switch="${rutina.estadoRutina.name()}">
+                                        <span th:case="'FINALIZADA'" class="estado-finalizada" th:text="${rutina.estadoRutina.name()}"></span>
+                                        <span th:case="'ANULADA'" class="estado-anulada" th:text="${rutina.estadoRutina.name()}"></span>
+                                        <span th:case="'EN_PROCESO'" class="estado-en-proceso" th:text="${rutina.estadoRutina.name()}"></span>
+                                    </span>
+                                </td>
+                                <!-- Profesor -->
+                                <td th:text="${rutina.empleado.getNombre()}"></td>
+                                <!-- Detalle -->
+                                <td>
+                                    <a th:href="@{/socio/detalle-rutina/{id}(id=${rutina.id})}"
+                                       class="btn btn-sm btn-success">Detalle</a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a th:href="@{/socio/dashboard}" class="btn btn-secondary">Volver</a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+</body>
+</html>

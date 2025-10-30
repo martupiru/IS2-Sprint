@@ -14,6 +14,8 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
         this.repository = repository;
     }
 
+    protected abstract T createEmpty();
+
     public T alta(T entidad) throws ErrorServiceException {
         try {
             validar(entidad);

@@ -15,6 +15,13 @@ public class VehiculoService extends BaseService<Vehiculo, String> {
     }
 
     @Override
+    protected Vehiculo createEmpty() {
+        Vehiculo v = new Vehiculo();
+        v.setEliminado(false);
+        return v;
+    }
+
+    @Override
     protected void validar(Vehiculo entidad) throws ErrorServiceException {
         if (entidad == null) throw new ErrorServiceException("Vehiculo nulo");
         if (entidad.getPatente() == null || entidad.getPatente().isBlank())

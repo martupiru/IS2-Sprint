@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Socios Eliminados</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container" style="padding-top: 50px;">
+    <h2>Socios Eliminados</h2>
+    <a th:href="@{/admin/socios}" class="btn btn-secondary mb-3">Volver</a>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="socio : ${sociosEliminados}">
+            <td th:text="${socio.numeroSocio}">1</td>
+            <td th:text="${socio.nombre}">Nombre</td>
+            <td th:text="${socio.apellido}">Apellido</td>
+            <td th:text="${socio.numeroDocumento}">12345678</td>
+            <td>
+                <a th:href="@{'/admin/socios/alta/' + ${socio.numeroSocio}}" class="btn btn-sm btn-success">
+                    Dar de Alta
+                </a>
+            </td>
+        </tr>
+
+        <!-- Si no hay socios eliminados -->
+        <tr th:if="${#lists.isEmpty(sociosEliminados)}">
+            <td colspan="5" class="text-center">No hay socios eliminados.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

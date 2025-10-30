@@ -36,6 +36,13 @@ public class UsuarioService extends BaseService<Usuario, String> implements User
     private PasswordEncoder passwordEncoder;
 
     @Override
+    protected Usuario createEmpty() {
+        Usuario u = new Usuario();
+        u.setEliminado(false);
+        return u;
+    }
+
+    @Override
     protected void validar(Usuario entidad) throws ErrorServiceException {
         if (entidad == null) throw new ErrorServiceException("Usuario nulo");
         if (entidad.getNombre() == null || entidad.getNombre().isBlank())

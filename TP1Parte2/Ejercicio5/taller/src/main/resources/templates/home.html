@@ -3,25 +3,88 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Sistema de Gestión de Taller Mecánico">
+    <meta name="author" content="TEAM Sprint">
+    <link rel="icon" th:href="@{/images/favicon.ico}">
 
-    <title th:text="${titulo}">Bienvenido</title>
+    <title th:text="${titulo}">Inicio | Taller Mecánico</title>
+
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('https://images.unsplash.com/photo-1571607388964-1e56c1f47a63?auto=format&fit=crop&w=1400&q=80') center/cover;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-weight: 700;
+            font-size: 2.8rem;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            color: #e0e0e0;
+        }
+
+        .features-section {
+            padding: 60px 0;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
 <header th:insert="~{fragments/menubody :: menu-principal}"></header>
 
+<!-- Sección principal -->
+<section class="hero-section">
+    <div class="container">
+        <h1>Bienvenido al Sistema de Gestión del Taller</h1>
+        <p>Administre fácilmente los vehículos, reparaciones, mecánicos y clientes de su taller.</p>
+        <a class="btn btn-primary btn-lg mt-3" th:href="@{/vehiculo/list}">Ver Vehículos</a>
+    </div>
+</section>
+
+<!-- Sección informativa -->
 <main role="main">
-
-    <h1 class="text-center mt-5">Bienvenido al Sistema de Gestión del Taller esto es de USER</h1>
-
+    <div class="container features-section">
+        <div class="row">
+            <div class="col-md-4 feature">
+                <i class="fas fa-car feature-icon"></i>
+                <h5>Gestión de Vehículos</h5>
+                <p>Registre y administre todos los autos que ingresan al taller, junto con su historial de arreglos.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-tools feature-icon"></i>
+                <h5>Reparaciones</h5>
+                <p>Controle las tareas de mantenimiento y asigne mecánicos a cada vehículo.</p>
+            </div>
+            <div class="col-md-4 feature">
+                <i class="fas fa-user-cog feature-icon"></i>
+                <h5>Usuarios y Seguridad</h5>
+                <p>Acceso protegido para administradores y usuarios, con autenticación y roles.</p>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
@@ -29,6 +92,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://kit.fontawesome.com/a2d04a0a3c.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
