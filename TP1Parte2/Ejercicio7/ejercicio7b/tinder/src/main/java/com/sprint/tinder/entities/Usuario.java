@@ -16,10 +16,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="usuario", uniqueConstraints = {(@UniqueConstraint(columnNames = {"mail"})})
+@Table(name="usuario", uniqueConstraints = {@UniqueConstraint(columnNames = {"mail"})})
 @Entity
 @Builder
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue
     @UuidGenerator
@@ -34,34 +34,50 @@ public class Usuario implements UserDetails{
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
-    @Temporal (TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date baja;
 
     @OneToOne
     private Foto foto;
 
     private boolean eliminado;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 
+    // Implementación de UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + (role != null ? role.name() : "USER")));
     }
+
+    @Override
+    public String getPassword() {
+        return clave;
+    }
+
+    @Override
+    public String getUsername() {
+        return mail;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     @Override
     public boolean isEnabled() {
-        return true;
+        return baja == null && !eliminado;
     }
-
 }

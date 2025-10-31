@@ -6,7 +6,6 @@ import com.sprint.tinder.entities.Zona;
 import com.sprint.tinder.errors.ErrorServicio;
 import com.sprint.tinder.repositories.UsuarioRepository;
 import com.sprint.tinder.repositories.ZonaRepository;
-import jakarta.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +36,7 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private ZonaRepository zonaRepositorio;
     @Autowired
-    private org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public void registrar(String nombre, String apellido, String mail, String clave, String clave2, MultipartFile archivo, String idZona) throws ErrorServicio { // hay que indicar que puede largar errores de ese tipo cpm throws ErrorServicio
