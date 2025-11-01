@@ -2,6 +2,7 @@ package com.sprint.contactos.controllers;
 
 import com.sprint.contactos.entities.ContactoCorreoElectronico;
 import com.sprint.contactos.entities.ContactoTelefonico;
+import com.sprint.contactos.entities.enums.TipoTelefono;
 import com.sprint.contactos.services.ContactoCorreoElectronicoService;
 import com.sprint.contactos.services.ContactoTelefonicoService;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class ContactoController {
         List<ContactoTelefonico> telefonos = telefonoService.findAll();
         model.addAttribute("correos", correos);
         model.addAttribute("telefonos", telefonos);
+        model.addAttribute("CELULAR", TipoTelefono.CELULAR);
+
         return "view/lContacto"; // plantilla general de listado
     }
 }

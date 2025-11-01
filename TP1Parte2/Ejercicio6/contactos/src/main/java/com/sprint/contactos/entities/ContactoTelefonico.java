@@ -14,5 +14,23 @@ public class ContactoTelefonico extends Contacto {
 
     @Enumerated(EnumType.STRING)
     private TipoTelefono tipoTelefono; // FIJO o CELULAR
+
+
+    public String getTelefonoLimpio() { //Limpia el numero de telefono
+        if (telefono == null) return "";
+        return telefono.replaceAll("[\\s-]", "");
+    }
+
+    public String getWhatsAppLink() { // Genera el link para Whatsapp Web
+        if (tipoTelefono == TipoTelefono.CELULAR) {
+            return "https://wa.me/" + getTelefonoLimpio();
+        }
+        return null;
+    }
+
+    public boolean isPuedeAbrirWhatsApp() {
+        return tipoTelefono == TipoTelefono.CELULAR;
+    }
+
 }
 
