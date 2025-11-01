@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titleEdit}">Editar Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/static">Sistema de Contactos</a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/home}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+            <h3 class="fw-bold text-primary mb-4" th:text="${titleEdit}">Editar Contacto</h3>
+
+            <form th:action="@{'/' + ${nameEntityLower} + '/actualizar'}" th:object="${item}" method="post">
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Tipo de Contacto:</label>
+                    <select class="form-select" th:field="*{tipoContacto}">
+                        <option value="PERSONAL">PERSONAL</option>
+                        <option value="LABORAL">LABORAL</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Observación:</label>
+                    <textarea class="form-control" th:field="*{observacion}" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Empresa asociada:</label>
+                    <select class="form-select" th:field="*{empresa.id}">
+                        <option th:each="e : ${empresas}" th:value="${e.id}" th:text="${e.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Persona asociada:</label>
+                    <select class="form-select" th:field="*{persona.id}">
+                        <option th:each="p : ${personas}" th:value="${p.id}" th:text="${p.nombre + ' ' + p.apellido}"></option>
+                    </select>
+                </div>
+
+                <div class="d-flex gap-3 mt-4">
+                    <button type="submit" class="btn btn-success" th:if="${!isDisabled}">Guardar</button>
+                    <a th:href="@{'/' + ${nameEntityLower} + '/cancelar'}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center mt-5 text-muted">
+    <p class="small mb-2">© 2025 Sistema de Contactos</p>
+</footer>
+
+</body>
+</html>
