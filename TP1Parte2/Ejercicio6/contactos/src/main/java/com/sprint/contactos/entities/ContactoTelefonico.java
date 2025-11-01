@@ -16,7 +16,7 @@ public class ContactoTelefonico extends Contacto {
     private TipoTelefono tipoTelefono; // FIJO o CELULAR
 
 
-    public String getTelefonoLimpio() { //Limpia
+    public String getTelefonoLimpio() { //Limpia el numero de telefono
         if (telefono == null) return "";
         return telefono.replaceAll("[\\s-]", "");
     }
