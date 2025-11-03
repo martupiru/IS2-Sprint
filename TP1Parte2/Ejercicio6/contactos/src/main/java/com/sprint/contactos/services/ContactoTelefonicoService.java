@@ -33,8 +33,9 @@ public class ContactoTelefonicoService extends BaseService<ContactoTelefonico, S
         }
 
         // Evitar duplicados
-        var existente = telefonoRepository.findByTelefono(entidad.getTelefono());
-        if (existente.isPresent() && !existente.get().getId().equals(entidad.getId())) {
+        if (telefonoRepository.findByTelefono(entidad.getTelefono())
+                .filter(t -> !t.getId().equals(entidad.getId()))
+                .isPresent()) {
             throw new ErrorServiceException("Ya existe un contacto con ese número de teléfono.");
         }
     }

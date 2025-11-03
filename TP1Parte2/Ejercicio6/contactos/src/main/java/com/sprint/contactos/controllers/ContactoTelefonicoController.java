@@ -16,6 +16,7 @@ public class ContactoTelefonicoController extends BaseController<ContactoTelefon
                 "Listado de Contactos Telefónicos",
                 "ContactoTelefónico"
         );
-        this.redirectList = "redirect:/contacto/listar";
+        this.nameEntityLower = "contactoTelefono";
+        this.redirectList = "redirect:/contactoTelefono/listar";
     }
 }

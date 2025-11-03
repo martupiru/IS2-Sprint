@@ -16,6 +16,7 @@ public class ContactoCorreoElectronicoController extends BaseController<Contacto
                 "Listado de Contactos por Correo",
                 "ContactoCorreo"
         );
+        this.nameEntityLower = "contactoCorreo";
         this.redirectList = "redirect:/contacto/listar";
     }
 }

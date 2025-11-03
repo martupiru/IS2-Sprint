@@ -33,9 +33,11 @@ public class EmpresaService extends BaseService<Empresa, String> {
         }
 
         // Evitar duplicados (case insensitive)
-        var existente = empresaRepository.findByNombreIgnoreCase(entidad.getNombre());
-        if (existente.isPresent() && !existente.get().getId().equals(entidad.getId())) {
+        if (empresaRepository.findByNombreIgnoreCase(entidad.getNombre())
+                .filter(e -> !e.getId().equals(entidad.getId()))
+                .isPresent()) {
             throw new ErrorServiceException("Ya existe una empresa con ese nombre.");
         }
+
     }
 }

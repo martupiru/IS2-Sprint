@@ -13,7 +13,7 @@ public class ContactoService extends BaseService<Contacto, String> {
 
     @Override
     protected Contacto createEmpty() {
-        return null; // No se crea directamente, se usan las subclases
+        return null;
     }
 
     @Override

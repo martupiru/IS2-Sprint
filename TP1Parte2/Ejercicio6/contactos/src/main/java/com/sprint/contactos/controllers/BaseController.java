@@ -180,6 +180,10 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID> {
             System.out.println("Error service: " + e.getMessage());
             e.printStackTrace();
             this.model.addAttribute("msgError", e.getMessage());
+            if (entidad.getId() == null) {
+                attributes.addFlashAttribute("msgError", e.getMessage());
+                return "redirect:/" + nameEntityLower + "/alta";
+            }
             return viewEdit;
         } catch(Exception e) {
             System.out.println("Error general: " + e.getMessage());

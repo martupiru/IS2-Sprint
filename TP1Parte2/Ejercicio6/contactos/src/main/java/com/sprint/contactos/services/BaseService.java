@@ -24,9 +24,11 @@ public abstract class BaseService<T extends BaseEntity<ID>, ID> {
             T guardado = repository.save(entidad);
             postAlta(guardado);
             return guardado;
-        }catch(Exception e) {
+        } catch (ErrorServiceException e) {
+            throw e;
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new ErrorServiceException(e.getMessage());
+            throw new ErrorServiceException("Error al guardar la entidad: " + e.getMessage());
         }
     }
 

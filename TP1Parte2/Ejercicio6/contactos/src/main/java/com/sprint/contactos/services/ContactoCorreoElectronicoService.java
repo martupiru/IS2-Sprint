@@ -35,9 +35,11 @@ public class ContactoCorreoElectronicoService extends BaseService<ContactoCorreo
         }
 
         // Evitar correos duplicados (ignorando mayúsculas)
-        var existente = correoRepository.findByEmailIgnoreCase(entidad.getEmail());
-        if (existente.isPresent() && !existente.get().getId().equals(entidad.getId())) {
+        if (correoRepository.findByEmailIgnoreCase(entidad.getEmail())
+                .filter(c -> !c.getId().equals(entidad.getId()))
+                .isPresent()) {
             throw new ErrorServiceException("Ya existe un contacto con ese correo electrónico.");
         }
+
     }
 }
