@@ -20,6 +20,7 @@ public class LocalidadService {
     @Autowired
     private DepartamentoRepository departamentoRepository;
 
+
     @Transactional
     public void crearLocalidad(String nombre, String codigoPostal, String idDepartamento) throws Exception {
         try {
@@ -148,6 +149,16 @@ public class LocalidadService {
             return departamento.get();
         } else {
             throw new Exception("Departamento no encontrado");
+        }
+    }
+
+    @Transactional
+    public Localidad buscarOCrearLocalidad(String nombre, String idDepartamento) throws Exception {
+        try {
+            return buscarLocalidadPorNombre(nombre);
+        } catch (Exception e) {
+            crearLocalidad(nombre, "0000", idDepartamento);
+            return buscarLocalidadPorNombre(nombre);
         }
     }
 }

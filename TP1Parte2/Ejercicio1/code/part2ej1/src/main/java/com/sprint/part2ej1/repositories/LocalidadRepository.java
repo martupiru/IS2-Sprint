@@ -27,4 +27,5 @@ public interface LocalidadRepository extends JpaRepository<Localidad, String> {
     Optional<Localidad> findByCodigoPostalAndEliminadoFalse(@Param("codigoPostal") String codigoPostal);
 
     Optional<Localidad> findByNombre(String nombre);
+
 }

@@ -24,10 +24,10 @@ public class Direccion {
     private String id;
 
 
-    @NotEmpty(message = "La latitud no puede estar vacía")
+    // opcional para migracion
     private String latitud;
 
-    @NotEmpty(message = "La longitud no puede estar vacía")
+    // opcional para migracion
     private String longitud;
 
     @NotEmpty(message = "El nombre no puede estar vacío")
@@ -39,19 +39,19 @@ public class Direccion {
     private String numeracion;
 
     @Size(max = 50, message = "El barrio no puede superar los 50 caracteres")
-    @NotEmpty(message = "El barrio no puede estar vacío")
+    // opcional para migracion
     private String barrio;
 
     @Size(max = 10, message = "La manzana/piso no puede superar los 10 caracteres")
-    @NotEmpty(message = "La manzana/piso no puede estar vacío")
+    // opcional para migracion
     private String manzanaPiso;
 
     @Size(max = 10, message = "La casa/departamento no puede superar los 10 caracteres")
-    @NotEmpty(message = "La casa/departamento no puede estar vacío")
+    // opcional para migracion
     private String casaDepartamento;
 
     @Size(max = 100, message = "La referencia no puede superar los 100 caracteres")
-    @NotEmpty(message = "La referencia no puede estar vacío")
+    // opcional para migracion
     private String referencia;
 
     @NotNull(message = "El campo eliminado no puede ser nulo")
