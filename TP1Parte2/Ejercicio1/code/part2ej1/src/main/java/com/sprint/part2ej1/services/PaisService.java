@@ -110,4 +110,14 @@ public class PaisService {
             throw new Exception("Error al buscar país: " + e.getMessage());
         }
     }
+
+    @Transactional
+    public Pais buscarOCrearPais(String nombre) throws Exception {
+        try {
+            return buscarPaisPorNombre(nombre);
+        } catch (Exception e) {
+            crearPais(nombre);
+            return buscarPaisPorNombre(nombre);
+        }
+    }
 }

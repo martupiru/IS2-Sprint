@@ -134,4 +134,16 @@ public class ProvinciaService {
             throw new Exception("País no encontrado");
         }
     }
+
+    @Transactional
+    public Provincia buscarOCrearProvincia(String nombre, String idPais) throws Exception {
+        try {
+            return buscarProvinciaPorNombre(nombre);
+        } catch (Exception e) {
+            crearProvincia(nombre, idPais);
+            return buscarProvinciaPorNombre(nombre);
+        }
+    }
+
+
 }

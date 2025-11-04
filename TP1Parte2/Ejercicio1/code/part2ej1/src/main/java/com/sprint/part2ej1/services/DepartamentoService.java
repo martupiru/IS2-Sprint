@@ -133,5 +133,15 @@ public class DepartamentoService {
             throw new Exception("Provincia no encontrada");
         }
     }
+
+    @Transactional
+    public Departamento buscarOCrearDepartamento(String nombre, String idProvincia) throws Exception {
+        try {
+            return buscarDepartamentoPorNombre(nombre);
+        } catch (Exception e) {
+            crearDepartamento(nombre, idProvincia);
+            return buscarDepartamentoPorNombre(nombre);
+        }
+    }
 }
 
