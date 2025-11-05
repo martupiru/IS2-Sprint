@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${persona.id} != null ? 'Editar Persona' : 'Nueva Persona'">Persona</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/personas}" class="current">Personas</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1 th:text="${persona.id} != null ? 'Editar Persona' : 'Nueva Persona'">Formulario Persona</h1>
+
+            <form th:action="@{/personas}" th:object="${persona}" method="post" style="max-width: 600px;">
+                <input type="hidden" th:field="*{id}" />
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Nombre:</strong></label>
+                    <input type="text" th:field="*{nombre}" required style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Apellido:</strong></label>
+                    <input type="text" th:field="*{apellido}" required style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>DNI:</strong></label>
+                    <input type="number" th:field="*{dni}" required min="1000000" max="99999999" style="width: 100%; padding: 8px;" />
+                </div>
+
+                <h2 style="margin-top: 30px;">Domicilio</h2>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Calle:</strong></label>
+                    <input type="text" th:field="*{domicilio.calle}" style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Número:</strong></label>
+                    <input type="number" th:field="*{domicilio.numero}" min="1" style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Localidad:</strong></label>
+                    <input type="text" th:field="*{domicilio.localidad.denominacion}" style="width: 100%; padding: 8px;"
+                           placeholder="Ej: Las Heras, Mendoza" />
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button type="submit" class="buy_now_button" style="padding: 10px 20px;">Guardar</button>
+                    <a th:href="@{/personas}" class="detail_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

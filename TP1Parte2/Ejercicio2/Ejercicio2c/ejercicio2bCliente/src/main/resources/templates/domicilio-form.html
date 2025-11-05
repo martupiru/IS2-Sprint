@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Domicilio</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/domicilios}" class="current">Domicilios</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1>Nuevo Domicilio</h1>
+
+            <form th:action="@{/domicilios}" th:object="${domicilio}" method="post" style="max-width: 500px;">
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Calle:</strong></label>
+                    <input type="text" th:field="*{calle}" required style="width: 100%; padding: 8px;"
+                           placeholder="Ej: San Martín" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Número:</strong></label>
+                    <input type="number" th:field="*{numero}" required min="1" style="width: 100%; padding: 8px;"
+                           placeholder="Ej: 1234" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Localidad:</strong></label>
+                    <select th:field="*{localidad.denominacion}" required style="width: 100%; padding: 8px;">
+                        <option value="">Seleccione una localidad</option>
+                        <option th:each="loc : ${localidades}"
+                                th:value="${loc.denominacion}"
+                                th:text="${loc.denominacion}">
+                        </option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="buy_now_button" style="padding: 10px 20px;">Guardar</button>
+                    <a th:href="@{/domicilios}" class="detail_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

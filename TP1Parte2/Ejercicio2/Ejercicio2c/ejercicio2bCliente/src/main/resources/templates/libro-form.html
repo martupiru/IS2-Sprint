@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Libro</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/libros}" class="current">Libros</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1>Agregar Nuevo Libro</h1>
+
+            <div th:if="${error}" style="padding: 15px; background-color: #f8d7da; color: #721c24; border-radius: 5px; margin-bottom: 20px;">
+                <strong>Error:</strong> <span th:text="${error}"></span>
+            </div>
+
+            <div th:if="${success}" style="padding: 15px; background-color: #d4edda; color: #155724; border-radius: 5px; margin-bottom: 20px;">
+                <strong>Éxito:</strong> <span th:text="${success}"></span>
+            </div>
+
+            <form th:action="@{/libros}" th:object="${libro}" method="post"
+                  enctype="multipart/form-data" style="max-width: 600px;">
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Título:</strong></label>
+                    <input type="text" th:field="*{titulo}" required style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Género:</strong></label>
+                    <input type="text" th:field="*{genero}" required style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Año de Publicación:</strong></label>
+                    <input type="number" th:field="*{fecha}" required min="1000" max="2100" style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Páginas:</strong></label>
+                    <input type="number" th:field="*{paginas}" required min="1" style="width: 100%; padding: 8px;" />
+                </div>
+
+                <div style="margin-bottom: 15px; padding: 15px; background-color: #f0f0f0; border-radius: 5px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>📄 Archivo PDF del Libro:</strong></label>
+                    <input type="file" name="pdfFile" accept=".pdf" style="width: 100%; padding: 8px;" />
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Seleccione el archivo PDF del libro (opcional). Se guardará en C://biblioteca/
+                    </small>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Seleccionar Autores:</strong></label>
+                    <select name="autoresIds" multiple size="5" style="width: 100%; padding: 8px;">
+                        <option th:each="autor : ${autores}"
+                                th:value="${autor.id}"
+                                th:text="${autor.nombre + ' ' + autor.apellido}">
+                        </option>
+                    </select>
+                    <small style="color: #666;">Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples autores</small>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="buy_now_button" style="padding: 10px 20px;">💾 Guardar Libro</button>
+                    <a th:href="@{/libros}" class="detail_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

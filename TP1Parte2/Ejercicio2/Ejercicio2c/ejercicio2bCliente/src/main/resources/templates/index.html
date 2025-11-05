@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Book Store - Home</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}" class="current">Home</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+            <li><a th:href="@{/autores}">Autores</a></li>
+            <li><a th:href="@{/libros}">Libros</a></li>
+            <li><a th:href="@{/localidades}">Localidades</a></li>
+            <li><a th:href="@{/domicilios}">Domicilios</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_header">
+        <div id="templatemo_special_offers">
+            <p>
+                <span>25%</span> descuentos en
+                compras mayores a $80
+            </p>
+            <a th:href="@{/libros}" style="margin-left: 50px;">Ver más...</a>
+        </div>
+
+        <div id="templatemo_new_books">
+            <ul>
+                <li><a th:href="@{/libros}">Nuevos Lanzamientos</a></li>
+                <li><a th:href="@{/autores}">Autores Destacados</a></li>
+                <li><a th:href="@{/personas}">Gestión de Personas</a></li>
+            </ul>
+            <a th:href="@{/libros}" style="margin-left: 50px;">Explorar catálogo...</a>
+        </div>
+    </div>
+
+    <div id="templatemo_content">
+
+        <div id="templatemo_content_left">
+            <div class="templatemo_content_left_section">
+                <h1>Categorías</h1>
+                <ul>
+                    <li><a th:href="@{/libros}">Todos los Libros</a></li>
+                    <li><a th:href="@{/autores}">Autores</a></li>
+                    <li><a th:href="@{/personas}">Personas</a></li>
+                    <li><a th:href="@{/localidades}">Localidades</a></li>
+                    <li><a th:href="@{/domicilios}">Domicilios</a></li>
+                </ul>
+            </div>
+            <div class="templatemo_content_left_section">
+                <h1>Gestión</h1>
+                <ul>
+                    <li><a th:href="@{/libros/nuevo}">Agregar Libro</a></li>
+                    <li><a th:href="@{/autores/nuevo}">Agregar Autor</a></li>
+                    <li><a th:href="@{/personas/nueva}">Agregar Persona</a></li>
+                    <li><a th:href="@{/localidades/nueva}">Agregar Localidad</a></li>
+                    <li><a th:href="@{/domicilios/nuevo}">Agregar Domicilio</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="templatemo_content_right">
+            <div class="templatemo_product_box">
+                <h1>Gestión de Libros  <span>(Sistema Completo)</span></h1>
+                <img src="images/templatemo_image_01.jpg" alt="image" />
+                <div class="product_info">
+                    <p>Administrá tu colección de libros, autores y personas de forma sencilla...</p>
+                    <div class="buy_now_button"><a th:href="@{/libros}">Ver Libros</a></div>
+                    <div class="detail_button"><a th:href="@{/autores}">Ver Autores</a></div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+
+            <div class="cleaner_with_width">&nbsp;</div>
+
+            <div class="templatemo_product_box">
+                <h1>Gestión de Personas  <span>(Base de Datos)</span></h1>
+                <img src="images/templatemo_image_02.jpg" alt="image" />
+                <div class="product_info">
+                    <p>Administrá personas con sus domicilios y libros asociados.</p>
+                    <div class="buy_now_button"><a th:href="@{/personas}">Ver Personas</a></div>
+                    <div class="detail_button"><a th:href="@{/personas/nueva}">Nueva Persona</a></div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+
+            <div class="cleaner_with_height">&nbsp;</div>
+
+            <div class="templatemo_product_box">
+                <h1>Localidades <span>(Ubicaciones)</span></h1>
+                <img src="images/templatemo_image_03.jpg" alt="image" />
+                <div class="product_info">
+                    <p>Gestioná las localidades disponibles en el sistema.</p>
+                    <div class="buy_now_button"><a th:href="@{/localidades}">Ver Localidades</a></div>
+                    <div class="detail_button"><a th:href="@{/localidades/nueva}">Nueva Localidad</a></div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+
+            <div class="cleaner_with_width">&nbsp;</div>
+
+            <div class="templatemo_product_box">
+                <h1>Domicilios  <span>(Direcciones)</span></h1>
+                <img src="images/templatemo_image_04.jpg" alt="image" />
+                <div class="product_info">
+                    <p>Administrá los domicilios del sistema.</p>
+                    <div class="buy_now_button"><a th:href="@{/domicilios}">Ver Domicilios</a></div>
+                    <div class="detail_button"><a th:href="@{/domicilios/nuevo}">Nuevo Domicilio</a></div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+
+            <div class="cleaner_with_height">&nbsp;</div>
+
+            <a th:href="@{/libros}"><img src="images/templatemo_ads.jpg" alt="ads" /></a>
+        </div>
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    </div>
+
+    <div id="templatemo_footer">
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/libros}">Libros</a> |
+        <a th:href="@{/autores}">Autores</a> |
+        <a th:href="@{/personas}">Personas</a> |
+        <a th:href="@{/localidades}">Localidades</a> |
+        <a th:href="@{/domicilios}">Domicilios</a><br />
+        Copyright © 2025 <a href="#"><strong>Tu Sistema de Gestión</strong></a>
+    </div>
+</div>
+</body>
+</html>

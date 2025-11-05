@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Localidades - Book Store</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+            <li><a th:href="@{/localidades}" class="current">Localidades</a></li>
+            <li><a th:href="@{/domicilios}">Domicilios</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_header">
+        <h1 style="padding: 30px;">Listado de Localidades</h1>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_left">
+            <div class="templatemo_content_left_section">
+                <h1>Menú</h1>
+                <ul>
+                    <li><a th:href="@{/localidades}">Localidades</a></li>
+                    <li><a th:href="@{/domicilios}">Domicilios</a></li>
+                    <li><a th:href="@{/personas}">Personas</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="templatemo_content_right">
+            <div style="margin-bottom: 20px;">
+                <a th:href="@{/localidades/nueva}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none;">
+                    Crear Nueva Localidad
+                </a>
+            </div>
+
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Denominación</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="localidad : ${localidades}">
+                    <td th:text="${localidad.id}"></td>
+                    <td th:text="${localidad.denominacion}"></td>
+                    <td>
+                        <a th:href="@{'/localidades/' + ${localidad.id}}">Ver</a> |
+                        <a th:href="@{'/localidades/editar/' + ${localidad.id}}">Editar</a> |
+                        <a th:href="@{'/localidades/eliminar/' + ${localidad.id}}"
+                           onclick="return confirm('¿Seguro que querés eliminar esta localidad?');">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    </div>
+
+    <div id="templatemo_footer">
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/localidades}">Localidades</a> |
+        <a th:href="@{/domicilios}">Domicilios</a>
+        <br/>
+        Copyright © 2025
+    </div>
+</div>
+</body>
+</html>

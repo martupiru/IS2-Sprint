@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Libro</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/libros}" class="current">Libros</a></li>
+            <li><a th:href="@{/autores}">Autores</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1 th:text="${libro.titulo}">Título del Libro</h1>
+
+            <div style="margin: 20px 0; background-color: #c4abad; padding: 20px; border-radius: 5px;">
+                <p><strong>Género:</strong> <span th:text="${libro.genero}"></span></p>
+                <p><strong>Año de Publicación:</strong> <span th:text="${libro.fecha}"></span></p>
+                <p><strong>Páginas:</strong> <span th:text="${libro.paginas}"></span></p>
+
+                <div th:if="${pdfUrl != null}" style="margin-top: 15px; padding: 15px; background-color: #e8f5e9; border-left: 4px solid #4caf50;">
+                    <p style="margin: 0; color: #000000">
+                        <strong>📄 PDF Disponible ✅</strong>
+                    </p>
+                    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">
+                        Este libro tiene un archivo PDF
+                    </p>
+                </div>
+
+                <div th:if="${pdfUrl == null}" style="margin-top: 15px; padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107;">
+                    <p style="margin: 0; color: #856404;">
+                        <strong>⚠️ Sin PDF 🤯</strong>
+                    </p>
+                    <p style="margin: 5px 0 0 0; color: #856404; font-size: 14px;">
+                        Este libro no tiene un archivo PDF asociado
+                    </p>
+                </div>
+            </div>
+
+            <div th:if="${libro.autores != null && !libro.autores.isEmpty()}">
+                <h2>Autores</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li th:each="autor : ${libro.autores}" style="margin-bottom: 10px;">
+                        <strong th:text="${autor.nombre + ' ' + autor.apellido}"></strong>
+                        <p th:if="${autor.biografia != null && !autor.biografia.isEmpty()}"
+                           th:text="${autor.biografia}" style="color: #666; margin-left: 20px;"></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <a th:href="@{/libros}" class="detail_button" style="padding: 10px 20px; text-decoration: none;">
+                    ← Volver al catálogo
+                </a>
+                <a th:if="${pdfUrl != null}"
+                   th:href="${pdfUrl}"
+                   target="_blank"
+                   class="buy_now_button"
+                   style="padding: 10px 20px; text-decoration: none; margin-left: 10px; background-color: #4caf50;">
+                    📖 Abrir PDF
+                </a>
+                <a th:href="@{'/libros/editar/' + ${libro.id}}"
+                   class="buy_now_button"
+                   style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                    ✏️ Editar Libro
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
