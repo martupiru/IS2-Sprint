@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Listado de Contactos</title>
@@ -51,18 +54,22 @@
                 <tr>
                     <th>ID</th>
                     <th>Email</th>
+                    <th>Persona</th>
+                    <th>Empresa</th>
                     <th>Tipo de Contacto</th>
-                    <th>Observación</th>
                     <th>Acciones</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="c : ${correos}">
                     <td th:text="${c.id}"></td>
                     <td th:text="${c.email}"></td>
+                    <td th:text="${c.persona != null ? c.persona.nombre + ' ' + c.persona.apellido : '—'}"></td>
+                    <td th:text="${c.empresa != null ? c.empresa.nombre : '—'}"></td>
                     <td th:text="${c.tipoContacto}"></td>
-                    <td th:text="${c.observacion}"></td>
                     <td>
+                        <a th:href="@{'/contactoCorreo/consultar/' + ${c.id}}" class="btn btn-sm btn-outline-info">Ver</a>
                         <a th:href="@{'/contactoCorreo/modificar/' + ${c.id}}" class="btn btn-sm btn-outline-warning">Editar</a>
                         <a th:href="@{'/contactoCorreo/baja/' + ${c.id}}" class="btn btn-sm btn-outline-danger">Eliminar</a>
                     </td>
@@ -83,25 +90,27 @@
                 <tr>
                     <th>ID</th>
                     <th>Teléfono</th>
+                    <th>Persona</th>
+                    <th>Empresa</th>
                     <th>Tipo de Teléfono</th>
                     <th>Tipo de Contacto</th>
-                    <th>Observación</th>
                     <th>Acciones</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="t : ${telefonos}">
                     <td th:text="${t.id}"></td>
                     <td th:text="${t.telefono}"></td>
+                    <td th:text="${t.persona != null ? t.persona.nombre + ' ' + t.persona.apellido : '—'}"></td>
+                    <td th:text="${t.empresa != null ? t.empresa.nombre : '—'}"></td>
                     <td>
                         <span th:text="${t.tipoTelefono}"></span>
-                        <!-- Icono de WhatsApp solo si es CELULAR -->
                         <i th:if="${t.tipoTelefono.name() == 'CELULAR'}"
                            class="fab fa-whatsapp text-success ms-1"
                            title="Disponible en WhatsApp"></i>
                     </td>
                     <td th:text="${t.tipoContacto}"></td>
-                    <td th:text="${t.observacion}"></td>
                     <td>
                         <a th:if="${t.tipoTelefono.name() == 'CELULAR'}"
                            th:href="${'https://wa.me/' + #strings.replace(#strings.replace(t.telefono, ' ', ''), '-', '')}"
@@ -110,7 +119,7 @@
                            title="Abrir en WhatsApp Web">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-
+                        <a th:href="@{'/contactoTelefono/consultar/' + ${t.id}}" class="btn btn-sm btn-outline-info">Ver</a>
                         <a th:href="@{'/contactoTelefono/modificar/' + ${t.id}}" class="btn btn-sm btn-outline-warning">Editar</a>
                         <a th:href="@{'/contactoTelefono/baja/' + ${t.id}}" class="btn btn-sm btn-outline-danger">Eliminar</a>
                     </td>

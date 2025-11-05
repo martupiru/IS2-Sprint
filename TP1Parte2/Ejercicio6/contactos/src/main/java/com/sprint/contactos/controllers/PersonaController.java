@@ -17,4 +17,11 @@ public class PersonaController extends BaseController<Persona, String> {
                 "Persona"
         );
     }
+
+    @Override
+    protected void preAlta() {
+        // Se asegura de que siempre se use una nueva instancia vacía
+        model.addAttribute("item", new Persona());
+    }
+
 }

@@ -9,10 +9,10 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/static">Sistema de Contactos</a>
+        <a class="navbar-brand fw-bold" href="/">Sistema de Contactos</a>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" th:href="@{/home}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -25,7 +25,7 @@
             <h3 class="fw-bold text-primary mb-4" th:text="${titleEdit}">Editar Persona</h3>
 
             <form th:action="@{'/' + ${nameEntityLower} + '/actualizar'}" th:object="${item}" method="post">
-                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:if="*{id != null}" th:field="*{id}" />
 
                 <div class="row g-3">
                     <div class="col-md-6">
@@ -37,13 +37,6 @@
                         <label class="form-label fw-semibold">Apellido:</label>
                         <input type="text" th:field="*{apellido}" class="form-control" th:disabled="${isDisabled}" />
                     </div>
-                </div>
-
-                <div class="form-check mt-4">
-                    <input class="form-check-input" type="checkbox" th:field="*{eliminado}" id="eliminadoCheck" />
-                    <label class="form-check-label" for="eliminadoCheck">
-                        Marcado como eliminado
-                    </label>
                 </div>
 
                 <div class="d-flex gap-3 mt-4">

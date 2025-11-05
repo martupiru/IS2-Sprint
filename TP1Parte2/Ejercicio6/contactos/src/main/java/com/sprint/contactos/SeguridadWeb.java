@@ -1,5 +1,6 @@
 package com.sprint.contactos;
 
+import com.sprint.contactos.security.CustomAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -20,10 +21,11 @@ public class SeguridadWeb {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, CustomAuthenticationProvider customAuthenticationProvider) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/register", "/css/**", "/js/**", "/img/**", "/static/**", "/bootstrap/**").permitAll()
+                .authenticationProvider(customAuthenticationProvider)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/register", "/css/**", "/js/**", "/img/**", "/bootstrap/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -34,14 +36,13 @@ public class SeguridadWeb {
                         .defaultSuccessUrl("/", true)
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout") // ✅ logout por POST (seguro y sin warnings)
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
                         .permitAll()
                 )
-                .csrf(csrf -> csrf.disable()); // ⚠️ mantener desactivado solo para fines académicos
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
+
 }

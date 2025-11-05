@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Sport Gym - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .card-body input.form-control {
+            color: #212529 !important;
+            background-color: #fff !important;
+        }
+
+        .card-body input.form-control::placeholder {
+            color: #6c757d !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <!-- NAVBAR -->
+    <nav th:replace="components/navbar :: nav_bar"></nav>
+
+    <!-- LOGIN -->
+    <div class="site-section" id="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-body p-4">
+                            <h2 class="text-center mb-4 text-dark">Iniciar Sesión</h2>
+                            <div th:if="${error}" class="alert alert-danger text-center">
+                                <p th:text="${error}"></p>
+                            </div>
+                            <!-- FORMULARIO -->
+                            <form th:action="@{/logincheck}" method="post">
+                                <div class="mb-3">
+                                    <label for="nombreUsuario" class="form-label">Nombre de usuario</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombreUsuario"
+                                           name="nombreUsuario"
+                                           required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           id="password"
+                                           name="password"
+                                           required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+
+                                <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+                                <div th:if="${msg}" class="alert alert-success mt-3" th:text="${msg}"></div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>

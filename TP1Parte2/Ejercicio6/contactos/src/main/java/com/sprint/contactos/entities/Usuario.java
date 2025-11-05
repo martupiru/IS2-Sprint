@@ -1,9 +1,7 @@
 package com.sprint.contactos.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.sprint.contactos.entities.enums.Rol;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +9,9 @@ import lombok.Setter;
 @Table(name = "usuario")
 @Getter @Setter
 public class Usuario extends BaseEntity<String> {
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     private String cuenta;
     private String clave;

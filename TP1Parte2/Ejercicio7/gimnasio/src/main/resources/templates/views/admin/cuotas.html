@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Historial de Cuotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        main h1 {
+            color: #212529 !important;
+        }
+        .estado-activa {
+            color: green;
+            font-weight: bold;
+        }
+        .btn-cambiar-cuota {
+            color: #fff;
+            background-color: #038500;
+            border-color: #28c21f;
+        }
+        .btn-cambiar-cuota:hover {
+            color: #fff;
+            background-color: #28c21f;
+            border-color: #1fa815;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <!-- Navbar -->
+    <nav th:replace="components/navbarAdmin :: nav_bar_adm"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Historial de Cuotas</h1>
+                <p class="lead text-secondary">Visualiza todos los valores de cuotas y cambia el valor actual.</p>
+            </div>
+
+            <!-- Mensajes -->
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+            <!-- Botón para cambiar valor de cuota -->
+            <div class="mb-4">
+                <a th:href="@{/admin/cuotas/cambiar}" class="btn btn-cambiar-cuota">Cambiar Valor de Cuota</a>
+            </div>
+
+            <!-- Tabla de historial de cuotas -->
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Fecha Desde</th>
+                        <th>Fecha Hasta</th>
+                        <th>Valor</th>
+                        <th>Estado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Mostrar todas las cuotas -->
+                    <tr th:each="valor : ${historialCuotas}"
+                        th:classappend="${!valor.eliminado} ? 'estado-activa'">
+                        <td th:text="${#dates.format(valor.fechaDesde,'dd/MM/yyyy')}"></td>
+                        <td th:text="${valor.fechaHasta != null ? #dates.format(valor.fechaHasta,'dd/MM/yyyy') : '-'}"></td>
+                        <td th:text="${valor.valorCuota}"></td>
+                        <td th:text="${valor.eliminado ? 'Inactiva' : 'Activa'}"></td>
+                    </tr>
+
+                    <!-- Mensaje si no hay cuotas -->
+                    <tr th:if="${#lists.isEmpty(historialCuotas)}">
+                        <td colspan="4" class="text-center fw-bold">No hay cuotas registradas.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a th:href="@{/admin/cuotas/menu}" class="btn btn-secondary">Volver al Menu</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>

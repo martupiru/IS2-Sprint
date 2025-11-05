@@ -1,6 +1,7 @@
 package com.sprint.contactos.services;
 
 import com.sprint.contactos.entities.Usuario;
+import com.sprint.contactos.entities.enums.Rol;
 import com.sprint.contactos.repositories.BaseRepository;
 import com.sprint.contactos.repositories.UsuarioRepository;
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +37,7 @@ public class UsuarioService extends BaseService<Usuario, String> implements User
     @Override
     protected Usuario createEmpty() {
         Usuario u = new Usuario();
+        u.setRol(Rol.USER);
         u.setEliminado(false);
         return u;
     }
@@ -64,6 +66,11 @@ public class UsuarioService extends BaseService<Usuario, String> implements User
         usuario.setCuenta(cuenta);
         usuario.setClave(passwordEncoder.encode(clave));
         usuario.setEliminado(false);
+        if (usuarioRepository.count() == 0) {
+            usuario.setRol(Rol.ADMIN);
+        } else {
+            usuario.setRol(Rol.USER);
+        }
         validar(usuario);
         usuarioRepository.save(usuario);
     }
@@ -74,12 +81,26 @@ public class UsuarioService extends BaseService<Usuario, String> implements User
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
         List<GrantedAuthority> permisos = new ArrayList<>();
-        permisos.add(new SimpleGrantedAuthority("ROLE_USER"));
+        permisos.add(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()));
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         session.setAttribute("usuariosession", usuario);
 
         return new User(usuario.getCuenta(), usuario.getClave(), permisos);
+    }
+
+    //Si decido cambiar roles del usuario
+    public void cambiarRol(String id) throws ErrorServiceException {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ErrorServiceException("Usuario no encontrado"));
+
+        if (usuario.getRol() == Rol.USER) {
+            usuario.setRol(Rol.ADMIN);
+        } else {
+            usuario.setRol(Rol.USER);
+        }
+
+        usuarioRepository.save(usuario);
     }
 }

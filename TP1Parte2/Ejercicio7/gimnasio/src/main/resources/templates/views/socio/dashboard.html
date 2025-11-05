@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>DASHBOARD SOCIO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <!-- Navbar Socio -->
+    <nav th:replace="components/navbarSocio :: nav_bar_socio"></nav>
+
+    <!-- Main -->
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Bienvenido, Socio</h1>
+                <p class="lead text-secondary">Gestiona tus rutinas, pagos y seguimiento de deuda</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Card Rutinas -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="icon-book display-4 text-primary mb-3"></i>
+                            <h5 class="card-title text-dark">Mis Rutinas</h5>
+                            <p class="card-text text-muted">Consulta y sigue tus rutinas asignadas.</p>
+                            <a th:href="@{/socio/rutinas}" class="btn btn-outline-primary btn-sm">Ir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Cuotas -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="icon-credit-card display-4 text-success mb-3"></i>
+                            <h5 class="card-title text-dark">Mis Cuotas</h5>
+                            <p class="card-text text-muted">Paga tus cuotas y revisa historial de pagos.</p>
+                            <a th:href="@{/socio/cuotas}" class="btn btn-outline-success btn-sm">Ir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Deuda -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <i class="icon-bar-chart display-4 text-danger mb-3"></i>
+                            <h5 class="card-title text-dark">Mi Deuda</h5>
+                            <p class="card-text text-muted">Visualiza el total de deuda y meses pendientes.</p>
+                            <a th:href="@{/socio/deuda}" class="btn btn-outline-danger btn-sm">Ir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>

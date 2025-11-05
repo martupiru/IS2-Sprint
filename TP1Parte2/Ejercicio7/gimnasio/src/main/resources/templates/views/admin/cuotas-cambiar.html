@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Cambiar valor de Cuotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        main h2 {
+            color: #212529 !important;
+        }
+        .actualizar-cuota {
+            color: #fff;
+            background-color: #038500;
+            border-color: #28c21f;
+        }
+        .btn-actualizar-cuota:hover {
+            color: #fff;
+            background-color: #28c21f;
+            border-color: #1fa815;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <!-- Navbar -->
+    <nav th:replace="components/navbarAdmin :: nav_bar_adm"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <h2>Cambiar Valor de la Cuota</h2>
+
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <form th:action="@{/admin/cuotas-cambiar}" method="post">
+            <div class="mb-3">
+                <label for="valorCuota" class="form-label">Nuevo Valor de la Cuota</label>
+                <input type="number" step="0.01" class="form-control" id="valorCuota" name="valorCuota" required style="color:#212529 !important;">
+            </div>
+
+            <button type="submit" class="btn btn-actualizar-cuota">Actualizar Valor</button>
+            <a th:href="@{/admin/cuotas/ver}" class="btn btn-secondary">Volver al Historial</a>
+            <a th:href="@{/admin/cuotas/menu}" class="btn btn-secondary">Volver al Menu</a>
+        </form>
+    </main>
+    <!-- Footer -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+<script th:src="@{/js/include-components.js}"></script>
+</body>
+</html>

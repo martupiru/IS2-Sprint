@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Listado de Empresas</title>
@@ -28,8 +31,15 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="fw-bold text-primary">Listado de Empresas</h2>
-        <a th:href="@{/empresa/alta}" class="btn btn-outline-primary">+ Nueva Empresa</a>
+
+        <!-- Solo visible para administradores -->
+        <a th:href="@{/empresa/alta}"
+           class="btn btn-outline-primary"
+           sec:authorize="hasRole('ROLE_ADMIN')">
+            + Nueva Empresa
+        </a>
     </div>
+
 
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body">

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mis Cuotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fuentes / Iconos -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/jquery.mb.YTPlayer.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        main h1 {
+            color: #212529 !important;
+        }
+        .estado-finalizada {
+            color: green;
+            font-weight: bold;
+        }
+        .estado-pendiente {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div class="site-wrap">
+
+    <!-- BARRA NAVEGACION -->
+    <nav th:replace="components/navbarSocio :: nav_bar_socio"></nav>
+
+    <main style="padding-top: 120px; background-color:#f8f9fa; min-height:100vh;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">Detalle de Rutina</h1>
+                <p class="lead text-secondary">
+                    Actividades de la rutina del
+                    <span th:text="${#dates.format(rutina.fechaInicio, 'dd/MM/yyyy')}"></span>
+                    al
+                    <span th:text="${#dates.format(rutina.fechaFinalizacion, 'dd/MM/yyyy')}"></span>
+                </p>
+            </div>
+
+            <!-- Tabla de detalles -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Actividad</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="detalle : ${detalles}">
+                                <td th:text="${#dates.format(detalle.fecha, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${detalle.actividad}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <a th:href="@{/socio/rutinas}" class="btn btn-secondary">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- FOOTER -->
+    <div th:replace="components/footerDash :: footer_dash"></div>
+
+</div>
+
+<script>
+    function mostrarMensajeLogout(event) {
+        event.preventDefault();
+        alert("✅ Sesión cerrada con éxito.");
+        window.location.href = "/inicio";
+    }
+</script>
+
+</body>
+</html>

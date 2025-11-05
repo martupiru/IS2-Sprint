@@ -161,7 +161,7 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID> {
 
             System.out.println("Entidad a guardar: " + entidad);
             System.out.println("ID es nulo? " + (entidad.getId() == null));
-
+            System.out.println(">>> Valor real de ID: '" + entidad.getId() + "'");
             if(entidad.getId() == null) {
                 System.out.println("Ejecutando alta...");
                 service.alta(entidad);

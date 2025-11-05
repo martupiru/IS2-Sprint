@@ -1,14 +1,22 @@
 package com.sprint.contactos.services;
 
 import com.sprint.contactos.entities.Persona;
+import com.sprint.contactos.repositories.ContactoCorreoElectronicoRepository;
+import com.sprint.contactos.repositories.ContactoTelefonicoRepository;
 import com.sprint.contactos.repositories.PersonaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PersonaService extends BaseService<Persona, String> {
 
-    public PersonaService(PersonaRepository repository) {
+    private final ContactoCorreoElectronicoRepository correoRepo;
+    private final ContactoTelefonicoRepository telefonoRepo;
+
+    public PersonaService(PersonaRepository repository, ContactoCorreoElectronicoRepository correoRepo,
+                          ContactoTelefonicoRepository telefonoRepo) {
         super(repository);
+        this.correoRepo = correoRepo;
+        this.telefonoRepo = telefonoRepo;
     }
 
     @Override
@@ -25,6 +33,30 @@ public class PersonaService extends BaseService<Persona, String> {
         }
         if (entidad.getApellido() == null || entidad.getApellido().isBlank()) {
             throw new ErrorServiceException("El apellido es obligatorio");
+        }
+    }
+
+    @Override
+    protected void preBaja(String id) throws ErrorServiceException {
+        try {
+            // Marcar los correos asociados como eliminados
+            correoRepo.findAll().stream()
+                    .filter(c -> c.getPersona() != null && id.equals(c.getPersona().getId()))
+                    .forEach(c -> {
+                        c.setEliminado(true);
+                        correoRepo.save(c);
+                    });
+
+            // Marcar los teléfonos asociados como eliminados
+            telefonoRepo.findAll().stream()
+                    .filter(t -> t.getPersona() != null && id.equals(t.getPersona().getId()))
+                    .forEach(t -> {
+                        t.setEliminado(true);
+                        telefonoRepo.save(t);
+                    });
+
+        } catch (Exception e) {
+            throw new ErrorServiceException("Error al eliminar los contactos de la persona: " + e.getMessage());
         }
     }
 }
