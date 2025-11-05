@@ -4,80 +4,82 @@
     <meta charset="UTF-8">
     <title th:text="${tituloForm}">Formulario de Artículo</title>
 
-    <!-- slider stylesheet -->
+    <!-- Owl Carousel -->
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
-    <!-- font awesome style -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- bootstrap core css -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
 
-    <!-- fonts style -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Estilos del sitio -->
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <!-- responsive style -->
     <link th:href="@{/css/responsive.css}" rel="stylesheet" />
 </head>
 <body>
 
-<header>
-    <h1 th:text="${tituloForm}">Formulario de Artículo</h1>
-    <a href="/articulos">⬅ Volver a la lista</a>
-</header>
-
-<div class="form-container">
-    <form th:action="@{${accionForm}}" th:object="${entidad}" method="post" enctype="multipart/form-data">
-
-    <!-- ID oculto -->
-        <input type="hidden" th:field="*{id}" />
-
-        <!-- Nombre -->
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" th:field="*{nombre}" id="nombre" required />
+<!-- Encabezado -->
+<section class="about_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 th:text="${tituloForm}">Formulario de Artículo</h2>
+        </div>
+        <div class="text-center mb-4">
+            <a href="/articulos" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Volver a la lista
+            </a>
         </div>
 
-        <!-- Precio -->
-        <div>
-            <label for="precio">Precio:</label>
-            <input type="number" th:field="*{precio}" id="precio" min="0" step="0.01" required />
-        </div>
+        <!-- Formulario -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form th:action="@{${accionForm}}" th:object="${entidad}" method="post" enctype="multipart/form-data" class="p-4 shadow rounded bg-light">
 
-        <!-- Proveedor -->
-        <div>
-            <label for="proveedor">Proveedor:</label>
-            <select th:field="*{proveedor}" id="proveedor" required>
-                <option value="">-- Seleccione un proveedor --</option>
-                <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.nombre}"></option>
-            </select>
+                    <input type="hidden" th:field="*{id}" />
 
-        </div>
+                    <div class="form-group mb-3">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" th:field="*{nombre}" id="nombre" class="form-control" placeholder="Ingrese el nombre" required>
+                    </div>
 
-        <!-- Imagen -->
-        <div>
-            <label for="imagen">Imagen:</label>
-            <div>
-                <label for="imagen">Imagen:</label>
-                <input type="file" name="archivoImagen" id="imagen" accept="image/*" required/>
+                    <div class="form-group mb-3">
+                        <label for="precio" class="form-label fw-bold">Precio</label>
+                        <input type="number" th:field="*{precio}" id="precio" class="form-control" placeholder="Ingrese el precio" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="proveedor" class="form-label fw-bold">Proveedor</label>
+                        <select th:field="*{proveedor}" id="proveedor" class="form-select" required>
+                            <option value="">-- Seleccione un proveedor --</option>
+                            <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.nombre}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="imagen" class="form-label fw-bold">Imagen</label>
+                        <input type="file" name="archivoImagen" id="imagen" class="form-control" accept="image/*" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Guardar
+                        </button>
+                        <a href="/articulos" class="btn btn-danger">
+                            <i class="fa fa-times"></i> Cancelar
+                        </a>
+                    </div>
+
+                    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+                </form>
             </div>
         </div>
-
-        <!-- Botones -->
-        <div class="buttons">
-            <button type="submit">💾 Guardar</button>
-            <a href="/articulos" class="btn-cancelar">Cancelar</a>
-        </div>
-    </form>
-
-    <!-- Mensajes de error -->
-    <div th:if="${error}" style="color:red; margin-top:1em;">
-        <p th:text="${error}"></p>
     </div>
-</div>
+</section>
 
 </body>
 </html>

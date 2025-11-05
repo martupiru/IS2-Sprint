@@ -61,7 +61,6 @@ public class ArticuloController extends BaseController<Articulo, String> {
         if (usuario == null) {
             return "redirect:/login?error=Debe iniciar sesión para ver los artículos";
         }
-
         model.addAttribute("entidades", articuloService.listarActivos());
         return "gestion-articulos";
     }
@@ -162,7 +161,23 @@ public class ArticuloController extends BaseController<Articulo, String> {
         if (carrito == null) {
             carrito = new ArrayList<>();
         }
+        double total = carrito.stream()
+                .mapToDouble(Articulo::getPrecio)
+                .sum();
+
         model.addAttribute("carrito", carrito);
+        model.addAttribute("total", total);
+
         return "carrito";
+    }
+
+    @PostMapping("/eliminar-carrito/{id}")
+    public String eliminarDelCarrito(@PathVariable String id, HttpSession session) {
+        List<Articulo> carrito = (List<Articulo>) session.getAttribute("carrito");
+        if (carrito != null) {
+            carrito.removeIf(a -> a.getId().equals(id));
+            session.setAttribute("carrito", carrito);
+        }
+        return "redirect:/articulos/carrito";
     }
 }

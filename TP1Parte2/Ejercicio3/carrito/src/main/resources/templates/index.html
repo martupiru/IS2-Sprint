@@ -1,97 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>FarmaING</title>
 
-    <!-- slider stylesheet -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <!-- Owl Carousel -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"/>
 
-    <!-- font awesome style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 
-    <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap"
+          rel="stylesheet"/>
 
-    <!-- Custom styles for this template -->
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <!-- responsive style -->
-    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
 </head>
 
 <body>
 <div class="hero_area">
-    <!-- header section starts -->
+    <!-- HEADER -->
     <header class="header_section">
         <div class="container">
             <div class="top_contact-container">
                 <div class="tel_container">
-                    <a href="">
+                    <a href="#">
                         <img th:src="@{/images/telephone-symbol-button.png}" alt=""> LLAMANOS : +54 9 261 246 4563
                     </a>
                 </div>
                 <div class="social-container">
-                    <a href="">
-                        <img th:src="@{/images/fb.png}" alt="" class="s-1">
-                    </a>
-                    <a href="">
-                        <img th:src="@{/images/twitter.png}" alt="" class="s-2">
-                    </a>
-                    <a href="">
-                        <img th:src="@{/images/instagram.png}" alt="" class="s-3">
-                    </a>
+                    <a href="#"><img th:src="@{/images/fb.png}" alt=""></a>
+                    <a href="#"><img th:src="@{/images/twitter.png}" alt=""></a>
+                    <a href="#"><img th:src="@{/images/instagram.png}" alt=""></a>
                 </div>
             </div>
         </div>
 
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-                <a class="navbar-brand" th:href="@{/}">
+                <a class="navbar-brand" href="#inicio">
                     <img th:src="@{/images/logo.png}" alt="">
                     <span>FarmaING</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-between">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/about}">Sobre nosotros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/buy}">Venta Online</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/news}">Noticias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/contact}">Contactanos</a>
-                            </li>
+                            <li class="nav-item active"><a class="nav-link" href="#inicio">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">Sobre nosotros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#buy">Venta Online</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contactanos</a></li>
                         </ul>
+
                         <form class="form-inline">
                             <input type="search" placeholder="Buscar">
                             <button class="btn my-2 my-sm-0 nav_search-btn" type="submit"></button>
                         </form>
+
                         <div class="login_btn-contanier ml-0 ml-lg-5">
                             <a th:href="@{/login}">
                                 <img th:src="@{/images/user.png}" alt="">
@@ -103,10 +80,9 @@
             </nav>
         </div>
     </header>
-    <!-- end header section -->
 
-    <!-- slider section -->
-    <section class="slider_section position-relative">
+    <!-- INICIO -->
+    <section id="inicio" class="slider_section position-relative">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -126,12 +102,9 @@
                             <div class="col-md-8">
                                 <div class="detail-box">
                                     <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
-                                    <p>
-                                        Hola Leandro, bienvenido a la farmacia online. Aquí podrás encontrar una gran variedad de productos y servicios para tu salud y bienestar.
-                                    </p>
-                                    <div>
-                                        <a th:href="@{/buy}">¡Compra Ahora!</a>
-                                    </div>
+                                    <p>Hola! Bienvenido a la farmacia online. Aquí podrás encontrar una gran variedad
+                                        de productos y servicios para tu salud y bienestar.</p>
+                                    <div><a href="#buy">¡Compra Ahora!</a></div>
                                 </div>
                             </div>
                         </div>
@@ -148,9 +121,9 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="detail-box">
-                                    <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
-                                    <p>No te pierdas nuestras promociones.</p>
-                                    <div><a th:href="@{/buy}">COMPRAR AHORA</a></div>
+                                    <h1>Promociones <br><span>Especiales</span></h1>
+                                    <p>No te pierdas nuestras promociones exclusivas en productos seleccionados.</p>
+                                    <div><a href="#buy">COMPRAR AHORA</a></div>
                                 </div>
                             </div>
                         </div>
@@ -167,27 +140,107 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="detail-box">
-                                    <h1>Bienvenido a tu <br><span>Farmacia Online</span></h1>
-                                    <p>
-                                        No dudes en contactarnos o visitarnos en nuestros puntos de venta.
-                                    </p>
-                                    <div><a th:href="@{/buy}">COMPRA YA!</a></div>
+                                    <h1>Estamos para <br><span>Ayudarte</span></h1>
+                                    <p>No dudes en contactarnos o visitarnos en nuestros puntos de venta.</p>
+                                    <div><a href="#contact">CONTÁCTANOS</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="sr-only">Siguiente</span>
-            </a>
         </div>
     </section>
 </div>
+
+<!-- SOBRE NOSOTROS -->
+<section id="about" class="about_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>Sobre Nosotros</h2>
+        </div>
+        <p>
+            En <strong>FarmaING</strong> somos un equipo comprometido con tu salud.
+            Nuestro objetivo es ofrecerte los mejores productos farmacéuticos y de bienestar,
+            combinando atención personalizada con tecnología moderna.
+        </p>
+        <p>
+            Contamos con años de experiencia y una amplia red de proveedores confiables.
+            Nos destacamos por nuestra rapidez, calidad de servicio y asesoramiento profesional.
+        </p>
+    </div>
+</section>
+
+<!-- VENTA ONLINE -->
+<section id="buy" class="buy_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>Venta Online</h2>
+        </div>
+        <p>Explorá nuestro catálogo de medicamentos, suplementos, productos de belleza y más.</p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box">
+                    <img th:src="@{/images/medicamento1.png}" alt="">
+                    <h5>Medicamentos</h5>
+                    <p>Los mejores precios en productos farmacéuticos de calidad certificada.</p>
+                    <a th:href="@{/login}">Comprar</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box">
+                    <img th:src="@{/images/suplementos.png}" alt="">
+                    <h5>Suplementos</h5>
+                    <p>Todo lo que necesitás para mantener tu energía y bienestar.</p>
+                    <a th:href="@{/login}">Comprar</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box">
+                    <img th:src="@{/images/cuidado.png}" alt="">
+                    <h5>Cuidado Personal</h5>
+                    <p>Productos de higiene, belleza y cosmética de las mejores marcas.</p>
+                    <a th:href="@{/login}">Comprar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contact" class="contact_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>Contactanos</h2>
+        </div>
+
+        <form th:action="@{/registro}" method="get">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Nombre" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="Mensaje" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer_section">
+    <div class="container">
+        <p>© 2025 FarmaING | Todos los derechos reservados.</p>
+    </div>
+</footer>
 
 <!-- JS -->
 <script th:src="@{/js/jquery-3.4.1.min.js}"></script>

@@ -857,18 +857,19 @@ a:focus {
 
 /* footer section*/
 .footer_section {
-  background-color: #121111;
-  font-weight: 500;
+    background-color: #198754; /* Verde tipo Bootstrap */
+    color: #ffffff;
+    font-weight: 500;
 }
 
 .footer_section p {
-  color: #fbfcfd;
-  margin: 0;
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #9b9b9b;
-  width: 65%;
-  margin: 0 auto;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #ffffff33;
+    width: 65%;
+    margin: 0 auto;
 }
 
 .footer_section a {

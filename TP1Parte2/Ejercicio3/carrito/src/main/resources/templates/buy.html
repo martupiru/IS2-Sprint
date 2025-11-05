@@ -1,70 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+    <meta charset="UTF-8">
+    <title>Catálogo - FarmaING</title>
 
-  <title>FarmaING</title>
-
-    <!-- slider stylesheet -->
+    <!-- OwlCarousel -->
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
-    <!-- font awesome style -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- bootstrap core css -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
 
-    <!-- fonts style -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom Styles -->
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <!-- responsive style -->
     <link th:href="@{/css/responsive.css}" rel="stylesheet" />
 </head>
 
 <body>
+<div class="hero_area">
+    <!-- Header con navbar igual al articulo.html -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                <a class="navbar-brand" th:href="@{/usuario/indexLogueado}">
+                    <img th:src="@{/images/logo.png}" alt="">
+                    <span>FarmaING</span>
+                </a>
 
-    <header>
-        <h1>Catálogo de productos</h1>
-        <a href="/articulos/carrito" style="float:right; text-decoration:none; font-size:18px;">
-            🛒 Ver carrito
-        </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-between">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/usuario/indexLogueado}">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/usuario/indexLogueado}">Sobre nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/usuario/indexLogueado}">Venta Online</a>
+                            </li>
+                        </ul>
+
+                        <div class="login_btn-contanier ml-0 ml-lg-5">
+                            <a th:href="@{/perfil}">
+                                <img th:src="@{/images/user.png}" alt="">
+                                <span th:text="${usuario.nombre}"></span>
+                            </a>
+                            <a th:href="@{/logout}" style="margin-left: 15px;">
+                                <span>Cerrar Sesión</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <div th:if="${error}" th:text="${error}" style="color:red;"></div>
-        <div th:if="${success}" th:text="${success}" style="color:green;"></div>
-
-        <div class="productos">
-            <div th:each="articulo : ${articulos}" class="producto">
-                <div th:if="${articulo.imagen != null}">
-                    <img th:src="@{/img/{id}(id=${articulo.imagen.id})}" alt="Imagen del artículo" width="200" />
-                </div>
-                <div th:if="${articulo.imagen == null}">
-                    <img th:src="@{/images/no-image.png}" alt="Sin imagen" width="200" />
-                </div>
-
-                <h2 th:text="${articulo.nombre}">Nombre</h2>
-                <p th:text="'$' + ${articulo.precio}">Precio</p>
-
-                <form th:action="@{/articulos/agregar-carrito/{id}(id=${articulo.id})}" method="post">
-                    <button type="submit">Comprar</button>
-                </form>
+    <!-- Sección principal -->
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="heading_container text-center">
+                <h2>Catálogo de Productos</h2>
+                <p>Descubrí nuestros productos disponibles.</p>
             </div>
 
-        </div>
-    </div>
+            <!-- Botones -->
+            <div class="text-center mb-4">
+                <a th:href="@{/usuario/indexLogueado}" class="btn btn-secondary mr-3">
+                    <i class="fa fa-arrow-left"></i> Volver
+                </a>
+                <a th:href="@{/articulos/carrito}" class="btn btn-primary">
+                    <i class="fa fa-shopping-cart"></i> Ver carrito
+                </a>
+            </div>
 
+            <!-- Catálogo de productos -->
+            <div class="row">
+                <div class="col-md-4 mb-4" th:each="articulo : ${articulos}">
+                    <div class="card producto-card">
+                        <img th:if="${articulo.imagen != null}"
+                             th:src="@{/img/{id}(id=${articulo.imagen.id})}"
+                             class="card-img-top producto-img" alt="Imagen del artículo">
+                        <img th:if="${articulo.imagen == null}"
+                             th:src="@{/images/no-image.png}"
+                             class="card-img-top producto-img" alt="Sin imagen">
+
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${articulo.nombre}"></h5>
+                            <p class="card-text fw-bold" th:text="'$' + ${articulo.precio}"></p>
+                            <form th:action="@{/articulos/agregar-carrito/{id}(id=${articulo.id})}" method="post">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-cart-plus"></i> Agregar al carrito
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
 </body>
 </html>
