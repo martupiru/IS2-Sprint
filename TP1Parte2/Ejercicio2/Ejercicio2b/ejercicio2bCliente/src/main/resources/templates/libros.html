@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Libros - Book Store</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+            <li><a th:href="@{/autores}">Autores</a></li>
+            <li><a th:href="@{/libros}" class="current">Libros</a></li>
+            <li><a th:href="@{/localidades}">Localidades</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_header">
+        <h1 style="padding: 30px;">Catálogo de Libros</h1>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_left">
+            <div class="templatemo_content_left_section">
+                <h1>Categorías</h1>
+                <ul>
+                    <li><a th:href="@{/libros}">Todos los Libros</a></li>
+                    <li><a th:href="@{/autores}">Por Autor</a></li>
+                    <li><a href="#">Ficción</a></li>
+                    <li><a href="#">Ciencia</a></li>
+                    <li><a href="#">Historia</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="templatemo_content_right">
+            <div style="margin-bottom: 20px;">
+                <form th:action="@{/libros}" method="get" style="display: inline-block;">
+                    <input type="text" name="buscar" placeholder="Buscar por título..." style="padding: 8px; width: 250px;" />
+                    <button type="submit" class="buy_now_button" style="padding: 8px 15px;">Buscar</button>
+                </form>
+                <a th:href="@{/libros/nuevo}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                    Agregar Nuevo Libro
+                </a>
+            </div>
+
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Año</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="libro : ${libros}">
+                    <td th:text="${libro.id}"></td>
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.genero}"></td>
+                    <td th:text="${libro.fecha}"></td>
+                    <td>
+                        <a th:href="@{'/libros/' + ${libro.id}}">Ver</a> |
+                        <a th:href="@{'/libros/editar/' + ${libro.id}}">Editar</a> |
+                        <a th:href="@{'/libros/eliminar/' + ${libro.id}}"
+                           onclick="return confirm('¿Seguro que querés eliminar este libro?');">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cleaner_with_height">&nbsp;</div>
+    </div>
+
+    <div id="templatemo_footer">
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/libros}">Libros</a> |
+        <a th:href="@{/autores}">Autores</a>
+        <br/>
+        Copyright © 2025
+    </div>
+</div>
+</body>
+</html>

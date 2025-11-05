@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Localidad</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/localidades}" class="current">Localidades</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1>Nueva Localidad</h1>
+
+            <form th:action="@{/localidades}" th:object="${localidad}" method="post" style="max-width: 500px;">
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;"><strong>Denominación:</strong></label>
+                    <input type="text" th:field="*{denominacion}" required style="width: 100%; padding: 8px;"
+                           placeholder="Ej: Las Heras, Mendoza" />
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="buy_now_button" style="padding: 10px 20px;">Guardar</button>
+                    <a th:href="@{/localidades}" class="detail_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

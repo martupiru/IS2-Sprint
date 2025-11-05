@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Personas - Book Store</title>
+    <title>Lista de Autores - Book Store</title>
     <link rel="stylesheet" href="/css/templatemo_style.css">
 </head>
 <body>
@@ -10,14 +10,15 @@
     <div id="templatemo_menu">
         <ul>
             <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/personas}" class="current">Personas</a></li>
-            <li><a th:href="@{/autores}">Autores</a></li>
+            <li><a th:href="@{/personas}">Personas</a></li>
+            <li><a th:href="@{/autores}" class="current">Autores</a></li>
             <li><a th:href="@{/libros}">Libros</a></li>
+            <li><a th:href="@{/localidades}">Localidades</a></li>
         </ul>
     </div>
 
     <div id="templatemo_header">
-        <h1 style="padding: 30px;">Listado de Personas</h1>
+        <h1 style="padding: 30px;">Listado de Autores</h1>
     </div>
 
     <div id="templatemo_content">
@@ -25,17 +26,17 @@
             <div class="templatemo_content_left_section">
                 <h1>Categorías</h1>
                 <ul>
-                    <li><a th:href="@{/personas}">Personas</a></li>
                     <li><a th:href="@{/libros}">Libros</a></li>
                     <li><a th:href="@{/autores}">Autores</a></li>
+                    <li><a th:href="@{/personas}">Personas</a></li>
                 </ul>
             </div>
         </div>
 
         <div id="templatemo_content_right">
             <div style="margin-bottom: 20px;">
-                <a th:href="@{/personas/nueva}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none;">
-                    Crear Nueva Persona
+                <a th:href="@{/autores/nuevo}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none;">
+                    Crear Nuevo Autor
                 </a>
             </div>
 
@@ -45,21 +46,19 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>DNI</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="persona : ${personas}">
-                    <td th:text="${persona.id}"></td>
-                    <td th:text="${persona.nombre}"></td>
-                    <td th:text="${persona.apellido}"></td>
-                    <td th:text="${persona.dni}"></td>
+                <tr th:each="autor : ${autores}">
+                    <td th:text="${autor.id}"></td>
+                    <td th:text="${autor.nombre}"></td>
+                    <td th:text="${autor.apellido}"></td>
                     <td>
-                        <a th:href="@{'/personas/' + ${persona.id}}">Ver</a> |
-                        <a th:href="@{'/personas/editar/' + ${persona.id}}">Editar</a> |
-                        <a th:href="@{'/personas/eliminar/' + ${persona.id}}"
-                           onclick="return confirm('¿Seguro que querés eliminar a esta persona?');">Eliminar</a>
+                        <a th:href="@{'/autores/' + ${autor.id}}">Ver</a> |
+                        <a th:href="@{'/autores/editar/' + ${autor.id}}">Editar</a> |
+                        <a th:href="@{'/autores/eliminar/' + ${autor.id}}"
+                           onclick="return confirm('¿Seguro que querés eliminar este autor?');">Eliminar</a>
                     </td>
                 </tr>
                 </tbody>
@@ -71,7 +70,7 @@
 
     <div id="templatemo_footer">
         <a th:href="@{/}">Home</a> |
-        <a th:href="@{/personas}">Personas</a> |
+        <a th:href="@{/autores}">Autores</a> |
         <a th:href="@{/libros}">Libros</a>
         <br/>
         Copyright © 2025

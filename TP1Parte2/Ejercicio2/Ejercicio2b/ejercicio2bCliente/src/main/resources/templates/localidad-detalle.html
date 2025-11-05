@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Localidad</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/localidades}" class="current">Localidades</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1>Detalle de Localidad</h1>
+
+            <div style="margin: 20px 0;">
+                <p><strong>ID:</strong> <span th:text="${localidad.id}"></span></p>
+                <p><strong>Denominación:</strong> <span th:text="${localidad.denominacion}"></span></p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a th:href="@{/localidades}" class="detail_button" style="padding: 10px 20px; text-decoration: none;">
+                    Volver a la lista
+                </a>
+                <a th:href="@{'/localidades/editar/' + ${localidad.id}}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none;">
+                    Editar Localidad
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
