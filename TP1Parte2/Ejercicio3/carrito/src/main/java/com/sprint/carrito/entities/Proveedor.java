@@ -23,8 +23,13 @@ public class Proveedor extends BaseEntity<String> {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
-
     private String nombre;
+
+    private String direccion;
+    private Double latitud;
+    private Double longitud;
+    private String email;
+    private String telefono;
 
     @Override
     public String getId() {return id;}
