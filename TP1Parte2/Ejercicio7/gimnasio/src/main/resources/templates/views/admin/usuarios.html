@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="container mt-4">
+
+<h2 class="text-center mb-3">Gestión de Usuarios</h2>
+
+<div th:if="${msg}" class="alert alert-success" th:text="${msg}"></div>
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>Usuario</th>
+        <th>Rol</th>
+        <th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.nombreUsuario}"></td>
+        <td th:text="${usuario.rol}"></td>
+        <td>
+            <a th:href="@{/admin/usuarios/cambiarRol/{id}(id=${usuario.id})}"
+               class="btn btn-warning btn-sm">Cambiar Rol</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/admin/dashboard}" class="btn btn-secondary mt-3">Volver</a>
+
+</body>
+</html>

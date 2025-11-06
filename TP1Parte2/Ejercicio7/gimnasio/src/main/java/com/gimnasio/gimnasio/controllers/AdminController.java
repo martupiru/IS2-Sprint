@@ -9,18 +9,17 @@ import com.gimnasio.gimnasio.enumerations.RolUsuario;
 import com.gimnasio.gimnasio.enumerations.TipoMensaje;
 import com.gimnasio.gimnasio.repositories.SocioRepository;
 import com.gimnasio.gimnasio.repositories.UsuarioRepository;
-import com.gimnasio.gimnasio.services.CuotaMensualService;
-import com.gimnasio.gimnasio.services.NotificacionService;
-import com.gimnasio.gimnasio.services.PromocionService;
-import com.gimnasio.gimnasio.services.SocioService;
+import com.gimnasio.gimnasio.services.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,11 +28,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@PreAuthorize("hasRole('ADMINISTRATIVO')")
 @Controller
 public class AdminController {
 
     @Autowired
     private SocioService socioService;
+    @Autowired
+    private UsuarioService usuarioService;
     @Autowired
     private SocioRepository socioRepository;
     @Autowired
@@ -56,6 +58,23 @@ public class AdminController {
         return "views/admin/dashboard";
     }
 
+    @GetMapping("/admin/usuarios")
+    public String listarUsuarios(Model model) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        model.addAttribute("usuarios", usuarios);
+        return "views/admin/usuarios";
+    }
+
+    @GetMapping("/admin/usuarios/cambiarRol/{id}")
+    public String cambiarRol(@PathVariable String id, RedirectAttributes redirectAttributes) {
+        try {
+            usuarioService.cambiarRol(id);
+            redirectAttributes.addFlashAttribute("msg", "Rol actualizado correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/admin/usuarios";
+    }
 
     @GetMapping("/admin/deudas")
     public String gestionDeudas(HttpSession session, Model model) {

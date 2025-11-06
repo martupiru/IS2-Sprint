@@ -8,12 +8,18 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue
     @UuidGenerator
@@ -38,4 +44,39 @@ public class Usuario {
     @JoinColumn(name = "fk_persona", nullable = false)
     private Persona persona;
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.getRol().name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.getClave();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getNombreUsuario();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !this.isEliminado();
+    }
 }

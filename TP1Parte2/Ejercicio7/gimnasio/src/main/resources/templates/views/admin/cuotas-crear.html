@@ -59,6 +59,7 @@
             <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 
             <form th:action="@{/admin/cuotas/crear}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="mes" class="form-label">Mes</label>

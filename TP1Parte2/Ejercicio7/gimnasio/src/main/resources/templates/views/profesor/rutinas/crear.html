@@ -33,6 +33,7 @@
             <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
             <form th:action="@{/profesor/rutinas/crear}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <div class="mb-3">
                     <label for="idSocio" class="form-label">Socio</label>
                     <select class="form-select" id="idSocio" name="idSocio" required style="color:#212529 !important;">

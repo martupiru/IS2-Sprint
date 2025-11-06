@@ -41,7 +41,7 @@
 
             <form th:object="${promocion}" method="post"
                   th:attr="action=${promocion.id != null} ? '/admin/promociones/editar/' + ${promocion.id} : '/admin/promociones/nuevo'">
-
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
                 <div class="mb-3">
                     <label for="texto" class="form-label">Promoción</label>

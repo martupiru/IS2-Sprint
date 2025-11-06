@@ -21,6 +21,7 @@
                                 <li><a th:href="@{/admin/socios}" class="nav-link text-white">Socios</a></li>
                                 <li><a th:href="@{/admin/cuotas/menu}" class="nav-link text-white">Cuotas</a></li>
                                 <li><a th:href="@{/admin/deudas}" class="nav-link text-white">Deuda</a></li>
+                                <li><a th:href="@{/admin/usuarios}" class="nav-link text-white">Usuarios</a></li>
                             </ul>
                         </li>
 
@@ -32,10 +33,12 @@
                 <!-- Cerrar sesión -->
                 <ul class="site-menu main-menu site-menu-dark js-clone-nav d-none d-lg-flex">
                     <li class="cta">
-                        <a th:href="@{/logout}" class="nav-link text-white" onclick="mostrarMensajeLogout(event)">
-                            <span class="rounded border border-light px-2">Cerrar Sesión</span>
-                        </a>
+                        <form th:action="@{/logout}" method="post" style="display:inline;">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <button type="submit" class="btn btn-link p-0 text-danger">Cerrar sesión</button>
+                        </form>
                     </li>
+
                 </ul>
 
                 <!-- Menu responsive -->

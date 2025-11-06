@@ -3,6 +3,7 @@ package com.gimnasio.gimnasio.security;
 import com.gimnasio.gimnasio.security.CustomAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,20 +16,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SeguridadWeb {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Bean
+    @Order(2)
     public SecurityFilterChain filterChain(
             HttpSecurity http,
             CustomAuthenticationProvider customAuthenticationProvider
     ) throws Exception {
 
         http
+                .securityMatcher("/**")
                 .authenticationProvider(customAuthenticationProvider)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/**", "/api/auth/login").permitAll()
                         // Recursos estáticos públicos
                         .requestMatchers(
                                 "/css/**",
@@ -40,9 +44,10 @@ public class SeguridadWeb {
                         ).permitAll()
                         // páginas públicas
                         .requestMatchers("/", "/home", "/login", "/registro").permitAll()
-                        // (ejemplo) zona admin
+                        // zona admin
                         .requestMatchers("/admin/**").hasRole("ADMINISTRATIVO")
-                        // todo lo demás requiere login
+                        .requestMatchers("/profesor/**").hasRole("PROFESOR")
+                        .requestMatchers("/socio/**").hasRole("SOCIO")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -56,9 +61,9 @@ public class SeguridadWeb {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
-                )
-                .csrf(csrf -> csrf.disable()); // para simplificar
+                );
 
         return http.build();
     }
 }
+

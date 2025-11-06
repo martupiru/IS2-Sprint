@@ -115,4 +115,17 @@ public class UsuarioService {
             throw new Exception("La persona asociada no es un socio");
         }
     }
+
+    public void cambiarRol(String id) throws Exception {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new Exception("Usuario no encontrado"));
+
+        switch (usuario.getRol()) {
+            case SOCIO -> usuario.setRol(RolUsuario.PROFESOR);
+            case PROFESOR -> usuario.setRol(RolUsuario.SOCIO);
+            default -> throw new Exception("No se puede cambiar el rol de un administrador");
+        }
+
+        usuarioRepository.save(usuario);
+    }
 }

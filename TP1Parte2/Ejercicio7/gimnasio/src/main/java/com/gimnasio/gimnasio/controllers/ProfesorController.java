@@ -7,6 +7,7 @@ import com.gimnasio.gimnasio.repositories.SocioRepository;
 import com.gimnasio.gimnasio.services.SocioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@PreAuthorize("hasRole('PROFESOR')")
 @Controller
 public class ProfesorController {
 
