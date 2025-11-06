@@ -1,0 +1,11 @@
+https://acadeu.com/
+
+Plataforma argentina de gestión escolar. Permite administrar alumnos, profesores, materias, calificaciones, asistencias y comunicación entre la institución y las familias.
+
+https://www.mendoza.edu.ar/gem/
+
+Sistema oficial del Gobierno de Mendoza para la gestión educativa (GEM). Permite registrar alumnos, docentes, calificaciones, asistencia y reportes institucionales.
+
+https://www.goschool.com.ar/index.html
+
+Software integral de gestión escolar para colegios. Facilita la administración académica, la comunicación con padres y alumnos, la gestión de notas y reportes institucionales.

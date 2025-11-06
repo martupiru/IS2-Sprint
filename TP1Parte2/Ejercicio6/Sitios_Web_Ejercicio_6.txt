@@ -1,0 +1,11 @@
+https://maxirest.com.ar/
+
+Sistema de gestión gastronómica argentino. Ofrece herramientas para administrar pedidos, mesas, stock, caja y delivery, integrando reportes en tiempo real para cadenas de restaurantes.
+
+https://bistrosoft.com/
+
+Software gastronómico para restaurantes, bares y cafeterías. Incluye módulos de ventas, caja, reservas, inventario, CRM y control de ingresos/egresos de dinero.
+
+https://starpos.com.ar/
+
+Sistema POS en la nube para restaurantes y locales gastronómicos. Gestiona comandas, mesas, stock y movimientos de caja, con soporte para múltiples sucursales.
