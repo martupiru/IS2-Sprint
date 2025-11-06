@@ -3,6 +3,7 @@ package com.sprint.carrito.controllers;
 import com.sprint.carrito.entities.BaseEntity;
 import com.sprint.carrito.error.ErrorServiceException;
 import com.sprint.carrito.services.BaseService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,6 +42,14 @@ public abstract class BaseController<T extends BaseEntity<ID>, ID> {
 
     private String getNameEntity(T object){
         return ((((T) object).getClass()).getSimpleName());
+    }
+
+    @ModelAttribute
+    public void agregarUsuarioAlModelo(HttpSession session, Model model) {
+        Object usuario = session.getAttribute("usuarioLogueado");
+        if (usuario != null) {
+            model.addAttribute("usuario", usuario);
+        }
     }
 
     @GetMapping("/{entidad}/list")

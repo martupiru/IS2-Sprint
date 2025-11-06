@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Libro</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/libros}" class="current">Libros</a></li>
+            <li><a th:href="@{/autores}">Autores</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1 th:text="${libro.titulo}">Título del Libro</h1>
+
+            <div style="margin: 20px 0; background-color: #f5f5f5; padding: 20px; border-radius: 5px;">
+                <p><strong>Género:</strong> <span th:text="${libro.genero}"></span></p>
+                <p><strong>Año de Publicación:</strong> <span th:text="${libro.fecha}"></span></p>
+                <p><strong>Páginas:</strong> <span th:text="${libro.paginas}"></span></p>
+            </div>
+
+            <div th:if="${libro.autores != null && !libro.autores.isEmpty()}">
+                <h2>Autores</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li th:each="autor : ${libro.autores}" style="margin-bottom: 10px;">
+                        <strong th:text="${autor.nombre + ' ' + autor.apellido}"></strong>
+                        <p th:if="${autor.biografia != null && !autor.biografia.isEmpty()}"
+                           th:text="${autor.biografia}" style="color: #666; margin-left: 20px;"></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <a th:href="@{/libros}" class="detail_button" style="padding: 10px 20px; text-decoration: none;">
+                    Volver al catálogo
+                </a>
+                <a th:href="@{'/libros/editar/' + ${libro.titulo}}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+                    Editar Libro
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

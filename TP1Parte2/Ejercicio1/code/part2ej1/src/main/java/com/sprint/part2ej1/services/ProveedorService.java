@@ -1,5 +1,7 @@
 package com.sprint.part2ej1.services;
 
+import com.sprint.part2ej1.entities.Direccion;
+import com.sprint.part2ej1.entities.Localidad;
 import com.sprint.part2ej1.entities.Proveedor;
 import com.sprint.part2ej1.entities.Usuario;
 import com.sprint.part2ej1.repositories.ProveedorRepository;
@@ -8,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,9 @@ public class ProveedorService {
 
     @Autowired
     private PersonaService personaService;
+
+    @Autowired
+    private LocalidadService localidadService;
 
     @Transactional
     public void crearProveedor(String cuit) throws Exception{
@@ -112,6 +118,53 @@ public class ProveedorService {
             return proveedorRepository.save(proveedor);
         } catch (Exception e) {
             throw new Exception("Error al guardar el proveedor durante la migración: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public void crearProveedorConDireccion(String nombre, String apellido, String telefono,
+                                           String correo, String cuit, String calle,
+                                           String numeracion, String idLocalidad) throws Exception {
+        try {
+            // Validar que no exista el CUIT
+            Optional<Proveedor> existente = proveedorRepository.findByCuit(cuit);
+            if (existente.isPresent()) {
+                throw new Exception("Ya existe un proveedor con el CUIT: " + cuit);
+            }
+
+            personaService.validar(nombre, apellido, telefono, correo);
+
+            Proveedor proveedor = new Proveedor();
+            proveedor.setNombre(nombre);
+            proveedor.setApellido(apellido);
+            proveedor.setTelefono(telefono);
+            proveedor.setCorreoElectronico(correo);
+            proveedor.setCuit(cuit);
+            proveedor.setEliminado(false);
+
+            // Crear dirección
+            Direccion direccion = new Direccion();
+            direccion.setCalle(calle);
+            direccion.setNumeracion(numeracion);
+            direccion.setBarrio("");
+            direccion.setManzanaPiso("");
+            direccion.setCasaDepartamento("");
+            direccion.setReferencia("");
+            direccion.setLatitud(null);
+            direccion.setLongitud(null);
+            direccion.setEliminado(false);
+
+            Localidad localidad = localidadService.buscarLocalidad(idLocalidad);
+            direccion.setLocalidad(localidad);
+
+            List<Direccion> direcciones = new ArrayList<>();
+            direcciones.add(direccion);
+            proveedor.setDirecciones(direcciones);
+
+            proveedorRepository.save(proveedor);
+
+        } catch (Exception e) {
+            throw new Exception("Error al crear proveedor con dirección: " + e.getMessage());
         }
     }
 }

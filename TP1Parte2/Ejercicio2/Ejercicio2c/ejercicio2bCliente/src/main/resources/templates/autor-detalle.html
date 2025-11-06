@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Autor</title>
+    <link rel="stylesheet" href="/css/templatemo_style.css">
+</head>
+<body>
+<div id="templatemo_container">
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/autores}" class="current">Autores</a></li>
+            <li><a th:href="@{/libros}">Libros</a></li>
+        </ul>
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_right" style="width: 100%;">
+            <h1>Detalle de Autor</h1>
+
+            <div style="margin: 20px 0;">
+                <p><strong>ID:</strong> <span th:text="${autor.id}"></span></p>
+                <p><strong>Nombre:</strong> <span th:text="${autor.nombre}"></span></p>
+                <p><strong>Apellido:</strong> <span th:text="${autor.apellido}"></span></p>
+                <p><strong>Biografía:</strong> <span th:text="${autor.biografia}"></span></p>
+            </div>
+
+            <div th:if="${autor.libros != null && !autor.libros.isEmpty()}">
+                <h2>Libros del Autor</h2>
+                <ul>
+                    <li th:each="libro : ${autor.libros}">
+                        <span th:text="${libro.titulo}"></span> (<span th:text="${libro.fecha}"></span>)
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a th:href="@{/autores}" class="detail_button" style="padding: 10px 20px; text-decoration: none;">
+                    Volver a la lista
+                </a>
+                <a th:href="@{'/autores/editar/' + ${autor.id}}" class="buy_now_button" style="padding: 10px 20px; text-decoration: none;">
+                    Editar Autor
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -26,7 +26,7 @@ public class Localidad {
     @Size(max = 50, message = "El nombre no puede superar los 50 caracteres")
     private String nombre;
 
-    @NotEmpty(message = "El código postal no puede estar vacío")
+    // opcional para migracion
     @Size(max = 10, message = "El código postal no puede superar los 10 caracteres")
     private String codigoPostal;
 
